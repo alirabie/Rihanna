@@ -71,8 +71,7 @@
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown"
-                    android:textSize="25dp"
-                    android:layout_gravity="center" />
+                    android:textSize="20dp"/>
 
 
             </LinearLayout>
@@ -94,8 +93,7 @@
             android:background="@android:color/transparent"
             android:gravity="center"
             android:spinnerMode="dropdown"
-            android:textSize="25dp"
-            android:layout_gravity="center" />
+            android:textSize="20dp" />
             </LinearLayout>
 
         </LinearLayout>
