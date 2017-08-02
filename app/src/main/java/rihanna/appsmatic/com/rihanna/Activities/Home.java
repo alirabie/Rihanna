@@ -50,6 +50,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
 
+        //
         countries = (BetterSpinner) findViewById(R.id.countrydown);
         countries.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
         countries.setHint("المدينة");
