@@ -15,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
@@ -31,11 +34,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private static List<String> vendorsIds;
     private static List<String>products;
     private static List<String> pids;
+    private LinearLayout sideMenuButtons;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -86,6 +91,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
                     drawer.openDrawer(GravityCompat.START);
+                    //Animate side icons
+                    sideMenuButtons=(LinearLayout)findViewById(R.id.side_buttons_container);
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                    sideMenuButtons.clearAnimation();
+                    sideMenuButtons.setAnimation(anim);
                 }
             }
         });

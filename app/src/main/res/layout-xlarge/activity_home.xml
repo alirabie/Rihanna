@@ -15,11 +15,71 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/side_buttons_container">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_side_button"
+                android:src="@drawable/home"
+                android:layout_marginTop="55dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_side_button"
+                android:src="@drawable/profile"
+                android:layout_marginTop="55dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/offers_side_button"
+                android:src="@drawable/sale"
+                android:layout_marginTop="55dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orders_side_button"
+                android:src="@drawable/orders"
+                android:layout_marginTop="55dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/settings_side_buttons"
+                android:layout_marginTop="55dp"
+                android:src="@drawable/settings" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/aboutapp_side_buttons"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="55dp"
+                android:src="@drawable/about" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_side_button"
+                android:layout_marginTop="55dp"
+                android:src="@drawable/logout" />
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
