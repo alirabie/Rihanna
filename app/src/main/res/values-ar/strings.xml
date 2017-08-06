@@ -5,4 +5,21 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="userhintinputlogin">أسم المستخدم</string>
+    <string name="emailhintinputlogin">البريد الإلكترونى</string>
+    <string name="phonehintinputlogin">رقم الجوال</string>
+    <string name="passwordhintinputlogin">كلمة المرور</string>
+    <string name="repasswordhintinputlogin">تأكيد كلمة المرور</string>
+    <string name="resumeregisterregister">إكمال التسجيل</string>
+    <string name="registernew">قم بتسجيل حساب جديد</string>
+    <string name="welvcome">أهلا وسهلا بك</string>
+    <string name="orrigsretfrom">أو التسجيل من خلال</string>
+    <string name="phoneormail">البريد الالكترونى أو رقم الجوال</string>
+    <string name="signin">تسجيل الدخول</string>
+    <string name="yourpass">كلمة المرور الخاصة بك</string>
+    <string name="plesesignin">قم بتسجيل الدخول لحسابك</string>
+    <string name="loginwith">او الدخول بواسطة</string>
+    <string name="remeberlogin">تذكر الدخول</string>
+    <string name="forgetpass">نسيت كلمة المرور ؟</string>
+    <string name="youdonthavaccount">ليس لديك حساب قم بإنشاءه الان </string>
 </resources>
