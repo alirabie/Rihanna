@@ -26,6 +26,15 @@
         <activity android:name=".Activities.SignInScreen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".Activities.ActivateAccountScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Activities.SecurityCodeFPscreen"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Activities.ResetPasswordScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

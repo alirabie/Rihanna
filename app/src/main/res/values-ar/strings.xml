@@ -22,4 +22,15 @@
     <string name="remeberlogin">تذكر الدخول</string>
     <string name="forgetpass">نسيت كلمة المرور ؟</string>
     <string name="youdonthavaccount">ليس لديك حساب قم بإنشاءه الان </string>
+    <string name="activationcode">رمز التفعيل</string>
+    <string name="active">تفعيل</string>
+    <string name="activeaccount">تفعيل الحساب</string>
+    <string name="isertactivationcode">قم بإدخال رمز التفعيل المرسل لك بالجوال</string>
+    <string name="conain">إستمرار</string>
+    <string name="isertsc">أدخل الرمز المرسل لجوالك لتعيين كلمة المرور</string>
+    <string name="seccode">رمز الحماية</string>
+    <string name="newpass">كلمة المرور الجديدة</string>
+    <string name="renewpass">تأكيد كلمة المرور الجديدة</string>
+    <string name="resetpassword">إعادة تعيين كلمة المرور</string>
+    <string name="save">حفظ</string>
 </resources>

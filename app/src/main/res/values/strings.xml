@@ -21,4 +21,15 @@
     <string name="remeberlogin">Remember Login</string>
     <string name="forgetpass">Forget Password ?</string>
     <string name="youdonthavaccount">You do not have account , Create it Now </string>
+    <string name="activeaccount">Activate Account</string>
+    <string name="isertactivationcode">Insert Activation Code</string>
+    <string name="activationcode">Activation Code</string>
+    <string name="active">Active</string>
+    <string name="seccode">Security Code</string>
+    <string name="isertsc">Insert security code to reset password</string>
+    <string name="conain">Continue</string>
+    <string name="resetpassword">Reset Password</string>
+    <string name="newpass">New Password</string>
+    <string name="renewpass">Re New Password</string>
+    <string name="save">Save</string>
 </resources>
