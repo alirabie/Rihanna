@@ -123,6 +123,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
         if(strings.size()==position+1){
             startActivity(new Intent(SliderSplash.this,SignInScreen.class));
             SliderSplash.this.finish();
+            sliderLayout.stopAutoCycle();
         }
     }
 
