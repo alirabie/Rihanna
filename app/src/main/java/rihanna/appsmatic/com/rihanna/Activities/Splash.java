@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
 
-                        Intent i = new Intent(Splash.this, SignInScreen.class);
+                        Intent i = new Intent(Splash.this, SliderSplash.class);
                         startActivity(i);
                         Splash.this.finish();
                     }

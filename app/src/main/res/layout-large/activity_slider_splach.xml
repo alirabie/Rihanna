@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Splash">
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/photo_slider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:fadingEdge="horizontal"
+        android:scrollbarSize="50dp"
+        android:scrollbarStyle="insideOverlay"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/phototext"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary" />
+
+</FrameLayout>
