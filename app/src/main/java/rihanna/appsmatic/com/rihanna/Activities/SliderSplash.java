@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -47,7 +48,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
         sliderLayout = (SliderLayout)findViewById(R.id.photo_slider);
         text=(TextView)findViewById(R.id.phototext);
 
-
+        text.setTypeface(Home.face);
         TextSliderView textSliderView = new TextSliderView(SliderSplash.this);
 
 
@@ -121,7 +122,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
        text.setText(strings.get(position).toString());
         Log.e("indexxx",position+"");
         if(strings.size()==position+1){
-            startActivity(new Intent(SliderSplash.this,SignInScreen.class));
+            startActivity(new Intent(SliderSplash.this,Home.class));
             SliderSplash.this.finish();
             sliderLayout.stopAutoCycle();
         }

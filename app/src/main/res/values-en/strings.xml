@@ -33,4 +33,12 @@
     <string name="renewpass">Re New Password</string>
     <string name="resetpassword">Reset Password</string>
     <string name="save">Save</string>
+    <string name="bycategory">By Category</string>
+    <string name="bycountry">Search By Country or District</string>
+    <string name="byserviceoroffer">By Service Or offers</string>
+    <string name="expertrate">By Expert Rate</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="neerst">Search By Nearest</string>
+    <string name="serchkey">Search Keyword</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -18,12 +19,15 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.List;
 
+import rihanna.appsmatic.com.rihanna.Fragments.Filter;
+import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +39,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private static List<String>products;
     private static List<String> pids;
     private LinearLayout sideMenuButtons;
-
+    public static Typeface face;
+    private ImageView homeSide,profileSide,latestOffersSide,ordersListSide,settingsSide,abutAppSide,exitLoginSide;
+    DrawerLayout drawer;
 
 
     @Override
@@ -46,6 +52,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+         drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -54,8 +62,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
+        face= Typeface.createFromAsset(getAssets(), "farsi_three_light.ttf");
 
-        //
+        //Setup two header spinners
         countries = (BetterSpinner) findViewById(R.id.countrydown);
         countries.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
         countries.setHint("المدينة");
@@ -69,6 +78,146 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+        //Setup Side Menu Items
+        homeSide=(ImageView)findViewById(R.id.home_side_button);
+        profileSide=(ImageView)findViewById(R.id.profile_side_button);
+        latestOffersSide=(ImageView)findViewById(R.id.offers_side_button);
+        ordersListSide=(ImageView)findViewById(R.id.orders_side_button);
+        settingsSide=(ImageView)findViewById(R.id.settings_side_buttons);
+        abutAppSide=(ImageView)findViewById(R.id.aboutapp_side_buttons);
+        exitLoginSide=(ImageView)findViewById(R.id.logout_side_button);
+
+
+        //Check Os Ver
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            homeSide.setBackgroundResource(R.drawable.ripple);
+            profileSide.setBackgroundResource(R.drawable.ripple);
+            latestOffersSide.setBackgroundResource(R.drawable.ripple);
+            ordersListSide.setBackgroundResource(R.drawable.ripple);
+            settingsSide.setBackgroundResource(R.drawable.ripple);
+            abutAppSide.setBackgroundResource(R.drawable.ripple);
+            exitLoginSide.setBackgroundResource(R.drawable.ripple);
+        }
+
+        //Action Side menu buttons :
+
+        //Home button
+        homeSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                homeSide.clearAnimation();
+                homeSide.setAnimation(anim);
+                Services services=new Services();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+                fragmentTransaction.commit();
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+        //Profile button
+        profileSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                profileSide.clearAnimation();
+                profileSide.setAnimation(anim);
+
+                //do
+
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        //Offers button
+        latestOffersSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                latestOffersSide.clearAnimation();
+                latestOffersSide.setAnimation(anim);
+
+                //do
+
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+
+
+        //Orders List
+        ordersListSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                ordersListSide.clearAnimation();
+                ordersListSide.setAnimation(anim);
+
+                //do
+
+                drawer.closeDrawer(GravityCompat.START);
+
+
+            }
+        });
+
+        //settings button
+        settingsSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                settingsSide.clearAnimation();
+                settingsSide.setAnimation(anim);
+
+
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+
+        //About App button
+        abutAppSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                abutAppSide.clearAnimation();
+                abutAppSide.setAnimation(anim);
+
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+
+
+        //Exit/login button
+        exitLoginSide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                exitLoginSide.clearAnimation();
+                exitLoginSide.setAnimation(anim);
+
+
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -76,7 +225,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         //Side menu
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -135,6 +284,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_filter) {
+            Filter filter = new Filter();
+            // Bundle bundle = new Bundle();
+            // filter.setArguments(bundle);
+            android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontener, filter);
+            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            fragmentTransaction.commit();
             return true;
         }
 

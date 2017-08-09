@@ -33,4 +33,12 @@
     <string name="renewpass">تأكيد كلمة المرور الجديدة</string>
     <string name="resetpassword">إعادة تعيين كلمة المرور</string>
     <string name="save">حفظ</string>
+    <string name="bycategory">بحث بالفئات</string>
+    <string name="bycountry">بحث بالمدينة او الحي</string>
+    <string name="byserviceoroffer">بحث بالخدمة او العروض</string>
+    <string name="expertrate">تقييم الخبيرة</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="neerst">بحث بالأقرب</string>
+    <string name="serchkey">كلمة البحث</string>
+    <string name="search">بحث</string>
 </resources>
