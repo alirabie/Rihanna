@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.R;
 
 
@@ -43,6 +44,7 @@ public class Filter extends Fragment {
         byNearst=(EditText)view.findViewById(R.id.byneer_input);
         byCountry=(EditText)view.findViewById(R.id.by_cityordistrict);
         filterBtn=(TextView)view.findViewById(R.id.filter_btn);
+        filterBtn.setTypeface(Home.face);
 
 
         expertRateSpinner=(BetterSpinner)view.findViewById(R.id.by_expert_rate_spinner);
@@ -75,6 +77,9 @@ public class Filter extends Fragment {
                 fragmentTransaction.replace(R.id.fragmentcontener, services);
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
+                Home.tittle.setVisibility(View.INVISIBLE);
+                Home.topButtons.setVisibility(View.VISIBLE);
+                Home.spainnersBox.setVisibility(View.VISIBLE);
             }
         });
 

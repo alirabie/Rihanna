@@ -41,4 +41,16 @@
     <string name="neerst">Search By Nearest</string>
     <string name="serchkey">Search Keyword</string>
     <string name="search">Search</string>
+    <string name="filtertitle">Filter</string>
+    <string name="applang">Application Language</string>
+    <string name="photoload">Load Images</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="notificationstoggle">Send Notification when Accept your request</string>
+    <string name="accept">Accept</string>
+    <string name="chose">Chose Language</string>
+    <string name="settings">Settings</string>
+    <string name="restart">Restart Application ?</string>
+    <string name="city">City</string>
+    <string name="district">District</string>
 </resources>

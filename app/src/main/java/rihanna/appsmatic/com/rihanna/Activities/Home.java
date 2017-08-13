@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
@@ -28,6 +31,7 @@ import java.util.List;
 
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
+import rihanna.appsmatic.com.rihanna.Fragments.Settings;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +46,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static Typeface face;
     private ImageView homeSide,profileSide,latestOffersSide,ordersListSide,settingsSide,abutAppSide,exitLoginSide;
     DrawerLayout drawer;
+    public static TextView tittle;
+    public static LinearLayout topButtons ,spainnersBox;
+    private boolean doubleBackToExitPressedOnce = false;
+
 
 
     @Override
@@ -51,8 +59,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+         face= Typeface.createFromAsset(getAssets(), "arabic.ttf");
          drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
+         tittle=(TextView)findViewById(R.id.filtertitle);
+         tittle.setTypeface(face);
+         tittle.setVisibility(View.INVISIBLE);
+         topButtons=(LinearLayout)findViewById(R.id.top_buttons_box);
+         spainnersBox=(LinearLayout)findViewById(R.id.spinners_box);
 
 
         Window window = this.getWindow();
@@ -62,17 +75,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
-        face= Typeface.createFromAsset(getAssets(), "farsi_three_light.ttf");
+
 
         //Setup two header spinners
         countries = (BetterSpinner) findViewById(R.id.countrydown);
         countries.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-        countries.setHint("المدينة");
+        countries.setHint(getResources().getString(R.string.city));
+        countries.setTypeface(face);
         countries.setHintTextColor(Color.WHITE);
 
         locations =(BetterSpinner)findViewById(R.id.citydown);
         locations.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-        locations.setHint("المنطقة");
+        locations.setHint(getResources().getString(R.string.district));
+        locations.setTypeface(face);
         locations.setHintTextColor(Color.WHITE);
 
 
@@ -113,8 +128,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontener, services);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
+                tittle.setVisibility(View.INVISIBLE);
+                topButtons.setVisibility(View.VISIBLE);
+                spainnersBox.setVisibility(View.VISIBLE);
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
@@ -175,8 +193,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 settingsSide.clearAnimation();
                 settingsSide.setAnimation(anim);
-
-
+                Settings settings=new Settings();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, settings);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                tittle.setVisibility(View.VISIBLE);
+                tittle.setText(getResources().getString(R.string.settings));
+                Animation anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                tittle.clearAnimation();
+                tittle.setAnimation(anim2);
+                topButtons.setVisibility(View.INVISIBLE);
+                spainnersBox.setVisibility(View.INVISIBLE);
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
@@ -261,7 +290,39 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+            homeSide.clearAnimation();
+            homeSide.setAnimation(anim);
+            Services services=new Services();
+            android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontener, services);
+            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            fragmentTransaction.commit();
+            tittle.setVisibility(View.INVISIBLE);
+            tittle.setText(getResources().getString(R.string.filtertitle));
+            topButtons.setVisibility(View.VISIBLE);
+            spainnersBox.setVisibility(View.VISIBLE);
+            drawer.closeDrawer(GravityCompat.START);
+           // super.onBackPressed();
+
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+           // Toast.makeText(this, R.string.pressagain, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+
+
+
+
+
         }
     }
 
@@ -292,6 +353,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             fragmentTransaction.replace(R.id.fragmentcontener, filter);
             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             fragmentTransaction.commit();
+            tittle.setText(getResources().getString(R.string.filtertitle));
+            tittle.setVisibility(View.VISIBLE);
+            Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+            tittle.clearAnimation();
+            tittle.setAnimation(anim);
+            topButtons.setVisibility(View.INVISIBLE);
+            spainnersBox.setVisibility(View.INVISIBLE);
             return true;
         }
 

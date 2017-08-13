@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Rihanna</string>
+    <string name="app_name">ريحانه</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -41,4 +41,16 @@
     <string name="neerst">بحث بالأقرب</string>
     <string name="serchkey">كلمة البحث</string>
     <string name="search">بحث</string>
+    <string name="filtertitle">الفلتر</string>
+    <string name="applang">لغة التطبيق</string>
+    <string name="photoload">تحميل الصور</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="notificationstoggle">إرسال إشعار عند قبول طلبك</string>
+    <string name="accept">موافق</string>
+    <string name="chose">أختر اللغة</string>
+    <string name="settings">ضبط الإعدادات</string>
+    <string name="restart">إعادة تشغيل التطبيق ؟</string>
+    <string name="city">المدينة</string>
+    <string name="district">المنطقة</string>
 </resources>

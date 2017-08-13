@@ -20,38 +20,59 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" >
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="15dp"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/hair_btn"
-                    android:src="@drawable/hair_tab_active"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp" />
+                android:gravity="center"
+                android:id="@+id/top_buttons">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/mack_up_btn"
-                    android:src="@drawable/makeup_tab_active"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp" />
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:id="@+id/filtertitle"
+                    android:textSize="20dp"
+                    android:background="#00ffffff" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/top_buttons_box">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/hair_btn"
+                        android:src="@drawable/hair_tab_active"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/mack_up_btn"
+                        android:src="@drawable/makeup_tab_active"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+                </LinearLayout>
+
+            </FrameLayout>
         </android.support.v7.widget.Toolbar>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/spinners_box">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +92,8 @@
                     android:gravity="center"
                     android:spinnerMode="dropdown"
                     android:textSize="30dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:textAlignment="center" />
 
 
             </LinearLayout>
@@ -94,7 +116,8 @@
                     android:gravity="center"
                     android:spinnerMode="dropdown"
                     android:textSize="30dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:textAlignment="center" />
             </LinearLayout>
 
         </LinearLayout>
