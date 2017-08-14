@@ -34,7 +34,7 @@
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:id="@+id/filtertitle"
-                    android:textSize="20dp"
+                    android:textSize="17dp"
                     android:background="#00ffffff" />
 
                 <LinearLayout

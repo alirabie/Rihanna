@@ -1,0 +1,178 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="rihanna.appsmatic.com.rihanna.Fragments.Profile"
+    android:layoutDirection="ltr"
+    android:background="#ffffff">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/frameLayout">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/placeholderprofilephoto"
+            app:border_color="@color/colorPrimary"
+            app:border_width="2dp"
+            android:layout_gravity="center"
+            android:id="@+id/profile_pic" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addphoto_btn"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/addprofilephoto" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:id="@+id/login_input_data_box"
+        android:layout_below="@+id/frameLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/nameprofileplace"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView6"
+                android:layout_weight="6"
+                android:layout_gravity="left" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/username_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start|right"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/emailprofileplace"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView5"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/email_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/mobileprofileplace"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView4"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/phone_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/passwordprofileplace"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView3"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/password_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <TextView
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/save"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:typeface="serif"
+            android:id="@+id/save_profile_btn">
+
+        </TextView>
+
+    </LinearLayout>
+</RelativeLayout>

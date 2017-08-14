@@ -51,6 +51,10 @@
     <string name="restart">Restart Application ? </string>
     <string name="city">City</string>
     <string name="district">District</string>
+    <string name="verifyaccount">Verify Account</string>
+    <string name="isertactivecode">Insert Activation Code</string>
+    <string name="profile">Profile</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

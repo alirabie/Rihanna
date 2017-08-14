@@ -53,4 +53,7 @@
     <string name="restart">Restart Application ?</string>
     <string name="city">City</string>
     <string name="district">District</string>
+    <string name="isertactivecode">Insert Activation Code</string>
+    <string name="verifyaccount">Verify Account</string>
+    <string name="profile">Profile</string>
 </resources>

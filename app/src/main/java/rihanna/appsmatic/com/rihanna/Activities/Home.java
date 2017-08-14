@@ -30,6 +30,7 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.util.List;
 
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
+import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Fragments.Settings;
 import rihanna.appsmatic.com.rihanna.R;
@@ -144,11 +145,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 profileSide.clearAnimation();
                 profileSide.setAnimation(anim);
-
-                //do
-
+                Profile profile=new Profile();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, profile);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                tittle.setVisibility(View.VISIBLE);
+                tittle.setText(getResources().getString(R.string.profile));
+                Animation anim3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                tittle.clearAnimation();
+                tittle.setAnimation(anim3);
+                topButtons.setVisibility(View.INVISIBLE);
+                spainnersBox.setVisibility(View.INVISIBLE);
                 drawer.closeDrawer(GravityCompat.START);
-
             }
         });
 

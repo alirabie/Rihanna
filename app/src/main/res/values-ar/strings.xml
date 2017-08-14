@@ -53,4 +53,7 @@
     <string name="restart">إعادة تشغيل التطبيق ؟</string>
     <string name="city">المدينة</string>
     <string name="district">المنطقة</string>
+    <string name="isertactivecode">أدخل رمز التفعيل المرسل لك بالجوال</string>
+    <string name="verifyaccount">تاكيد الحساب</string>
+    <string name="profile">الملف الشخصى</string>
 </resources>
