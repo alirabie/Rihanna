@@ -42,7 +42,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:id="@+id/login_input_data_box">
+        android:id="@+id/complains_input_data_box">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -233,7 +233,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_input_data_box"
+        android:layout_below="@+id/complains_input_data_box"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="10dp"

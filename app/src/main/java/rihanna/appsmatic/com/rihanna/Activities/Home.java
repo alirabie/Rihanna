@@ -29,6 +29,7 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.List;
 
+import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
@@ -228,7 +229,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 abutAppSide.clearAnimation();
                 abutAppSide.setAnimation(anim);
-
+                AboutApp aboutApp=new AboutApp();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, aboutApp);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                tittle.setVisibility(View.VISIBLE);
+                tittle.setText(getResources().getString(R.string.aboutapp));
+                Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                tittle.clearAnimation();
+                tittle.setAnimation(anim5);
+                topButtons.setVisibility(View.INVISIBLE);
+                spainnersBox.setVisibility(View.INVISIBLE);
                 drawer.closeDrawer(GravityCompat.START);
             }
         });

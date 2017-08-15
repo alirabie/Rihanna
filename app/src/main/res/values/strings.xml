@@ -54,6 +54,12 @@
     <string name="verifyaccount">Verify Account</string>
     <string name="isertactivecode">Insert Activation Code</string>
     <string name="profile">Profile</string>
+    <string name="polcies">Policies</string>
+    <string name="subwayes">Ways to subscribe</string>
+    <string name="complains">Complaints</string>
+    <string name="send">Send</string>
+    <string name="comptext">Complaints Text ...</string>
+    <string name="aboutapp">About Application</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

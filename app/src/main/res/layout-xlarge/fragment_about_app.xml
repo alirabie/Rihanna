@@ -1,0 +1,403 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="rihanna.appsmatic.com.rihanna.Fragments.AboutApp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_below="@+id/about_app_info_tv"
+        android:layout_alignParentStart="true"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/expandableButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dropdwonlistbg"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:text="@string/polcies"
+                android:drawablePadding="5dp"
+                android:textColor="#000000"
+                android:textAlignment="viewStart"
+                android:textSize="25dp"
+                android:padding="10dp" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton1"
+                android:padding="10dp"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical"
+                android:gravity="center"
+                android:background="#ffffff">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="end"
+                    android:id="@+id/text1"
+                    android:textSize="20dp"
+                    android:inputType="textMultiLine" />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/expandableButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandableLayout1"
+                android:background="@drawable/dropdwonlistbg"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="5dp"
+                android:text="@string/subwayes"
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:textAlignment="viewStart"
+                android:textSize="25dp" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton2"
+                android:padding="10dp"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical"
+                android:gravity="center"
+                android:background="#ffffff">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="end"
+                    android:id="@+id/text2"
+                    android:textSize="20dp"
+                    android:inputType="textImeMultiLine" />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/expandableButton3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandableLayout2"
+                android:background="@drawable/dropdwonlistbg"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:drawablePadding="5dp"
+                android:text="@string/complains"
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="25dp"
+                android:padding="10dp" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton3"
+                android:padding="10dp"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical"
+                android:gravity="center"
+                android:background="#ffffff">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:id="@+id/complains_input_data_box"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:background="@drawable/inputusername"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageView6"
+                            android:layout_weight="6"
+                            android:layout_gravity="left" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/username_input_about_us"
+                            android:background="#00ffffff"
+                            android:padding="8dp"
+                            android:gravity="center|start|right"
+                            android:textAlignment="textStart"
+                            android:hint="@string/userhintinputlogin"
+                            android:layout_weight="1"
+                            android:layout_gravity="right"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:background="@drawable/inputemail"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageView5"
+                            android:layout_weight="6" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/email_input_about_us"
+                            android:background="#00ffffff"
+                            android:padding="8dp"
+                            android:gravity="center|start"
+                            android:textAlignment="textStart"
+                            android:hint="@string/emailhintinputlogin"
+                            android:layout_weight="1"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@drawable/inputcode"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageView4"
+                            android:layout_weight="6" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:ems="10"
+                            android:id="@+id/complaints_input_body"
+                            android:background="#00ffffff"
+                            android:padding="8dp"
+                            android:gravity="center|start"
+                            android:textAlignment="textStart"
+                            android:hint="@string/comptext"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:inputType="textMultiLine" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/send"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:typeface="serif"
+                        android:id="@+id/complaints_send_btn_about_us">
+                    </TextView>
+
+                </LinearLayout>
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layoutDirection="ltr"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/linearLayout11"
+                android:layout_marginTop="50dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp" >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageView7"
+                            android:src="@drawable/emailsymbol"
+                            android:padding="2dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Info@rihanna.net"
+                            android:id="@+id/textView8"
+                            android:textSize="20dp"
+                            android:padding="2dp"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageView11"
+                            android:src="@drawable/phonesymbol"
+                            android:padding="2dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="01234567890"
+                            android:id="@+id/textView9"
+                            android:textSize="20dp"
+                            android:padding="2dp"
+                            android:textColor="#000000" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView12"
+                        android:src="@drawable/fb"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView13"
+                        android:src="@drawable/tw"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginLeft="4dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView14"
+                        android:src="@drawable/gm"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView15"
+                        android:src="@drawable/insta"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView16"
+                        android:src="@drawable/copyright"
+                        android:layout_marginTop="3dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo_about_app"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:padding="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="تطبيق ريحانة افضل طرق لعرض خدمات اشهر وافضل خبيرات التجميل فى جميع المدن والمناطق ... ايضا يمكنك من معرفة جميع العروض لديهم وحجزها ويمكنك الدفع بواسطته"
+        android:id="@+id/about_app_info_tv"
+        android:layout_below="@+id/logo_about_app"
+        android:layout_alignParentStart="true"
+        android:padding="25dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="25dp" />
+
+
+
+
+</RelativeLayout>

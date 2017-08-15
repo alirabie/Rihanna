@@ -56,4 +56,10 @@
     <string name="isertactivecode">أدخل رمز التفعيل المرسل لك بالجوال</string>
     <string name="verifyaccount">تاكيد الحساب</string>
     <string name="profile">الملف الشخصى</string>
+    <string name="complains">الشكاوى</string>
+    <string name="polcies">السياسات</string>
+    <string name="subwayes">طرق الاشتراك</string>
+    <string name="send">إرسال</string>
+    <string name="comptext">نص الشكوى ...</string>
+    <string name="aboutapp">عن التطبيق</string>
 </resources>
