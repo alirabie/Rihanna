@@ -62,4 +62,10 @@
     <string name="send">Send</string>
     <string name="comptext">Complaints Text ...</string>
     <string name="aboutapp">About Application</string>
+    <string name="reqorders">Requests</string>
+    <string name="reqservices">Requested Services</string>
+    <string name="reservisons">Reservations</string>
+    <string name="acceptedreq">Accepted Requests</string>
+    <string name="listorderstitle">Requests List</string>
+    <string name="sr">SR</string>
 </resources>

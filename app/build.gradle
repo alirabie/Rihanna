@@ -30,6 +30,7 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'
@@ -43,6 +44,12 @@ dependencies {
     compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
 }
 
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
 dependencies {
     compile 'com.github.aakira:expandable-layout:1.4.2@aar'
 }

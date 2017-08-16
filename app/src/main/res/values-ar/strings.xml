@@ -62,4 +62,10 @@
     <string name="send">إرسال</string>
     <string name="comptext">نص الشكوى ...</string>
     <string name="aboutapp">عن التطبيق</string>
+    <string name="reqorders">الطلبات</string>
+    <string name="reqservices">الطلبات المقدمة</string>
+    <string name="reservisons">الحجوزات</string>
+    <string name="acceptedreq">الطلبات المقبولة</string>
+    <string name="listorderstitle">قائمة الطلبات والحجوزات</string>
+    <string name="sr">ر.س</string>
 </resources>
