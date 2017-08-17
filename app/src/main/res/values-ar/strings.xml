@@ -68,4 +68,6 @@
     <string name="acceptedreq">الطلبات المقبولة</string>
     <string name="listorderstitle">قائمة الطلبات والحجوزات</string>
     <string name="sr">ر.س</string>
+    <string name="listempty">القائمة فارغة</string>
+    <string name="salestitle">أحدث العروض</string>
 </resources>

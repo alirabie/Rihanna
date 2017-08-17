@@ -33,6 +33,7 @@ import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.ListOfOrders;
 import rihanna.appsmatic.com.rihanna.Fragments.Profile;
+import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Fragments.Settings;
 import rihanna.appsmatic.com.rihanna.R;
@@ -172,8 +173,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 latestOffersSide.clearAnimation();
                 latestOffersSide.setAnimation(anim);
 
-                //do
-
+                Sale sale=new Sale();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,sale);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                tittle.setVisibility(View.VISIBLE);
+                tittle.setText(getResources().getString(R.string.salestitle));
+                Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                tittle.clearAnimation();
+                tittle.setAnimation(anim5);
+                topButtons.setVisibility(View.INVISIBLE);
+                spainnersBox.setVisibility(View.INVISIBLE);
                 drawer.closeDrawer(GravityCompat.START);
 
             }

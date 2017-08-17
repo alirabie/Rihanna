@@ -68,4 +68,6 @@
     <string name="acceptedreq">Accepted Requests</string>
     <string name="listorderstitle">Requests List</string>
     <string name="sr">SR</string>
+    <string name="listempty">Empty List</string>
+    <string name="salestitle">Latest offers</string>
 </resources>
