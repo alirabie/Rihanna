@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 
@@ -21,6 +23,7 @@ public class AboutApp extends Fragment {
     private TextView txt1,txt2,txt3;
     private Button bt1,bt2,bt3;
     private ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3;
+    private ImageView copyright;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class AboutApp extends Fragment {
 
 
 
+        copyright=(ImageView)view.findViewById(R.id.copyright_tv);
         bt1=(Button)view.findViewById(R.id.expandableButton1);
         bt2=(Button)view.findViewById(R.id.expandableButton2);
         bt3=(Button)view.findViewById(R.id.expandableButton3);
@@ -53,8 +57,12 @@ public class AboutApp extends Fragment {
         expandableLayout3.collapse();
 
 
-
-
+        //check language
+        if(SaveSharedPreference.getLangId(getContext()).equals("ar")){
+            copyright.setImageResource(R.drawable.copyright);
+        }else{
+            copyright.setImageResource(R.drawable.copyright_en);
+        }
 
 
 

@@ -358,7 +358,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/imageView16"
+                        android:id="@+id/copyright_tv"
                         android:src="@drawable/copyright" />
                 </LinearLayout>
             </LinearLayout>

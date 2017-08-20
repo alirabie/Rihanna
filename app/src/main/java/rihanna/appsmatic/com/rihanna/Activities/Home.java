@@ -36,6 +36,7 @@ import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Fragments.Settings;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -116,6 +117,26 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             settingsSide.setBackgroundResource(R.drawable.ripple);
             abutAppSide.setBackgroundResource(R.drawable.ripple);
             exitLoginSide.setBackgroundResource(R.drawable.ripple);
+        }
+
+
+        //check language
+        if(SaveSharedPreference.getLangId(this).equals("ar")){
+            homeSide.setImageResource(R.drawable.home);
+            profileSide.setImageResource(R.drawable.profile);
+            latestOffersSide.setImageResource(R.drawable.sale);
+            ordersListSide.setImageResource(R.drawable.orders);
+            settingsSide.setImageResource(R.drawable.settings);
+            abutAppSide.setImageResource(R.drawable.about);
+            exitLoginSide.setImageResource(R.drawable.signin);
+        }else{
+            homeSide.setImageResource(R.drawable.home_en);
+            profileSide.setImageResource(R.drawable.profile_en);
+            latestOffersSide.setImageResource(R.drawable.sale_en);
+            ordersListSide.setImageResource(R.drawable.orders_en);
+            settingsSide.setImageResource(R.drawable.settings_en);
+            abutAppSide.setImageResource(R.drawable.aboutus_en);
+            exitLoginSide.setImageResource(R.drawable.signin_en);
         }
 
         //Action Side menu buttons :
