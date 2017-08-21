@@ -70,4 +70,8 @@
     <string name="sr">SR</string>
     <string name="listempty">Empty List</string>
     <string name="salestitle">Latest offers</string>
+    <string name="addtocartbtn">Add to Orders List</string>
+    <string name="tababoutexpert">About Expert</string>
+    <string name="tabexpertservices">Services</string>
+    <string name="tablatestoffers">Latest Offers</string>
 </resources>

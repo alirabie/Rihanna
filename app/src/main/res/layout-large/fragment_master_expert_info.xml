@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#353535"
+        android:id="@+id/linearLayout13"
+        android:layoutDirection="rtl">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/expert_details_back"
+            android:src="@drawable/backarrow"
+            android:padding="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="خبيرة التجميل جويل"
+            android:id="@+id/expert_details_name_tv"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/expert_details_share"
+            android:src="@drawable/shareicon"
+            android:padding="15dp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/linearLayout13"
+        android:background="@drawable/imageslider"
+        android:id="@+id/expert_details_images"></FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expert_details_images"
+        android:layout_alignParentEnd="true"
+        android:background="#e9e9e9"
+        android:id="@+id/linearLayout14"
+        android:layoutDirection="rtl">
+
+        <RatingBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expert_details_ratingBar"
+            android:layout_gravity="center"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:progressTint="@color/ratebar"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:rating="2"
+            android:layout_weight="1"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="أراء العملاء   25"
+            android:id="@+id/expert_details_customerrates"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/expert_details_goto_customercomments"
+            android:src="@drawable/gotocommentarrw"
+            android:padding="10dp" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout14"
+        android:layout_alignParentEnd="true">
+
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/expert_tabs_master"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:fillViewport="false"
+            android:textSize="18sp"
+            app:pstsIndicatorColor="@color/colorPrimary"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/expert_info_viewpager_master"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

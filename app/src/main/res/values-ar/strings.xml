@@ -70,4 +70,8 @@
     <string name="sr">ر.س</string>
     <string name="listempty">القائمة فارغة</string>
     <string name="salestitle">أحدث العروض</string>
+    <string name="addtocartbtn">أضف الى قائمة الطلبات</string>
+    <string name="tababoutexpert">عن الخبيرة</string>
+    <string name="tabexpertservices">الخدمات</string>
+    <string name="tablatestoffers">أحدث العروض</string>
 </resources>

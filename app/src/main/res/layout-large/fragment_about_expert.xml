@@ -2,14 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rihanna.appsmatic.com.rihanna.Fragments.Services">
+    tools:context="rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.AboutExpertFrag">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Test expert info frag"
-        android:gravity="center"
-        android:id="@+id/go_expert_info" />
+        android:text="aboutExpert"
+        android:gravity="center" />
 
 </FrameLayout>
