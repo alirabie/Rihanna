@@ -1,18 +1,19 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.AboutExpertFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.LatestOffersFrag;
@@ -30,6 +31,7 @@ public class ExpertInfo extends Fragment {
     CustomFragmentPagerAdapter adapter;
     PagerSlidingTabStrip tabsStrip;
     public static String expertId ="";
+    private ImageView goToRatesComments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class ExpertInfo extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        goToRatesComments =(ImageView)view.findViewById(R.id.expert_details_goto_customercomments);
 
         servicesFrag=new ServicesFrag();
         aboutExpertFrag=new AboutExpertFrag();
@@ -62,6 +65,38 @@ public class ExpertInfo extends Fragment {
         p.setAdapter(adapter);
         tabsStrip.setViewPager(p);
         adapter.notifyDataSetChanged();
+
+
+
+        goToRatesComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                 goToRatesComments.clearAnimation();
+                 goToRatesComments.setAnimation(anim);
+
+                RatingandComments ratingandComments=new RatingandComments();
+
+                //send id
+
+                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, ratingandComments);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                Home.tittle.setVisibility(View.INVISIBLE);
+                Home.tittle.setText(getResources().getString(R.string.filtertitle));
+                Home.topButtons.setVisibility(View.INVISIBLE);
+                Home.spainnersBox.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+
+
+
+
+
 
     }
 

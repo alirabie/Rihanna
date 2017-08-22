@@ -83,4 +83,6 @@
     <string name="expyears">سنوات الخبرة </string>
     <string name="level">المستوى </string>
     <string name="servicetype">نوع الخدمة </string>
+    <string name="rateservices">قم بتقييم خدماتنا </string>
+    <string name="leaveyourcomment">أضف تعليق</string>
 </resources>

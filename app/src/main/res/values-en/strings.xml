@@ -83,4 +83,6 @@
     <string name="expyears">Experience years </string>
     <string name="level">Level </string>
     <string name="servicetype">Service type </string>
+    <string name="rateservices">Rate Our Services</string>
+    <string name="leaveyourcomment">Add Commment</string>
 </resources>
