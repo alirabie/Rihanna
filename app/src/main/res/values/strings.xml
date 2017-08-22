@@ -72,6 +72,16 @@
     <string name="tababoutexpert">About Expert</string>
     <string name="tabexpertservices">Services</string>
     <string name="addtocartbtn">Add to Orders List</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="workhors">Working hours from</string>
+    <string name="am">AM to</string>
+    <string name="pm">PM</string>
+    <string name="level">Level </string>
+    <string name="servicetype">Service type </string>
+    <string name="certification">Certifications </string>
+    <string name="expyears">Experience years </string>
+
 
 
 

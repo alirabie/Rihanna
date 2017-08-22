@@ -74,4 +74,13 @@
     <string name="tababoutexpert">عن الخبيرة</string>
     <string name="tabexpertservices">الخدمات</string>
     <string name="tablatestoffers">أحدث العروض</string>
+    <string name="from">من</string>
+    <string name="to">الى</string>
+    <string name="am">صباحا الى</string>
+    <string name="pm">ليلا</string>
+    <string name="workhors">ساعات العمل من</string>
+    <string name="certification">الشهادات </string>
+    <string name="expyears">سنوات الخبرة </string>
+    <string name="level">المستوى </string>
+    <string name="servicetype">نوع الخدمة </string>
 </resources>

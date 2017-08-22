@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.R;
 
 

@@ -29,6 +29,7 @@ public class ExpertInfo extends Fragment {
     ViewPager p;
     CustomFragmentPagerAdapter adapter;
     PagerSlidingTabStrip tabsStrip;
+    public static String expertId ="";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
