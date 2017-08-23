@@ -85,4 +85,13 @@
     <string name="servicetype">نوع الخدمة </string>
     <string name="rateservices">قم بتقييم خدماتنا </string>
     <string name="leaveyourcomment">أضف تعليق</string>
+    <string name="title_activity_customer_location">خريطة</string>
+    <string name="turnon">تشغيل خاصية تحديد الموقع</string>
+    <string name="gpsoff">خاصية تحديد المواقع غير مفعله</string>
+    <string name="locationdet">تحديد الموقع</string>
+    <string name="locationtittle">موقع العميل</string>
+    <string name="locatononmap">الموقع على الخريطة</string>
+    <string name="cety">المدينة</string>
+    <string name="neborhoode">الحى</string>
+    <string name="street">الشارع</string>
 </resources>

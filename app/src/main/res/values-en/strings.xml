@@ -85,4 +85,13 @@
     <string name="servicetype">Service type </string>
     <string name="rateservices">Rate Our Services</string>
     <string name="leaveyourcomment">Add Commment</string>
+    <string name="title_activity_customer_location">Map</string>
+    <string name="turnon">Turn GPS on</string>
+    <string name="gpsoff">GPS is Turned Off</string>
+    <string name="locationdet">Location Detected</string>
+    <string name="locationtittle">Customer Location</string>
+    <string name="locatononmap">Location On Map</string>
+    <string name="cety">City</string>
+    <string name="neborhoode">Neighborhood</string>
+    <string name="street">Street</string>
 </resources>

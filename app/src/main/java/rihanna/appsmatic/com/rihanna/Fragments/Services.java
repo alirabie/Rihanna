@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import junit.framework.Test;
 
+import rihanna.appsmatic.com.rihanna.Activities.CustomerLocation;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.R;
 
@@ -34,6 +36,10 @@ public class Services extends Fragment {
         testexpertingo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+            startActivity(new Intent(getContext(), CustomerLocation.class));
+
                 ExpertInfo expertInfo=new ExpertInfo();
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

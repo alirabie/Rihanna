@@ -39,7 +39,7 @@
         android:gravity="center"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:id="@+id/complains_input_data_box"
+        android:id="@+id/customerlocation_input_data_box"
         android:layout_below="@+id/frameLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp">

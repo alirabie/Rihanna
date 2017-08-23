@@ -130,7 +130,7 @@
                     android:layout_marginRight="50dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:id="@+id/complains_input_data_box"
+                    android:id="@+id/customerlocation_input_data_box"
                     android:padding="15dp">
 
                     <LinearLayout

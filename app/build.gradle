@@ -4,13 +4,25 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
 
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
     defaultConfig {
         applicationId "rihanna.appsmatic.com.rihanna"
         minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        generatedDensities = []
     }
+
+    // This is handled for you by the 2.0+ Gradle Plugin
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,6 +43,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.google.android.gms:play-services:10.2.1'
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'
@@ -70,6 +83,10 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.google.android.gms:play-services:4.2.42'
+    compile 'com.android.support:appcompat-v7:25.+'
 }
 dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
