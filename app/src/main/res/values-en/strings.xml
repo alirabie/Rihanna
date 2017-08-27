@@ -48,7 +48,7 @@
     <string name="no">No</string>
     <string name="notificationstoggle">Send Notification when Accept your request</string>
     <string name="accept">Accept</string>
-    <string name="chose">Chose Language</string>
+    <string name="chose">Choose Language</string>
     <string name="settings">Settings</string>
     <string name="restart">Restart Application ?</string>
     <string name="city">City</string>
@@ -94,4 +94,15 @@
     <string name="cety">City</string>
     <string name="neborhoode">Neighborhood</string>
     <string name="street">Street</string>
+    <string name="dissmis">Dismiss</string>
+    <string name="addcosts">Extra charges in case of external service is requested</string>
+    <string name="booknow">Book Now</string>
+    <string name="cstomernumber">Clients Number</string>
+    <string name="descountfromtotal">25% of the total amount will be deducted for appointment booking</string>
+    <string name="insertcreditcard">Insert CreditCard Details</string>
+    <string name="orderinfo">Order Information</string>
+    <string name="payinbutecenter">Pay in Beauty Center</string>
+    <string name="paymentmethod">Choose Payment Methodology</string>
+    <string name="payonline">Pay Online</string>
+    <string name="totalprice">Total</string>
 </resources>

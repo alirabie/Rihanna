@@ -94,4 +94,15 @@
     <string name="cety">المدينة</string>
     <string name="neborhoode">الحى</string>
     <string name="street">الشارع</string>
+    <string name="dissmis">إخفاء</string>
+    <string name="addcosts">رسوم اضافية فى حالة طلب خدمة خارجية مقدارها</string>
+    <string name="booknow">أحجز الان</string>
+    <string name="cstomernumber">عدد الافراد</string>
+    <string name="descountfromtotal">سيتم أخذ مبلغ   25 من مجموع الطلب لحجز موعد</string>
+    <string name="insertcreditcard">أدخل بيانات البطاقة</string>
+    <string name="orderinfo">معلومات الطلب</string>
+    <string name="payinbutecenter">الدفع فى الصالون</string>
+    <string name="paymentmethod">اختر طريقة الدفع</string>
+    <string name="payonline">الدفع المباشر اونلاين</string>
+    <string name="totalprice">المجموع </string>
 </resources>

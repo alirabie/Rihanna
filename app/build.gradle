@@ -89,5 +89,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.+'
 }
 dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }

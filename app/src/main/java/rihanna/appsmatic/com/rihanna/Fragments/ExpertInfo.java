@@ -75,6 +75,10 @@ public class ExpertInfo extends Fragment {
                  goToRatesComments.clearAnimation();
                  goToRatesComments.setAnimation(anim);
 
+
+               // Home.fireDoneDialog(getContext(),"خبيرة التجميل جويل",goToRatesComments);
+
+
                 RatingandComments ratingandComments=new RatingandComments();
 
                 //send id

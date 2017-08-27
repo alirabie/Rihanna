@@ -2,15 +2,18 @@ package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -48,6 +53,7 @@ import java.util.List;
 import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.ListOfOrders;
+import rihanna.appsmatic.com.rihanna.Fragments.OrderInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
@@ -449,6 +455,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             spainnersBox.setVisibility(View.INVISIBLE);
 
             return true;
+        }else if (id==R.id.action_shopping_cart){
+            OrderInfo orderInfo =new OrderInfo();
+            android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontener, orderInfo);
+            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            fragmentTransaction.commit();
+            tittle.setText(getResources().getString(R.string.orderinfo));
+            tittle.setVisibility(View.VISIBLE);
+            Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+            tittle.clearAnimation();
+            tittle.setAnimation(anim);
+            topButtons.setVisibility(View.INVISIBLE);
+            spainnersBox.setVisibility(View.INVISIBLE);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -540,6 +561,71 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
     }
+
+
+
+    //Done Dialog method
+    public static void fireDoneDialog(Context context,String exName,View button){
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withDialogColor(Color.WHITE)
+                .withEffect(Effectstype.Newspager)
+                .withTitleColor(context.getResources().getColor(R.color.colorPrimary))
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.thanks_dialog_layout, button.getContext())
+                .withButton1Text(context.getResources().getString(R.string.dissmis))
+                .withDialogColor(R.color.colorPrimary)
+                .withTitle(context.getResources().getString(R.string.app_name))
+                .setButton1Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogBuildercard.dismiss();
+                    }
+                })
+                .show();
+
+        //Setup Items
+        ImageView thanksMsg=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_smilemessage);
+        ImageView advBanner=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_addv_img);
+        TextView expertNameTv=(TextView)dialogBuildercard.findViewById(R.id.thanks_dialog_expert_name_tv);
+
+        //check language
+        if(SaveSharedPreference.getLangId(context).equals("ar")){
+            thanksMsg.setImageResource(R.drawable.thanks);
+        }else{
+            thanksMsg.setImageResource(R.drawable.thanks_en);
+        }
+
+
+        expertNameTv.setText(" "+exName);
+        dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                return keyCode == KeyEvent.KEYCODE_BACK;
+            }
+
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 
     //Check Google Service
     public static boolean isGooglePlayServicesAvailable(Activity activity) {
