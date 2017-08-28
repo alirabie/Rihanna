@@ -105,4 +105,9 @@
     <string name="paymentmethod">اختر طريقة الدفع</string>
     <string name="payonline">الدفع المباشر اونلاين</string>
     <string name="totalprice">المجموع </string>
+    <string name="requsteddate">التاريخ المطلوب</string>
+    <string name="visittime">حدد ساعة الزيارة</string>
+    <string name="listorders">قائمة الطلبات</string>
+    <string name="resume">متابعة</string>
+    <string name="timebokking">حجز موعد</string>
 </resources>

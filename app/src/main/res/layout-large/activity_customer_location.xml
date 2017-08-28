@@ -233,7 +233,7 @@
         android:layout_height="wrap_content"
         android:padding="2dp"
         android:background="#33333a"
-        android:layout_above="@+id/customer_location_save"
+        android:layout_above="@+id/date_time_next_btn"
         android:layout_alignParentEnd="true"
         android:id="@+id/frameLayout2">
 
@@ -256,7 +256,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/save"
-        android:id="@+id/customer_location_save"
+        android:id="@+id/date_time_next_btn"
         android:padding="10dp"
         android:gravity="center"
         android:textStyle="bold"

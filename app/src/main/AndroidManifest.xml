@@ -71,6 +71,11 @@
             android:name=".Activities.CustomerLocation"
             android:label="@string/title_activity_customer_location"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".Activities.DateTimeScreen"
+            android:label="@string/title_activity_customer_location"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

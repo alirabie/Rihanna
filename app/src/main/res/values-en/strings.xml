@@ -105,4 +105,9 @@
     <string name="paymentmethod">Choose Payment Methodology</string>
     <string name="payonline">Pay Online</string>
     <string name="totalprice">Total</string>
+    <string name="requsteddate">Requested Date</string>
+    <string name="visittime">Select your visit date</string>
+    <string name="listorders">Orders List</string>
+    <string name="resume">Next</string>
+    <string name="timebokking">Appointment Booking</string>
 </resources>

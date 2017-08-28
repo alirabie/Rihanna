@@ -102,6 +102,11 @@
     <string name="insertcreditcard">Insert CreditCard Details</string>
     <string name="booknow">Book Now</string>
     <string name="orderinfo">Order Information</string>
+    <string name="requsteddate">Requested Date</string>
+    <string name="visittime">Select your visit date</string>
+    <string name="listorders">Orders List</string>
+    <string name="resume">Next</string>
+    <string name="timebokking">Appointment Booking</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
