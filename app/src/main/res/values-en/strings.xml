@@ -134,4 +134,5 @@
     <string name="loginvalemail">Email is required!</string>
     <string name="loginvalpassword">"Password is required!"</string>
     <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
+    <string name="update">Your Info has been updated</string>
 </resources>

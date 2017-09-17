@@ -16,8 +16,8 @@
         android:id="@+id/frameLayout">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/placeholderprofilephoto"
             app:border_color="@color/colorPrimary"
             app:border_width="2dp"
@@ -31,18 +31,26 @@
             android:layout_gravity="center_horizontal|bottom"
             android:src="@drawable/addprofilephoto" />
     </FrameLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:id="@+id/scroll"
+    android:layout_below="@+id/frameLayout"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:id="@+id/customerlocation_input_data_box"
         android:layout_below="@+id/frameLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -50,6 +58,37 @@
             android:layout_height="35dp"
             android:background="@drawable/nameprofileplace"
             android:gravity="center">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView6f"
+                android:layout_weight="6"
+                android:layout_gravity="left" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/fname_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start|right"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/nameprofileplace"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -63,7 +102,7 @@
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/username_input_profile"
+                android:id="@+id/lname_input_profile"
                 android:background="#00ffffff"
                 android:padding="6dp"
                 android:gravity="center|start|right"
@@ -73,6 +112,7 @@
                 android:textSize="15dp" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -157,6 +197,132 @@
                 android:textSize="15dp"
                 android:inputType="textPassword" />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/passwordprofileplace"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView3"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/re_password_input_profile"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:inputType="textPassword" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/dropdwonlistbg"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/profile_countery_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:textSize="11dp"
+                android:padding="5dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layoutDirection="ltr"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/dropdwonlistbg"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp">
+                <com.weiwangcn.betterspinner.library.BetterSpinner
+                    android:id="@+id/profile_states_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:textSize="11dp"
+                    android:padding="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/dropdwonlistbg"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_marginRight="3dp"
+                android:layout_marginLeft="3dp">
+                <com.weiwangcn.betterspinner.library.BetterSpinner
+                    android:id="@+id/profile_districts_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:textSize="11dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/addressinput"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layoutDirection="ltr">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView43"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/profile_address_input"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="viewStart"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:inputType="text" />
+        </LinearLayout>
 
         <TextView
             android:orientation="horizontal"
@@ -175,4 +341,5 @@
         </TextView>
 
     </LinearLayout>
+</ScrollView>
 </RelativeLayout>

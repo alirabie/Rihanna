@@ -134,4 +134,5 @@
     <string name="loginvalemail">أدخل البريد الالكترونى</string>
     <string name="loginvalpassword">أدخل كلمة المرور</string>
     <string name="newpasswillsend">سوف يتم ارسال كلمة مرور افتراضيه على جوالك الان</string>
+    <string name="update">تم تحديث بياناتك بنجاح</string>
 </resources>

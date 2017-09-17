@@ -131,6 +131,7 @@
     <string name="faild">Operation Failed</string>
     <string name="loginsucsess">Login Success (Welcome)</string>
     <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
+    <string name="update">Your Info has been updated</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
