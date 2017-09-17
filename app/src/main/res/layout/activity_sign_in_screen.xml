@@ -67,7 +67,7 @@
                 android:background="#00ffffff"
                 android:padding="6dp"
                 android:gravity="center|start"
-                android:textAlignment="textStart"
+                android:textAlignment="viewStart"
                 android:hint="@string/phoneormail"
                 android:layout_weight="1"
                 android:textSize="13dp" />
@@ -94,12 +94,12 @@
                 android:id="@+id/password_input_login"
                 android:background="#00ffffff"
                 android:padding="6dp"
-                android:gravity="center|start"
-                android:textAlignment="textStart"
+                android:textAlignment="viewStart"
                 android:hint="@string/yourpass"
                 android:layout_weight="1"
                 android:textSize="13dp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:gravity="center" />
         </LinearLayout>
 
         <TextView
@@ -269,7 +269,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/youdonthavaccount"
-        android:id="@+id/textView6"
+        android:id="@+id/create_account_btn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"

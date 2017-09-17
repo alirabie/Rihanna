@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="userhintinputlogin">أسم المستخدم</string>
+    <string name="userhintinputlogin">الاسم الاول</string>
     <string name="emailhintinputlogin">البريد الإلكترونى</string>
     <string name="phonehintinputlogin">رقم الجوال</string>
     <string name="passwordhintinputlogin">كلمة المرور</string>
@@ -110,4 +110,28 @@
     <string name="listorders">قائمة الطلبات</string>
     <string name="resume">متابعة</string>
     <string name="timebokking">حجز موعد</string>
+    <string name="lastname">الاسم الثانى</string>
+    <string name="address">العنوان</string>
+    <string name="selectcounery">أختر الدولة</string>
+    <string name="selectdistrect">أختر المنطقة</string>
+    <string name="selectstate">أختر المحافظة</string>
+    <string name="connectionerror">خطاء فى الاتصال</string>
+    <string name="codewillsend">سوف يتم ارسال رمز التفعيل على جوالك الان</string>
+    <string name="invalidphonenum">رقم الجوال غير صحيح</string>
+    <string name="phoneerror">من فضلك ادخل رقم الجوال</string>
+    <string name="pleasewait">من فضلك انتظر</string>
+    <string name="addreesserorr">أدخل عنوانك</string>
+    <string name="faild">فشلت العملية</string>
+    <string name="fnameerrorr">أدخل الاسم الاول</string>
+    <string name="notvalidemail">البريد الالكترونى غير صحيح</string>
+    <string name="passnotmatch">كلمات المرور غير متطابقه</string>
+    <string name="passwordleanght">لابد ان لا تقل كلمة المرور عن 6 احرف</string>
+    <string name="phonevalid">رقم الجوال غير صحيح (e.g : 14155552671)</string>
+    <string name="regsuccsess">تم انشاء مستخدم جديد بنجاح</string>
+    <string name="loginsucsess">تم تسجيل دخولك بنجاح (مرحبا بك)</string>
+    <string name="insertvercode">من فضلك ادخل كود التفعيل</string>
+    <string name="lnameerrorr">أدخل الاسم الثانى</string>
+    <string name="loginvalemail">أدخل البريد الالكترونى</string>
+    <string name="loginvalpassword">أدخل كلمة المرور</string>
+    <string name="newpasswillsend">سوف يتم ارسال كلمة مرور افتراضيه على جوالك الان</string>
 </resources>

@@ -3,6 +3,7 @@ package rihanna.appsmatic.com.rihanna.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -133,6 +134,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         exitLoginSide=(ImageView)findViewById(R.id.logout_side_button);
 
 
+
+
+
+
+
+
+
+
+
         //Check Os Ver
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             homeSide.setBackgroundResource(R.drawable.ripple);
@@ -153,7 +163,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             ordersListSide.setImageResource(R.drawable.orders);
             settingsSide.setImageResource(R.drawable.settings);
             abutAppSide.setImageResource(R.drawable.about);
-            exitLoginSide.setImageResource(R.drawable.signin);
+            if(SaveSharedPreference.getCustomerInfo(Home.this)==null){
+                exitLoginSide.setImageResource(R.drawable.signin);
+            }else {
+                exitLoginSide.setImageResource(R.drawable.logout);
+            }
         }else{
             homeSide.setImageResource(R.drawable.home_en);
             profileSide.setImageResource(R.drawable.profile_en);
@@ -161,8 +175,24 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             ordersListSide.setImageResource(R.drawable.orders_en);
             settingsSide.setImageResource(R.drawable.settings_en);
             abutAppSide.setImageResource(R.drawable.aboutus_en);
-            exitLoginSide.setImageResource(R.drawable.signin_en);
+            if(SaveSharedPreference.getCustomerInfo(Home.this)==null){
+                exitLoginSide.setImageResource(R.drawable.signin_en);
+            }else {
+                exitLoginSide.setImageResource(R.drawable.signout_en);
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         //Action Side menu buttons :
 
@@ -326,11 +356,36 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 exitLoginSide.clearAnimation();
                 exitLoginSide.setAnimation(anim);
 
+                if(SaveSharedPreference.getCustomerInfo(Home.this)==null){
 
-                drawer.closeDrawer(GravityCompat.START);
+                    //Login
+                    startActivity(new Intent(Home.this,SignInScreen.class));
+                    drawer.closeDrawer(GravityCompat.START);
+
+                }else {
+
+                    //Logout and clear all data
+                    SaveSharedPreference.setCustomerId(Home.this,"");
+                    SaveSharedPreference.setCustomerInfo(Home.this, null);
+                    SaveSharedPreference.setUserName(Home.this, "", "");
+                    startActivity(new Intent(Home.this, Splash.class));
+                    drawer.closeDrawer(GravityCompat.START);
+                    Home.this.finish();
+
+                }
+
 
             }
         });
+
+
+
+
+
+
+
+
+
 
 
 

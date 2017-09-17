@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
+import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
+
 /**
  * Created by Eng Ali on 8/13/2017.
  */
@@ -13,6 +20,8 @@ public class SaveSharedPreference {
     static final String LANG_ID="langId";
     static final String lOAD_IMG_ID="imagesStatus";
     static final String CUSTOMER_ID="customerid";
+    static final String CUSTOMER_INFO="customerInfo";
+
 
 
 
@@ -74,6 +83,26 @@ public class SaveSharedPreference {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.clear(); //clear all stored data
         editor.commit();
+    }
+
+    public static void setCustomerInfo(Context context,RegResponse regResponse){
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(regResponse);
+        editor.putString(CUSTOMER_INFO, json);
+        editor.commit();
+    }
+
+    public static RegResponse getCustomerInfo(Context context){
+
+        String json= getSharedPreferences(context).getString(CUSTOMER_INFO, "");
+        RegResponse regResponse=new RegResponse();
+        if(!json.isEmpty()) {
+            Type type = new TypeToken<RegResponse>() {}.getType();
+            Gson gson = new Gson();
+            regResponse= gson.fromJson(json, type);
+        }
+        return regResponse;
     }
 
 

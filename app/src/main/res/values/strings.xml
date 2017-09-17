@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="userhintinputlogin">Username</string>
+    <string name="userhintinputlogin">First Name</string>
     <string name="emailhintinputlogin">Email</string>
     <string name="phonehintinputlogin">Phone Number</string>
     <string name="passwordhintinputlogin">Password</string>
@@ -107,6 +107,30 @@
     <string name="listorders">Orders List</string>
     <string name="resume">Next</string>
     <string name="timebokking">Appointment Booking</string>
+    <string name="lastname">Last Name</string>
+    <string name="address">Address</string>
+    <string name="selectcounery">Select Country</string>
+    <string name="selectstate">Select State</string>
+    <string name="selectdistrect">Select District</string>
+    <string name="connectionerror">Connection Error</string>
+    <string name="phoneerror">Insert Phone number</string>
+    <string name="invalidphonenum">Invalid Phone Number</string>
+    <string name="pleasewait">Please Wait ..</string>
+    <string name="codewillsend">Verification Code will send shortly in SMS</string>
+    <string name="loginvalemail">Email is required!</string>
+    <string name="loginvalpassword">"Password is required!"</string>
+    <string name="fnameerrorr">First Name is required !</string>
+    <string name="lnameerrorr">Last Name is required !</string>
+    <string name="phonevalid">Invalid phone number format (e.g : 14155552671)</string>
+    <string name="passnotmatch">Passwords Not Matches !</string>
+    <string name="notvalidemail">Invalid Email Address</string>
+    <string name="passwordleanght">Password should be at lest 6 Chars </string>
+    <string name="addreesserorr">Insert your Address</string>
+    <string name="insertvercode">Insert Verification code</string>
+    <string name="regsuccsess">New User has been registered successfully</string>
+    <string name="faild">Operation Failed</string>
+    <string name="loginsucsess">Login Success (Welcome)</string>
+    <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
