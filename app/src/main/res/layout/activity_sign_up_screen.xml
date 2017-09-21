@@ -274,7 +274,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp">
                     <com.weiwangcn.betterspinner.library.BetterSpinner
-                        android:id="@+id/signup_states_spinner"
+                        android:id="@+id/signup_states_spinner2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"

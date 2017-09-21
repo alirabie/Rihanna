@@ -439,10 +439,29 @@ public class Profile extends Fragment {
 
                 }
 
+                countriesNames.clear();
+                countriesIds.clear();
+                statesNames.clear();
+                countriesIds.clear();
+                districtsNames.clear();
+                districtsIds.clear();
+
+
             }
         });
 
                 }
 
 
-            }
+    @Override
+    public void onResume() {
+        super.onResume();
+        countriesNames.clear();
+        countriesIds.clear();
+        statesNames.clear();
+        countriesIds.clear();
+        districtsNames.clear();
+        districtsIds.clear();
+
+    }
+}

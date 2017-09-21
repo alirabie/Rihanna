@@ -92,7 +92,7 @@ public class SignUpScreen extends AppCompatActivity {
 
 
         filterCountries = (BetterSpinner) findViewById(R.id.signup_countery_spinner);
-        filterStates =(BetterSpinner)findViewById(R.id.signup_states_spinner);
+        filterStates =(BetterSpinner)findViewById(R.id.signup_states_spinner2);
         filterdistructs=(BetterSpinner)findViewById(R.id.signup_districts_spinner);
         filterCountries.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item));
         filterStates.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item));
