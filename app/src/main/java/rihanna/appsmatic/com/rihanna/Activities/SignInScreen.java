@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -80,37 +82,18 @@ public class SignInScreen extends AppCompatActivity  {
     private CallbackManager callbackManager;
     private final String CONSUMER_KEY = "Cx1OokZ9Zf7CICMcjU6rfdUSh";
     private final String CONSUMER_SECRET = "ZzCgAxMuQf1XoOlnIngs5VL4o4WtGve6hvyw3tPpBKEcppk6i9";
-    GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient mGoogleApiClient;
+    private AccessTokenTracker accessTokenTracker;
+    private ImageView fblogin,twitterlogin,gmailLogin;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onCreate(savedInstanceState);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-
-        TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig(CONSUMER_KEY, CONSUMER_SECRET))
-                .debug(true)
-                .build();
-        Twitter.initialize(config);
-
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
-        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_sign_in_screen);
-
-
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -120,7 +103,39 @@ public class SignInScreen extends AppCompatActivity  {
         }
 
 
-        printKeyHash();
+        //Google sign in API Configurations
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        //Twitter sign in API Configurations
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.INFO))
+                .twitterAuthConfig(new TwitterAuthConfig(CONSUMER_KEY, CONSUMER_SECRET))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+
+
+        //Facebook sign in API Configurations
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+                // Set the access token using
+                // currentAccessToken when it's loaded or set.
+            }
+        };
+
+
+        //printKeyHash();
 
 
         //Setup items
@@ -133,6 +148,11 @@ public class SignInScreen extends AppCompatActivity  {
         fbLoginButton = (LoginButton) findViewById(R.id.facebook_login_btn);
         twitterLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_btn);
         signInButton = (SignInButton) findViewById(R.id.gmail_login_btn);
+
+       //Mask of buttons actions for social media login
+        fblogin=(ImageView)findViewById(R.id.fbloginbutton);
+        twitterlogin=(ImageView)findViewById(R.id.twitterloginbutton);
+        gmailLogin=(ImageView)findViewById(R.id.gmailloginbutton);
 
 
         //Check Os Ver
@@ -305,53 +325,122 @@ public class SignInScreen extends AppCompatActivity  {
         fbLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
                 Toast.makeText(SignInScreen.this, "Success" + "Facebook Login  :  " + loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(SignInScreen.this, "Login Cancel", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInScreen.this, "Facebook Login Canceled", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException e) {
-                Toast.makeText(SignInScreen.this, "Facebook " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInScreen.this, "Facebook Login Error :  " + e.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("ERRRRRR", e.getMessage());
             }
         });
+        //Facebook mask button
+        fblogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(SignInScreen.this, R.anim.alpha);
+                fblogin.clearAnimation();
+                fblogin.setAnimation(anim);
+                fbLoginButton.performClick();
+            }
+        });
+
+
+
+
+
 
 
         //Twitter Login Button
         twitterLoginButton.setCallback(new com.twitter.sdk.android.core.Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                Toast.makeText(SignInScreen.this, "Success" + "Twitter Login  :  " + result.data.getUserId()+" "+result.data.getUserName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInScreen.this, "Success" + "Twitter Login  :  " + result.data.getUserId() + " " + result.data.getUserName(), Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void failure(TwitterException exception) {
-                Toast.makeText(SignInScreen.this, "Twitter " + exception.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInScreen.this, "Twitter Login Error : " + exception.getMessage(), Toast.LENGTH_LONG).show();
 
+            }
+        });
+        //Twitter Mask Button
+        twitterlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(SignInScreen.this, R.anim.alpha);
+                twitterlogin.clearAnimation();
+                twitterlogin.setAnimation(anim);
+                twitterLoginButton.performClick();
             }
         });
 
 
         //Gmail login button
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setOnClickListener(new View.OnClickListener() {
+
+        //Gmail Mask Button
+        gmailLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Animation anim = AnimationUtils.loadAnimation(SignInScreen.this, R.anim.alpha);
+                gmailLogin.clearAnimation();
+                gmailLogin.setAnimation(anim);
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, 9001);
             }
         });
 
-
-
     }
 
 
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        //Get Facebook login results
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        //Get twitter login results
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+
+
+
+        //Get Gmail login results
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == 9001) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Signed in successfully, show authenticated UI.
+                GoogleSignInAccount acct = result.getSignInAccount();
+
+                Toast.makeText(SignInScreen.this, "Success" + "Gmail Login  :  " + acct.getId().toString()+" "+acct.getDisplayName(), Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(SignInScreen.this, "Error Gmail Login ", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+
+
+
+
+
+    //Get KeyHash
     public void printKeyHash() {
         // Add code to print out the key hash
         try {
@@ -367,36 +456,6 @@ public class SignInScreen extends AppCompatActivity  {
             Log.e("KeyHash:", e.toString());
         }
     }
-
-
-
-
-
-
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
-
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == 9001) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Signed in successfully, show authenticated UI.
-                GoogleSignInAccount acct = result.getSignInAccount();
-
-                Toast.makeText(SignInScreen.this, "Success" + "Gmail Login  :  " + acct.getId().toString()+" "+acct.getDisplayName(), Toast.LENGTH_LONG).show();
-
-            } else {
-                Toast.makeText(SignInScreen.this, "Error" + " Gmail Login ", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
 
 
 }
