@@ -196,7 +196,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -204,29 +204,28 @@
         android:layout_marginRight="30dp"
         android:id="@+id/linearLayout"
         android:layout_below="@+id/linearLayout2"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp">
 
-        <ImageView
+        <com.facebook.login.widget.LoginButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/twitter_login_btn"
-            android:src="@drawable/twiiter"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/facebook_login_btn"
             android:src="@drawable/facebook"
-            android:layout_weight="1" />
+            android:layout_margin="5dp" />
 
-        <ImageView
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/twitter_login_btn"
+            android:src="@drawable/twiiter"
+            android:layout_margin="5dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/gmail_login_btn"
             android:src="@drawable/gmail"
-            android:layout_weight="1" />
+            android:layout_margin="5dp" />
     </LinearLayout>
 
     <LinearLayout

@@ -37,12 +37,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
         android:gravity="center"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:id="@+id/customerlocation_input_data_box">
+        android:id="@+id/customerlocation_input_data_box"
+        android:layout_below="@+id/linearLayout32"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -126,7 +127,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/view"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:id="@+id/linearLayout32">
 
         <TextView
             android:layout_width="match_parent"
@@ -166,8 +168,7 @@
         android:layout_marginRight="30dp"
         android:id="@+id/linearLayout2"
         android:layout_below="@+id/linearLayout3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -196,7 +197,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -207,25 +208,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/twitter_login_btn"
-            android:src="@drawable/twiiter"
-            android:layout_weight="1" />
-
-        <ImageView
+        <com.facebook.login.widget.LoginButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/facebook_login_btn"
             android:src="@drawable/facebook"
+            android:layout_margin="5dp"
             android:layout_weight="1" />
 
-        <ImageView
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/twitter_login_btn"
+            android:src="@drawable/twiiter"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textSize="10dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:id="@+id/gmail_login_btn"
             android:src="@drawable/gmail"
+            android:layout_margin="5dp"
             android:layout_weight="1" />
     </LinearLayout>
 
