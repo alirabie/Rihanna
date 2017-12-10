@@ -7,6 +7,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
@@ -50,5 +51,8 @@ public interface RihannaAPI {
     Call<RegResponse> updateCustomer(@Body Object item,@Path("id")String id);
 
 
+    //Get Categories
+    @GET("api/categories?fields=name,id")
+    Call<ResCategory> getCategories();
 
 }

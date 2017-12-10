@@ -7,11 +7,9 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,8 +48,18 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
+import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
+import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.ListOfOrders;
@@ -64,12 +73,13 @@ import rihanna.appsmatic.com.rihanna.R;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private BetterSpinner locations;
-    private BetterSpinner countries;
-    private static List<String> vendorsNames;
-    private static List<String> vendorsIds;
-    private static List<String>products;
-    private static List<String> pids;
+    private BetterSpinner cities;
+    private BetterSpinner categories;
+    private static List<String> citesNames;
+    private static List<String>citesIds;
+
+    private static List<String>categoriesNames;
+    private static List<String>categoriesIds;
     private LinearLayout sideMenuButtons;
     public static Typeface face;
     private ImageView homeSide,profileSide,latestOffersSide,ordersListSide,settingsSide,abutAppSide,exitLoginSide;
@@ -109,17 +119,102 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         //Setup two header spinners
-        countries = (BetterSpinner) findViewById(R.id.countrydown);
-        countries.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-        countries.setHint(getResources().getString(R.string.city));
-        countries.setTypeface(face);
-        countries.setHintTextColor(Color.WHITE);
 
-        locations =(BetterSpinner)findViewById(R.id.citydown);
-        locations.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-        locations.setHint(getResources().getString(R.string.district));
-        locations.setTypeface(face);
-        locations.setHintTextColor(Color.WHITE);
+
+        //Setup states spinner
+        cities =(BetterSpinner)findViewById(R.id.citydown);
+        cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
+        cities.setHint(getResources().getString(R.string.city));
+        cities.setTypeface(face);
+        cities.setHintTextColor(Color.WHITE);
+        citesNames=new ArrayList<>();
+        citesIds=new ArrayList<>();
+        Generator.createService(RihannaAPI.class).getStates("69").enqueue(new Callback<ResStates>() {
+
+            @Override
+            public void onResponse(Call<ResStates> call, Response<ResStates> response) {
+                if (response.isSuccessful()) {
+
+                    //fill names and ids to spinner list from response
+                    for (int i = 0; i < response.body().getStates().size(); i++) {
+                        citesNames.add(response.body().getStates().get(i).getName());
+                        citesIds.add(response.body().getStates().get(i).getId());
+                    }
+
+                    cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome, citesNames));
+                    cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //Reload Fragment with city id
+                            Toast.makeText(Home.this,citesIds.get(position),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getApplication(), "Response not sucsess from states ", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResStates> call, Throwable t) {
+                NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Home.this);
+                dialogBuilder
+                        .withTitle(getResources().getString(R.string.connectionerror))
+                        .withDialogColor(R.color.colorPrimary)
+                        .withTitleColor("#FFFFFF")
+                        .withDuration(700)                                          //def
+                        .withEffect(Effectstype.RotateBottom)
+                        .withMessage(t.getMessage() + " : From states ")
+                        .show();
+            }
+        });
+
+
+        //setup categories spinner
+        categories = (BetterSpinner) findViewById(R.id.countrydown);
+        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
+        categories.setHint(getResources().getString(R.string.categoriy));
+        categories.setTypeface(face);
+        categories.setHintTextColor(Color.WHITE);
+        categoriesNames=new ArrayList<>();
+        categoriesIds=new ArrayList<>();
+        Generator.createService(RihannaAPI.class).getCategories().enqueue(new Callback<ResCategory>() {
+            @Override
+            public void onResponse(Call<ResCategory> call, Response<ResCategory> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCategories() != null) {
+                        for (int i = 0; i < response.body().getCategories().size(); i++) {
+                            categoriesNames.add(response.body().getCategories().get(i).getName());
+                            categoriesIds.add(response.body().getCategories().get(i).getId());
+                        }
+
+                        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome,categoriesNames));
+                        categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                Toast.makeText(Home.this,categoriesIds.get(position),Toast.LENGTH_SHORT).show();
+                              // Reload Fragment with category id
+                            }
+                        });
+
+                    } else {
+                        Toast.makeText(Home.this, "Null from categories Api", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    try {
+                        Toast.makeText(Home.this, "Response Not Success from categories Api"+response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResCategory> call, Throwable t) {
+                Toast.makeText(Home.this, "Connection Error from categories Api" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
