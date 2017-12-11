@@ -136,4 +136,7 @@
     <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
     <string name="update">Your Info has been updated</string>
     <string name="categoriy">Category</string>
+    <string name="pick">Pick</string>
+    <string name="noservices">No Services</string>
+    <string name="loading">Loading</string>
 </resources>

@@ -11,6 +11,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
+import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.Models.verifications.VerificationCode;
 
@@ -54,5 +55,9 @@ public interface RihannaAPI {
     //Get Categories
     @GET("api/categories?fields=name,id")
     Call<ResCategory> getCategories();
+
+    //Get Expert Services
+    @GET("api/expert/services?")
+    Call<ResExpertServices> getExpertServices(@Query("ExpertId") String id);
 
 }

@@ -2,29 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.ServicesFrag">
+    tools:context=".Fragments.RegistrationFragments.RegPersonalInfo">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="expert services"
-        android:gravity="center" />
+        tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
+        android:layout_above="@+id/linearLayout8">
 
-    <TextView
+        <!-- TODO: Update blank fragment layout -->
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/sevecices_frag_list">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/noservices"
+            android:id="@+id/empty_services_flag_frag"
+            android:layout_gravity="center"
+            android:textSize="40dp" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/addtocartbtn"
-        android:id="@+id/textView16"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout8">
+
+    </LinearLayout>
 
 </RelativeLayout>

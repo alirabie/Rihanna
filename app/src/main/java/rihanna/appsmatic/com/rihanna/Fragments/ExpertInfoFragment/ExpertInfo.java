@@ -1,4 +1,4 @@
-package rihanna.appsmatic.com.rihanna.Fragments;
+package rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +15,10 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
-import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.AboutExpertFrag;
-import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.LatestOffersFrag;
-import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfo3Fragments.ServicesFrag;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.AboutExpertFrag;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.LatestOffersFrag;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.ServicesFrag;
+import rihanna.appsmatic.com.rihanna.Fragments.RatingandComments;
 import rihanna.appsmatic.com.rihanna.R;
 
 

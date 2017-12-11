@@ -136,4 +136,7 @@
     <string name="newpasswillsend">سوف يتم ارسال كلمة مرور افتراضيه على جوالك الان</string>
     <string name="update">تم تحديث بياناتك بنجاح</string>
     <string name="categoriy">التصنيف</string>
+    <string name="pick">أختر</string>
+    <string name="noservices">لا توجد خدمات</string>
+    <string name="loading">تحميل</string>
 </resources>

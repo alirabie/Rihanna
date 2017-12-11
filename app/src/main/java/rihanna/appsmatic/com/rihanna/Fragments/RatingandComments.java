@@ -1,7 +1,5 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.R;
 
 

@@ -1,20 +1,16 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import junit.framework.Test;
 
 import rihanna.appsmatic.com.rihanna.Activities.CustomerLocation;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class Services extends Fragment {
