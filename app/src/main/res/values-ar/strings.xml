@@ -139,4 +139,10 @@
     <string name="pick">أختر</string>
     <string name="noservices">لا توجد خدمات</string>
     <string name="loading">تحميل</string>
+    <string name="cert">شهادات</string>
+    <string name="nocert">لم تحصل على شهادات</string>
+    <string name="outdoortv">خدمة خارجية + خدمة داخلية </string>
+    <string name="outdoorserv">خدمة خارجية</string>
+    <string name="yesars">سنوات</string>
+    <string name="notset">لم تحدد</string>
 </resources>

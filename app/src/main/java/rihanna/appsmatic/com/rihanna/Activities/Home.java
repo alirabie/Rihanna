@@ -88,6 +88,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static LinearLayout topButtons ,spainnersBox;
     private boolean doubleBackToExitPressedOnce = false;
 
+    private ImageView hairBtn,makeUpBtn;
+
 
 
 
@@ -106,6 +108,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
          tittle.setVisibility(View.INVISIBLE);
          topButtons=(LinearLayout)findViewById(R.id.top_buttons_box);
          spainnersBox=(LinearLayout)findViewById(R.id.spinners_box);
+        hairBtn=(ImageView)findViewById(R.id.hair_btn);
+        makeUpBtn=(ImageView)findViewById(R.id.mack_up_btn);
+
 
 
 
@@ -145,8 +150,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //Reload Fragment with city id
-                            Toast.makeText(Home.this,citesIds.get(position),Toast.LENGTH_SHORT).show();
+                            Services services = new Services();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("sourceflag","cites");
+                            bundle.putString("state", citesNames.get(position));
+                            services.setArguments(bundle);
+                            android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragmentcontener, services);
+                            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                            fragmentTransaction.commit();
+                            Toast.makeText(getApplicationContext(), citesNames.get(position), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -188,13 +202,23 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                             categoriesIds.add(response.body().getCategories().get(i).getId());
                         }
 
-                        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome,categoriesNames));
+                        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome, categoriesNames));
                         categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                                Toast.makeText(Home.this,categoriesIds.get(position),Toast.LENGTH_SHORT).show();
-                              // Reload Fragment with category id
+                                Services services = new Services();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("sourceflag","categories");
+                                bundle.putString("category", categoriesNames.get(position));
+                                services.setArguments(bundle);
+                                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                fragmentTransaction.commit();
+                                Toast.makeText(getApplicationContext(), categoriesNames.get(position), Toast.LENGTH_SHORT).show();
+
                             }
                         });
 
@@ -203,7 +227,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
                 } else {
                     try {
-                        Toast.makeText(Home.this, "Response Not Success from categories Api"+response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Home.this, "Response Not Success from categories Api" + response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -217,6 +241,46 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
 
 
+
+        hairBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                hairBtn.clearAnimation();
+                hairBtn.setAnimation(anim);
+
+                Services services = new Services();
+                Bundle bundle = new Bundle();
+                bundle.putString("sourceflag","categories");
+                bundle.putString("category", "Hair");
+                services.setArguments(bundle);
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+        makeUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
+                makeUpBtn.clearAnimation();
+                makeUpBtn.setAnimation(anim);
+                Services services = new Services();
+                Bundle bundle = new Bundle();
+                bundle.putString("sourceflag","categories");
+                bundle.putString("category", "Makeup");
+                services.setArguments(bundle);
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+            }
+        });
 
 
         //Setup Side Menu Items
@@ -289,7 +353,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+
         //Action Side menu buttons :
+
+        //START FIRST SCREEN
+        Services services=new Services();
+        android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentcontener, services);
+        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+        fragmentTransaction.commit();
 
         //Home button
         homeSide.setOnClickListener(new View.OnClickListener() {
@@ -525,6 +598,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.doubleBackToExitPressedOnce = false;
+    }
 
     //back press
     @Override
@@ -533,39 +611,57 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
-            homeSide.clearAnimation();
-            homeSide.setAnimation(anim);
-            Services services=new Services();
+
+            //START FIRST SCREEN
+            Services services = new Services();
             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragmentcontener, services);
             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             fragmentTransaction.commit();
-            tittle.setVisibility(View.INVISIBLE);
-            tittle.setText(getResources().getString(R.string.filtertitle));
+            categories.setText("");
+            cities.setText("");
             topButtons.setVisibility(View.VISIBLE);
             spainnersBox.setVisibility(View.VISIBLE);
-            drawer.closeDrawer(GravityCompat.START);
-           // super.onBackPressed();
 
+            Toast.makeText(this, "Press Again", Toast.LENGTH_SHORT).show();
             if (doubleBackToExitPressedOnce) {
-                super.onBackPressed();
+                final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Home.this);
+                dialogBuilder
+                        .withTitle(getResources().getString(R.string.app_name))
+                        .withDialogColor(R.color.colorPrimary)
+                        .withTitleColor("#FFFFFF")
+                        .withIcon(getResources().getDrawable(R.drawable.logo))
+                        .withDuration(700)                                          //def
+                        .withEffect(Effectstype.RotateBottom)
+                        .withMessage("are You Sure ? ")
+                        .withButton1Text(getResources().getString(R.string.yes))
+                        .withButton2Text(getResources().getString(R.string.no))
+                        .setButton1Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogBuilder.dismiss();
+                                Home.this.finish();
+                            }
+                        })
+                        .setButton2Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogBuilder.dismiss();
+                            }
+                        })
+                        .show();
                 return;
             }
+
             this.doubleBackToExitPressedOnce = true;
-           // Toast.makeText(this, R.string.pressagain, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, R.string.pressagain, Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     doubleBackToExitPressedOnce = false;
                 }
             }, 2000);
-
-
-
-
-
         }
     }
 

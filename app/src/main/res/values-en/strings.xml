@@ -139,4 +139,10 @@
     <string name="pick">Pick</string>
     <string name="noservices">No Services</string>
     <string name="loading">Loading</string>
+    <string name="cert">Certificates</string>
+    <string name="nocert">Did not have certificates</string>
+    <string name="outdoortv">Outdoor + Indoor Service</string>
+    <string name="outdoorserv">Outdoor Service</string>
+    <string name="yesars">Years</string>
+    <string name="notset">Not Set</string>
 </resources>

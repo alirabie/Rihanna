@@ -21,6 +21,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Adabtors.ExpertServicesAdb;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class ServicesFrag extends Fragment {
@@ -57,7 +58,7 @@ public class ServicesFrag extends Fragment {
 
 
         //Add here expert Id from expert list adaptor               here !
-        Generator.createService(RihannaAPI.class).getExpertServices("109").enqueue(new Callback<ResExpertServices>() {
+        Generator.createService(RihannaAPI.class).getExpertServices(ExpertInfo.expertId).enqueue(new Callback<ResExpertServices>() {
             @Override
             public void onResponse(Call<ResExpertServices> call, Response<ResExpertServices> response) {
                 if (response.isSuccessful()) {

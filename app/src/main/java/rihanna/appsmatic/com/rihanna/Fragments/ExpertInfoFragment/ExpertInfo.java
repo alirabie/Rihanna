@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -19,6 +21,7 @@ import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fra
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.LatestOffersFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.ServicesFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.RatingandComments;
+import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.R;
 
 
@@ -32,7 +35,11 @@ public class ExpertInfo extends Fragment {
     CustomFragmentPagerAdapter adapter;
     PagerSlidingTabStrip tabsStrip;
     public static String expertId ="";
+    public static String expertAddress="";
+    public static String expertcert="";
+    public static boolean expertserviceIndoor =false;
     private ImageView goToRatesComments;
+    private TextView name;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +57,14 @@ public class ExpertInfo extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        goToRatesComments =(ImageView)view.findViewById(R.id.expert_details_goto_customercomments);
+        //Receive Expert Id from adaptor
+        expertId=getArguments().get("expertId").toString();
+        expertAddress=getArguments().getString("expaddrss");
+        expertcert=getArguments().getString("expcert");
+        expertserviceIndoor=getArguments().getBoolean("expisindoorserv");
 
+        goToRatesComments =(ImageView)view.findViewById(R.id.expert_details_goto_customercomments);
+        name=(TextView)view.findViewById(R.id.expert_details_name_tv);
         servicesFrag=new ServicesFrag();
         aboutExpertFrag=new AboutExpertFrag();
         latestOffersFrag=new LatestOffersFrag();
@@ -67,6 +80,7 @@ public class ExpertInfo extends Fragment {
         tabsStrip.setViewPager(p);
         adapter.notifyDataSetChanged();
 
+        name.setText(getArguments().getString("name"));
 
 
         goToRatesComments.setOnClickListener(new View.OnClickListener() {
@@ -106,12 +120,45 @@ public class ExpertInfo extends Fragment {
     }
 
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         getFragmentManager().beginTransaction().remove(this).commit();
         getFragmentManager().popBackStack();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button's click listener
+                    Services services = new Services();
+                    android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontener, services);
+                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    fragmentTransaction.commit();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
+
+    }
+
 }
 
