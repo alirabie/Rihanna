@@ -145,4 +145,10 @@
     <string name="outdoorserv">خدمة خارجية</string>
     <string name="yesars">سنوات</string>
     <string name="notset">لم تحدد</string>
+    <string name="show">أعرض</string>
+    <string name="certificatename">الشهادة</string>
+    <string name="certyesr">تاريخ المنح</string>
+    <string name="grantor">جهة المنح</string>
+    <string name="spicialty">التخصص</string>
+    <string name="byemail">بواسطة البريد الاليكترونى للخبيرة</string>
 </resources>

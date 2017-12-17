@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="rihanna.appsmatic.com.rihanna.Fragments.RatingandComments"
     android:background="#e9e9e9">
 
@@ -9,44 +9,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#353535"
-        android:id="@+id/linearLayout13"
-        android:layoutDirection="rtl">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/expert_details_ratingfrag_back"
-            android:src="@drawable/backarrow"
-            android:padding="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="خبيرة التجميل جويل"
-            android:id="@+id/expert_details_ratingfrag_expert_name"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/expert_details_ratingfrag_share"
-            android:src="@drawable/shareicon"
-            android:padding="20dp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="#e9e9e9"
         android:id="@+id/y"
-        android:layout_below="@+id/linearLayout13"
         android:layout_alignParentEnd="true">
 
         <RatingBar

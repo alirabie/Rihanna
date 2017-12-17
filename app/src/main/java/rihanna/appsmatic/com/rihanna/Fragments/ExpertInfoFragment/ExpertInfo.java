@@ -17,6 +17,7 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
+import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.AboutExpertFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.LatestOffersFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.ServicesFrag;
@@ -40,6 +41,7 @@ public class ExpertInfo extends Fragment {
     public static boolean expertserviceIndoor =false;
     private ImageView goToRatesComments;
     private TextView name;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,15 +91,17 @@ public class ExpertInfo extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                  goToRatesComments.clearAnimation();
                  goToRatesComments.setAnimation(anim);
-
-
                // Home.fireDoneDialog(getContext(),"خبيرة التجميل جويل",goToRatesComments);
 
 
+                FireDialog.CommentsDialog(getContext(),goToRatesComments,expertId,name.getText().toString());
+
+
+                /*
                 RatingandComments ratingandComments=new RatingandComments();
-
-                //send id
-
+                Bundle bundle=new Bundle();
+                bundle.putString("expertId",expertId);
+                ratingandComments.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontener, ratingandComments);
@@ -107,6 +111,7 @@ public class ExpertInfo extends Fragment {
                 Home.tittle.setText(getResources().getString(R.string.filtertitle));
                 Home.topButtons.setVisibility(View.INVISIBLE);
                 Home.spainnersBox.setVisibility(View.INVISIBLE);
+                */
 
             }
         });

@@ -67,43 +67,14 @@
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/byneer_input"
+                android:id="@+id/byemail_input"
                 android:background="#00ffffff"
                 android:padding="6dp"
                 android:gravity="center|start"
                 android:textAlignment="textStart"
-                android:hint="@string/neerst"
+                android:hint="@string/byemail"
                 android:layout_weight="1"
                 android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/searchinputbar"
-            android:gravity="center"
-            android:layout_marginTop="5dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView4"
-                android:layout_weight="6" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:id="@+id/by_cityordistrict"
-                android:background="#00ffffff"
-                android:padding="6dp"
-                android:gravity="center|start"
-                android:textAlignment="textStart"
-                android:hint="@string/bycountry"
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,14 +86,35 @@
             android:layout_marginTop="5dp"
             android:gravity="center">
             <com.weiwangcn.betterspinner.library.BetterSpinner
-                android:id="@+id/by_expert_rate_spinner"
+                android:id="@+id/by_city_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:spinnerMode="dropdown"
-                android:textSize="10dp"/>
+                android:textSize="10dp"
+                android:hint="@string/city" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/dropdwonlistbg"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:id="@+id/by_district_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:textSize="10dp"
+                android:hint="@string/district" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,7 +133,8 @@
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:spinnerMode="dropdown"
-                android:textSize="10dp"/>
+                android:textSize="10dp"
+                android:hint="@string/bycategory" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,14 +146,15 @@
             android:layout_marginTop="5dp"
             android:gravity="center">
             <com.weiwangcn.betterspinner.library.BetterSpinner
-                android:id="@+id/by_services_ofeers_spinner"
+                android:id="@+id/by_expert_rate_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:spinnerMode="dropdown"
-                android:textSize="10dp"/>
+                android:textSize="10dp"
+                android:hint="@string/expertrate" />
         </LinearLayout>
 
 

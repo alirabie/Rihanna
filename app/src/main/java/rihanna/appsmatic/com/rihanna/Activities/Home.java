@@ -621,6 +621,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             fragmentTransaction.commit();
             categories.setText("");
             cities.setText("");
+            tittle.setText("");
             topButtons.setVisibility(View.VISIBLE);
             spainnersBox.setVisibility(View.VISIBLE);
 
@@ -683,7 +684,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_filter) {
+
             Filter filter = new Filter();
             // Bundle bundle = new Bundle();
             // filter.setArguments(bundle);

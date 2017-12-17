@@ -36,7 +36,7 @@ public class RatingandComments extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+/*
         backBtn=(ImageView)view.findViewById(R.id.expert_details_ratingfrag_back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +46,9 @@ public class RatingandComments extends Fragment {
                 backBtn.setAnimation(anim);
 
                 ExpertInfo expertInfo=new ExpertInfo();
-
-                //back id again to expert info
-
+                Bundle bundle=new Bundle();
+                bundle.putString("expertId",getArguments().getString("expertId"));
+                expertInfo.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontener, expertInfo);
@@ -61,8 +61,9 @@ public class RatingandComments extends Fragment {
             }
         });
 
-
+*/
 
 
     }
+
 }

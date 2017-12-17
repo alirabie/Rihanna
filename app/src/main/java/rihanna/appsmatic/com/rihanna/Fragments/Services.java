@@ -186,6 +186,57 @@ public class Services extends Fragment {
                 }
             });
 
+        }else if(getArguments().get("sourceflag").toString().equals("filter")){
+
+
+            //Loading Dialog
+            final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setMessage(getResources().getString(R.string.pleasewait));
+            mProgressDialog.show();
+            Generator.createService(RihannaAPI.class).getExpertsByFilterComp(getArguments().getString("category")+"", "",getArguments().getString("state") + "").enqueue(new Callback<ExpertsResponse>() {
+                @Override
+                public void onResponse(Call<ExpertsResponse> call, Response<ExpertsResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        if (response.body().getVendors() != null) {
+                            if (response.body().getVendors().isEmpty()) {
+                                emptyFlag.setVisibility(View.VISIBLE);
+                            } else {
+                                emptyFlag.setVisibility(View.INVISIBLE);
+                                expertsList.setAdapter(new ExpertsAdb(getContext(), response.body()));
+                                expertsList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            }
+
+                        } else {
+                            Toast.makeText(getContext(), "Null from Experts API", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        try {
+                            Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ExpertsResponse> call, Throwable t) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    Toast.makeText(getContext(), "Connection error from Experts API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+
+
         }
 
 

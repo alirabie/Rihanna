@@ -135,7 +135,6 @@ public class SignUpScreen extends AppCompatActivity {
                             countryKey = countriesNames.get(position);
                             countryid = countriesIds.get(position);
 
-
                             //get states by id
                             Generator.createService(RihannaAPI.class).getStates(countriesIds.get(position)).enqueue(new Callback<ResStates>() {
 
@@ -261,6 +260,9 @@ public class SignUpScreen extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
 

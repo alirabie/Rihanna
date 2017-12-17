@@ -8,6 +8,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
+import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
@@ -73,9 +74,12 @@ public interface RihannaAPI {
                                                       @Query("state")String state);
 
 
-
     //Get Experiences
     @GET("api/expert/expertise/{id}")
     Call<GetExperinces> getExperinces(@Path("id") String id);
+
+    //Get Certificates
+    @GET("api/expert/certificates/{id}")
+    Call<CertificatesList> getExpertCertificates(@Path("id") String id);
 
 }

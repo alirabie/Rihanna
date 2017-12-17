@@ -234,11 +234,22 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="دبلوم التجميل العالمى"
                 android:id="@+id/aboutex_frag_cert_tv"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="13dp"
                 android:layout_weight="1"
                 android:textAlignment="viewStart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/show"
+                android:id="@+id/show_cert_btn"
+                android:textSize="13dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout

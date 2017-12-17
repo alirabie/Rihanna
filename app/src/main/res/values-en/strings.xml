@@ -145,4 +145,10 @@
     <string name="outdoorserv">Outdoor Service</string>
     <string name="yesars">Years</string>
     <string name="notset">Not Set</string>
+    <string name="show">Show</string>
+    <string name="certificatename">Certificate</string>
+    <string name="certyesr">Year Of Grant</string>
+    <string name="grantor">Granter</string>
+    <string name="spicialty">Specialty</string>
+    <string name="byemail">By Expert Email</string>
 </resources>

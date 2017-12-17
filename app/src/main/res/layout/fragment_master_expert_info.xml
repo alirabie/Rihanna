@@ -44,7 +44,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="140dp"
         android:layout_below="@+id/linearLayout13"
         android:background="@drawable/imageslider"
         android:id="@+id/expert_details_images"></FrameLayout>
@@ -106,9 +106,9 @@
             app:pstsShouldExpand="true"
             app:pstsTextAllCaps="true"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="30dp"
             android:fillViewport="false"
-            android:textSize="14sp"
+            android:textSize="9sp"
             app:pstsIndicatorColor="@color/colorPrimary"/>
 
         <android.support.v4.view.ViewPager
