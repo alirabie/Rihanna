@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -31,6 +32,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splach);
         setLang(R.layout.activity_splach);

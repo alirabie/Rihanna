@@ -3,6 +3,8 @@ package rihanna.appsmatic.com.rihanna.Activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
@@ -11,8 +13,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -35,9 +41,11 @@ public class DateTimeScreen extends AppCompatActivity {
 
 
     TabLayout timetabs;
+    TextView next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datetime);
         Window window = this.getWindow();
@@ -49,6 +57,7 @@ public class DateTimeScreen extends AppCompatActivity {
         }
 
 
+        next=(TextView)findViewById(R.id.date_time_next_btn);
 
         //fill time tabs
         timetabs=(TabLayout)findViewById(R.id.time_tabs);
@@ -112,6 +121,23 @@ public class DateTimeScreen extends AppCompatActivity {
         timeline.setFirstVisibleDate(2016, Calendar.JULY, 19);
         timeline.setLastVisibleDate(2020, Calendar.JULY, 19);
         //timeline.setFollowScroll(false);
+
+
+
+
+
+
+        //next
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(DateTimeScreen.this, R.anim.alpha);
+                next.clearAnimation();
+                next.setAnimation(anim);
+                startActivity(new Intent(DateTimeScreen.this,CustomerLocation.class));
+            }
+        });
+
     }
 
 

@@ -98,7 +98,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/y"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/booking_btn">
 
 
         <com.astuetz.PagerSlidingTabStrip
@@ -118,6 +119,19 @@
             android:background="@android:color/white" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/startbooking"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@color/colorPrimary"
+        android:id="@+id/booking_btn" />
 
 
 </RelativeLayout>

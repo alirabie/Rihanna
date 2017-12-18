@@ -7,8 +7,7 @@
     <!-- TODO: Update blank fragment layout -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/frag_latest_offers_addtocart_btn">
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,19 +26,4 @@
         </android.support.v7.widget.RecyclerView>
     </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/addtocartbtn"
-        android:id="@+id/frag_latest_offers_addtocart_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:layout_gravity="center_horizontal|bottom" />
 </RelativeLayout>

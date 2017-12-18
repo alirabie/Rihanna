@@ -255,7 +255,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/save"
+        android:text="@string/resume"
         android:id="@+id/date_time_next_btn"
         android:padding="10dp"
         android:gravity="center"

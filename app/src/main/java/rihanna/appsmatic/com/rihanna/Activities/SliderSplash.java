@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_splach);
         Window window = this.getWindow();

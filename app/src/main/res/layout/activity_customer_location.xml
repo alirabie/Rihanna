@@ -255,7 +255,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/save"
         android:id="@+id/date_time_next_btn"
         android:padding="10dp"
         android:gravity="center"
@@ -264,7 +263,8 @@
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:text="@string/resume" />
 
     <LinearLayout
         android:orientation="horizontal"

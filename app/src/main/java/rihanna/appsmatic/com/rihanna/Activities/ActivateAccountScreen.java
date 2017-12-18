@@ -2,6 +2,7 @@ package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -42,6 +43,7 @@ public class ActivateAccountScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activate_account_screen);
 

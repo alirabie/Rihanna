@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -97,6 +98,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -705,17 +707,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             return true;
         }else if (id==R.id.action_shopping_cart){
-            OrderInfo orderInfo =new OrderInfo();
+            ListOfOrders listOfOrders=new ListOfOrders();
             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentcontener, orderInfo);
+            fragmentTransaction.replace(R.id.fragmentcontener, listOfOrders);
             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             fragmentTransaction.commit();
-            tittle.setText(getResources().getString(R.string.orderinfo));
             tittle.setVisibility(View.VISIBLE);
-            Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+            tittle.setText(getResources().getString(R.string.listorderstitle));
+            Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
             tittle.clearAnimation();
-            tittle.setAnimation(anim);
+            tittle.setAnimation(anim5);
             topButtons.setVisibility(View.INVISIBLE);
             spainnersBox.setVisibility(View.INVISIBLE);
             return true;

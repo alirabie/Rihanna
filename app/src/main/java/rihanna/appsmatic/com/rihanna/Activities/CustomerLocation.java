@@ -3,13 +3,19 @@ package rihanna.appsmatic.com.rihanna.Activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,10 +35,12 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
     private Double lat,lang;
     private Marker marker;
     private GPSTracker gpsTracker;
+    private TextView next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_location);
         Window window = this.getWindow();
@@ -43,6 +51,8 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
 
+
+        next=(TextView)findViewById(R.id.date_time_next_btn);
 
 
         lat=0.0;
@@ -70,6 +80,15 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
 
 
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(CustomerLocation.this, R.anim.alpha);
+                next.clearAnimation();
+                next.setAnimation(anim);
+                startActivity(new Intent(CustomerLocation.this,OrderScreen.class));
+            }
+        });
 
 
 
@@ -81,7 +100,6 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
 
     @Override

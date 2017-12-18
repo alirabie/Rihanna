@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ public class SecurityCodeActiveAccountscreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.security_code_active_account_screen);
 

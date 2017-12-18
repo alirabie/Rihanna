@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import rihanna.appsmatic.com.rihanna.Activities.DateTimeScreen;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
@@ -41,6 +43,8 @@ public class ExpertInfo extends Fragment {
     public static boolean expertserviceIndoor =false;
     private ImageView goToRatesComments;
     private TextView name;
+    private TextView bookingBtn;
+    private ImageView backbtn;
 
 
     @Override
@@ -67,6 +71,8 @@ public class ExpertInfo extends Fragment {
 
         goToRatesComments =(ImageView)view.findViewById(R.id.expert_details_goto_customercomments);
         name=(TextView)view.findViewById(R.id.expert_details_name_tv);
+        bookingBtn=(TextView)view.findViewById(R.id.booking_btn);
+        backbtn=(ImageView)view.findViewById(R.id.expert_details_back);
         servicesFrag=new ServicesFrag();
         aboutExpertFrag=new AboutExpertFrag();
         latestOffersFrag=new LatestOffersFrag();
@@ -89,12 +95,12 @@ public class ExpertInfo extends Fragment {
             @Override
             public void onClick(View v) {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                 goToRatesComments.clearAnimation();
-                 goToRatesComments.setAnimation(anim);
-               // Home.fireDoneDialog(getContext(),"خبيرة التجميل جويل",goToRatesComments);
+                goToRatesComments.clearAnimation();
+                goToRatesComments.setAnimation(anim);
+                // Home.fireDoneDialog(getContext(),"خبيرة التجميل جويل",goToRatesComments);
 
 
-                FireDialog.CommentsDialog(getContext(),goToRatesComments,expertId,name.getText().toString());
+                FireDialog.CommentsDialog(getContext(), goToRatesComments, expertId, name.getText().toString());
 
 
                 /*
@@ -117,6 +123,33 @@ public class ExpertInfo extends Fragment {
         });
 
 
+        //back Button
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                backbtn.clearAnimation();
+                backbtn.setAnimation(anim);
+                Services services = new Services();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+        //booking btn
+        bookingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                bookingBtn.clearAnimation();
+                bookingBtn.setAnimation(anim);
+                startActivity(new Intent(getContext(), DateTimeScreen.class));
+            }
+        });
 
 
 

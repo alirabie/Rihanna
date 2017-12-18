@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 /**
@@ -62,9 +63,13 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
         }
 
         holder.name.setText(expertsResponse.getVendors().get(position).getName()+"");
-        holder.address.setText(expertsResponse.getVendors().get(position).getAddress()+"");
-        Picasso.with(context).load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg").placeholder(R.drawable.loadinggif).fit().into(holder.expertImg);
+        holder.address.setText(expertsResponse.getVendors().get(position).getAddress() + "");
 
+        if(SaveSharedPreference.getImgLoadingSatatus(context)) {
+            Picasso.with(context).load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg")
+                    .placeholder(R.drawable.loadinggif).fit()
+                    .into(holder.expertImg);
+        }
 
         holder.expertProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override

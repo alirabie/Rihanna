@@ -110,7 +110,11 @@
             android:theme="@style/Theme.Checkout.Light"
             android:windowSoftInputMode="adjustPan"
             tools:replace="android:theme" />
-        <activity android:name=".Activities.PaymentScreen"></activity>
+        <activity android:name=".Activities.PaymentScreen" />
+        <activity
+            android:name=".Activities.OrderScreen"
+            android:label="@string/title_activity_order_screen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
