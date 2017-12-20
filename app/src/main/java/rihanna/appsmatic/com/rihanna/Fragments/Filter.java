@@ -232,6 +232,7 @@ public class Filter extends Fragment {
                 bundle.putString("sourceflag","filter");
                 bundle.putString("category",categoryKey);
                 bundle.putString("state",stateKey);
+                bundle.putString("email",email.getText().toString());
                 services.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -47,7 +47,13 @@
         android:layout_height="140dp"
         android:layout_below="@+id/linearLayout13"
         android:background="@drawable/imageslider"
-        android:id="@+id/expert_details_images"></FrameLayout>
+        android:id="@+id/expert_details_images">
+        <ss.com.bannerslider.views.BannerSlider
+            android:id="@+id/banner_slider1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
 
     <LinearLayout
         android:orientation="horizontal"

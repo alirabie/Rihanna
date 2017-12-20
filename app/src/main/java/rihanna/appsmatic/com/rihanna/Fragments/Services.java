@@ -194,7 +194,11 @@ public class Services extends Fragment {
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.setMessage(getResources().getString(R.string.pleasewait));
             mProgressDialog.show();
-            Generator.createService(RihannaAPI.class).getExpertsByFilterComp(getArguments().getString("category")+"", "",getArguments().getString("state") + "").enqueue(new Callback<ExpertsResponse>() {
+            Generator.createService(RihannaAPI.class).getExpertsByFilterComp(
+                    getArguments().getString("category")+"",
+                    getArguments().getString("email")+"",
+                    getArguments().getString("state") + "")
+                    .enqueue(new Callback<ExpertsResponse>() {
                 @Override
                 public void onResponse(Call<ExpertsResponse> call, Response<ExpertsResponse> response) {
                     if (response.isSuccessful()) {

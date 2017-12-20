@@ -152,4 +152,5 @@
     <string name="spicialty">Specialty</string>
     <string name="byemail">By Expert Email</string>
     <string name="startbooking">Booking Now</string>
+    <string name="areyousure">Exit Application ?</string>
 </resources>

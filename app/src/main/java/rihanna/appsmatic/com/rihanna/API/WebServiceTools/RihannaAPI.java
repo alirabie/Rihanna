@@ -13,6 +13,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
 import rihanna.appsmatic.com.rihanna.API.Models.Experinces.GetExperinces;
+import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.GetExpertPhotos;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
@@ -64,7 +65,7 @@ public interface RihannaAPI {
     Call<ResExpertServices> getExpertServices(@Query("ExpertId") String id);
 
     //Get All Experts
-    @GET("api/experts")
+    @GET("api/experts?limit=200")
     Call<ExpertsResponse> getAllExperts();
 
     //Get Experts by service category or email or state or all
@@ -73,7 +74,6 @@ public interface RihannaAPI {
                                                       @Query("email")String email,
                                                       @Query("state")String state);
 
-
     //Get Experiences
     @GET("api/expert/expertise/{id}")
     Call<GetExperinces> getExperinces(@Path("id") String id);
@@ -81,5 +81,10 @@ public interface RihannaAPI {
     //Get Certificates
     @GET("api/expert/certificates/{id}")
     Call<CertificatesList> getExpertCertificates(@Path("id") String id);
+
+
+    //Get Expert Photos
+    @GET("api/expert/images?")
+    Call<GetExpertPhotos>getExpertPhotos(@Query("ExpertId") String expId);
 
 }

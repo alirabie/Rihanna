@@ -637,7 +637,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         .withIcon(getResources().getDrawable(R.drawable.logo))
                         .withDuration(700)                                          //def
                         .withEffect(Effectstype.RotateBottom)
-                        .withMessage("are You Sure ? ")
+                        .withMessage(getResources().getString(R.string.areyousure))
                         .withButton1Text(getResources().getString(R.string.yes))
                         .withButton2Text(getResources().getString(R.string.no))
                         .setButton1Click(new View.OnClickListener() {
