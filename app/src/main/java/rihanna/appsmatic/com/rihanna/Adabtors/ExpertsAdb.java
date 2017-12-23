@@ -71,6 +71,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                     .into(holder.expertImg);
         }
 
+        holder.ratingBar.setRating(expertsResponse.getVendors().get(position).getRating());
         holder.expertProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +86,8 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                 bundle.putString("expaddrss",expertsResponse.getVendors().get(position).getAddress());
                 bundle.putString("expcert",expertsResponse.getVendors().get(position).getCertifications()+"");
                 bundle.putBoolean("expisindoorserv",expertsResponse.getVendors().get(position).getIndoor());
+                bundle.putInt("rate",expertsResponse.getVendors().get(position).getRating());
+
                 expertInfo.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

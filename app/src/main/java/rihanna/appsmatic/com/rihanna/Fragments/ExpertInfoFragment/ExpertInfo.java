@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +27,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.GetExpertPhotos;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Activities.DateTimeScreen;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.AboutExpertFrag;
@@ -64,7 +68,8 @@ public class ExpertInfo extends Fragment {
     private ImageView backbtn;
     private BannerSlider bannerSlider;
     private List<Banner> banners;
-
+    private RatingBar ratingBar;
+    private TextView reviewsNum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +96,9 @@ public class ExpertInfo extends Fragment {
         name=(TextView)view.findViewById(R.id.expert_details_name_tv);
         bookingBtn=(TextView)view.findViewById(R.id.booking_btn);
         backbtn=(ImageView)view.findViewById(R.id.expert_details_back);
+        ratingBar=(RatingBar)view.findViewById(R.id.expert_details_ratingBar);
         bannerSlider = (BannerSlider) view.findViewById(R.id.banner_slider1);
+        reviewsNum=(TextView)view.findViewById(R.id.expert_details_customerrates);
         bannerSlider.setVisibility(View.INVISIBLE);
 
 
@@ -138,6 +145,7 @@ public class ExpertInfo extends Fragment {
         }
 
 
+
         servicesFrag=new ServicesFrag();
         aboutExpertFrag=new AboutExpertFrag();
         latestOffersFrag=new LatestOffersFrag();
@@ -153,34 +161,15 @@ public class ExpertInfo extends Fragment {
         adapter.notifyDataSetChanged();
 
         name.setText(getArguments().getString("name"));
+        ratingBar.setRating(getArguments().getInt("rate"));
         goToRatesComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 goToRatesComments.clearAnimation();
                 goToRatesComments.setAnimation(anim);
-                // Home.fireDoneDialog(getContext(),"خبيرة التجميل جويل",goToRatesComments);
-
-
-                FireDialog.CommentsDialog(getContext(), goToRatesComments, expertId, name.getText().toString());
-
-
-                /*
-                RatingandComments ratingandComments=new RatingandComments();
-                Bundle bundle=new Bundle();
-                bundle.putString("expertId",expertId);
-                ratingandComments.setArguments(bundle);
-                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener, ratingandComments);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-                Home.tittle.setVisibility(View.INVISIBLE);
-                Home.tittle.setText(getResources().getString(R.string.filtertitle));
-                Home.topButtons.setVisibility(View.INVISIBLE);
-                Home.spainnersBox.setVisibility(View.INVISIBLE);
-                */
-
+                FireDialog.CommentsDialog(getContext(), goToRatesComments, expertId,getArguments().getInt("rate"),name.getText().toString());
+                //FireDialog.experrReviewDailog(getContext(),goToRatesComments,expertId,SaveSharedPreference.getCustomerId(getContext()),name.getText().toString());
             }
         });
 
@@ -200,6 +189,41 @@ public class ExpertInfo extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+
+
+
+
+        //Get review counts
+        Generator.createService(RihannaAPI.class).getReviews(expertId).enqueue(new Callback<GetReviews>() {
+            @Override
+            public void onResponse(Call<GetReviews> call, Response<GetReviews> response) {
+                if (response.isSuccessful()) {
+
+                    if (response.body().getRatings() != null) {
+                        reviewsNum.setText(getResources().getString(R.string.rviewsnum) + " " + response.body().getRatings().size());
+
+                    } else {
+                        Toast.makeText(getContext(), "Null from get reviews API", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    try {
+                        Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetReviews> call, Throwable t) {
+
+                Toast.makeText(getContext(), "Connection error from get reviews API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
 
 
         //booking btn

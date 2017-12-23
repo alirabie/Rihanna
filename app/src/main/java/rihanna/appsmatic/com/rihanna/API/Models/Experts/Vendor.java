@@ -19,6 +19,9 @@ public class Vendor {
     @SerializedName("certifications")
     @Expose
     private Integer certifications;
+    @SerializedName("rating")
+    @Expose
+    private Integer rating;
     @SerializedName("address")
     @Expose
     private String address;
@@ -73,5 +76,13 @@ public class Vendor {
 
     public void setIndoor(Boolean indoor) {
         this.indoor = indoor;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

@@ -153,4 +153,6 @@
     <string name="byemail">By Expert Email</string>
     <string name="startbooking">Booking Now</string>
     <string name="areyousure">Exit Application ?</string>
+    <string name="title_activity_order_screen">OrderScreen</string>
+    <string name="rviewsnum">Reviews</string>
 </resources>

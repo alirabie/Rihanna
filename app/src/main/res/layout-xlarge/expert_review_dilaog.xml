@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout16"
+        android:background="#e9e9e9"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout13"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/rateservices"
+                android:id="@+id/r"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:layout_width="255dp"
+                android:layout_height="match_parent"
+                android:id="@+id/expert_details_ratingfrag_rateoursevices"
+                android:layout_gravity="center"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:progressTint="@color/ratebar"
+                style="?android:attr/ratingBarStyle"
+                android:rating="2"
+                android:layout_weight="1"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/expert_details_ratingfrag_comment_input"
+            android:background="@drawable/commentbox"
+            android:layout_margin="20dp"
+            android:textSize="25dp"
+            android:padding="10dp"
+            android:hint="@string/leaveyourcomment"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/send"
+            android:id="@+id/expert_details_ratingfrag_send_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:singleLine="false"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="40dp"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+</RelativeLayout>

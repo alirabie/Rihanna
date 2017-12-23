@@ -1,10 +1,14 @@
 package rihanna.appsmatic.com.rihanna.Dilaogs;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -22,9 +26,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.PostReview;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Adabtors.CertificatesAdb;
+import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
 import rihanna.appsmatic.com.rihanna.R;
 
 /**
@@ -33,13 +42,13 @@ import rihanna.appsmatic.com.rihanna.R;
 public class FireDialog {
 
     //Comments Dialog
-    public static void CommentsDialog(final Context context,View view, String exId,String name){
+    public static void CommentsDialog(final Context context,View view, String exId,int rate,String name){
 
 
         final TextView send,title,custreviewNum,emptyFlag;
         RatingBar ratingBar;
         ImageView back;
-        RecyclerView commentsList;
+        final RecyclerView commentsList;
 
 
         //Initialize Done Dialog
@@ -55,13 +64,54 @@ public class FireDialog {
                 .show();
 
        //Setup Items
-        send=(TextView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_send_btn);
+
         custreviewNum=(TextView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_userscomments);
         emptyFlag=(TextView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_empty_flag);
         ratingBar=(RatingBar)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_users_rating);
+        commentsList=(RecyclerView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_comments_list);
+        emptyFlag.setVisibility(View.VISIBLE);
+        ratingBar.setRating(rate);
+        //Loading Dialog
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(context.getResources().getString(R.string.pleasewait));
+        mProgressDialog.show();
+        Generator.createService(RihannaAPI.class).getReviews(exId).enqueue(new Callback<GetReviews>() {
+            @Override
+            public void onResponse(Call<GetReviews> call, Response<GetReviews> response) {
+                if(response.isSuccessful()){
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    if(response.body().getRatings()!=null){
+                        custreviewNum.setText(context.getResources().getString(R.string.rviewsnum)+" "+response.body().getRatings().size());
+                        if(response.body().getRatings().isEmpty()){
+                            emptyFlag.setVisibility(View.VISIBLE);
+                        }else {
+                            emptyFlag.setVisibility(View.INVISIBLE);
+                            commentsList.setAdapter(new CommentsAdb(context, response.body()));
+                            commentsList.setLayoutManager(new LinearLayoutManager(context));
+                        }
+                    }else {
+                        Toast.makeText(context,"Null from get reviews API",Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    try {
+                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
-
-
+            @Override
+            public void onFailure(Call<GetReviews> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                Toast.makeText(context,"Connection error from get reviews API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -145,6 +195,90 @@ public class FireDialog {
     }
 
 
+    public static void experrReviewDailog(final Context context,View view, final String expertId, final String customerId,String name){
+
+        final TextView send;
+        final EditText comment;
+        final RatingBar ratingBar;
+
+
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withEffect(Effectstype.Slit)
+                .withDialogColor(Color.BLACK)
+                .withTitleColor(Color.WHITE)
+                .withTitle(name)
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.expert_review_dilaog, view.getContext())
+                .show();
+
+        send=(TextView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_send_btn);
+        comment=(EditText)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_comment_input);
+        ratingBar=(RatingBar)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_rateoursevices);
+        ratingBar.setRating(0);
+
+        ratingBar.setMax(5);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                send.clearAnimation();
+                send.setAnimation(anim);
+
+                PostReview postReview = new PostReview();
+                Rating rating = new Rating();
+                rating.setCustomerId(Integer.parseInt(customerId));
+                rating.setExpertId(Integer.parseInt(expertId));
+                rating.setRating(Math.round(ratingBar.getRating()));
+                rating.setReviewText(comment.getText().toString());
+
+                postReview.setRating(rating);
+                Generator.createService(RihannaAPI.class).AddReview(postReview).enqueue(new Callback<ResReview>() {
+                    @Override
+                    public void onResponse(Call<ResReview> call, Response<ResReview> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getRatings()!=null){
+                                dialogBuildercard.dismiss();
+                            }else {
+                                Toast.makeText(context,"Null from rating API ",Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            try {
+                                Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResReview> call, Throwable t) {
+                        Toast.makeText(context,"Connection Error from rating API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 

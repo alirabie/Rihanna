@@ -153,4 +153,6 @@
     <string name="byemail">بواسطة البريد الاليكترونى للخبيرة</string>
     <string name="startbooking">أحجز الان</string>
     <string name="areyousure">الخروج من التطبيق ؟</string>
+    <string name="title_activity_order_screen">صفحة الطلب</string>
+    <string name="rviewsnum">التقييمات</string>
 </resources>
