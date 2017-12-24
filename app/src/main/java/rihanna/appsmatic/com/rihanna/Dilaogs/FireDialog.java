@@ -5,9 +5,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -17,15 +21,27 @@ import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import junit.framework.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
+import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.PostReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
@@ -35,11 +51,21 @@ import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Adabtors.CertificatesAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
 import rihanna.appsmatic.com.rihanna.R;
+import rihanna.appsmatic.com.rihanna.SQLiteDB.DB;
+import rihanna.appsmatic.com.rihanna.SQLiteDB.DB_Models.ExpertTime;
 
 /**
  * Created by Eng Ali on 12/17/2017.
  */
 public class FireDialog {
+
+    public static List<String>timesFrom;
+    public static List<String>timesTo;
+    public static List<String>fromToTv;
+    public static List<ExpertTime>expertTimes;
+    public static String fromKey;
+    public static String toKey;
+    public static String dateKey;
 
     //Comments Dialog
     public static void CommentsDialog(final Context context,View view, String exId,int rate,String name){
@@ -238,15 +264,15 @@ public class FireDialog {
                 Generator.createService(RihannaAPI.class).AddReview(postReview).enqueue(new Callback<ResReview>() {
                     @Override
                     public void onResponse(Call<ResReview> call, Response<ResReview> response) {
-                        if(response.isSuccessful()){
-                            if(response.body().getRatings()!=null){
+                        if (response.isSuccessful()) {
+                            if (response.body().getRatings() != null) {
                                 dialogBuildercard.dismiss();
-                            }else {
-                                Toast.makeText(context,"Null from rating API ",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Null from rating API ", Toast.LENGTH_SHORT).show();
                             }
-                        }else {
+                        } else {
                             try {
-                                Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -255,7 +281,7 @@ public class FireDialog {
 
                     @Override
                     public void onFailure(Call<ResReview> call, Throwable t) {
-                        Toast.makeText(context,"Connection Error from rating API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Connection Error from rating API " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -281,9 +307,208 @@ public class FireDialog {
     }
 
 
+    public static void pickService (final Context context,View view,String expertId, final String serviceId,String serviceName){
+
+        MaterialCalendarView calendarView;
+        final BetterSpinner avalibalTimesSp;
+        final TextView save;
+
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withEffect(Effectstype.Fall)
+                .withDialogColor(Color.WHITE)
+                .withTitleColor(Color.BLACK)
+                .withTitle(serviceName)
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.pick_service_dilaog, view.getContext())
+                .show();
+
+        calendarView=(MaterialCalendarView)dialogBuildercard.findViewById(R.id.calendarView);
+        save=(TextView)dialogBuildercard.findViewById(R.id.save_order_item_btn);
+        calendarView.setDateSelected(CalendarDay.today(), true);
+        avalibalTimesSp=(BetterSpinner)dialogBuildercard.findViewById(R.id.expert_times_sp);
+        avalibalTimesSp.setAdapter(new ArrayAdapter<>(context, R.layout.drop_down_list_custome));
 
 
 
+        //get data from server
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
+        mProgressDialog.show();
+        Generator.createService(RihannaAPI.class).getExpertSchadules(expertId).enqueue(new Callback<SchdulesResponse>() {
+            @Override
+            public void onResponse(Call<SchdulesResponse> call, Response<SchdulesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    if (response.body().getDeliveryschedules() != null) {
+
+                        expertTimes = new ArrayList<ExpertTime>();
+                        for (int i = 0; i < response.body().getDeliveryschedules().size(); i++) {
+                            ExpertTime expertTime = new ExpertTime();
+                            expertTime.setDay(response.body().getDeliveryschedules().get(i).getDay() + 1);
+                            expertTime.setFrom(response.body().getDeliveryschedules().get(i).getTimefrom());
+                            expertTime.setTo(response.body().getDeliveryschedules().get(i).getTimeto());
+                            expertTimes.add(expertTime);
+                        }
+
+                        Log.e("ggg", expertTimes.size() + "");
+
+                    } else {
+                        Toast.makeText(context, "Null from times API", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    try {
+                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<SchdulesResponse> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                Toast.makeText(context, "Connection Error from times API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(date.getYear(), date.getMonth(), date.getDay());
+
+                Calendar calendar2 = Calendar.getInstance();
+                calendar2.set(date.getYear(), date.getMonth(), date.getDay());
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy",Locale.ENGLISH);
+                dateKey = format.format(calendar.getTime());
+
+                timesFrom = new ArrayList<String>();
+                timesTo = new ArrayList<String>();
+                fromToTv = new ArrayList<String>();
+
+                if (filterExpertTimes(calendar.get(Calendar.DAY_OF_WEEK), expertTimes).isEmpty()) {
+                    avalibalTimesSp.setHint(context.getResources().getString(R.string.didntwork));
+                    avalibalTimesSp.setText("");
+                }else {
+                    avalibalTimesSp.setHint(context.getResources().getString(R.string.selectfromtimes));
+                    avalibalTimesSp.setText("");
+                }
+
+                for (int i = 0; i < filterExpertTimes(calendar.get(Calendar.DAY_OF_WEEK), expertTimes).size(); i++) {
+                    //Date setup
+                    SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                    SimpleDateFormat DesiredFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                    Date dateFrom = null;
+                    try {
+                        dateFrom = sourceFormat.parse(filterExpertTimes(calendar.get(Calendar.DAY_OF_WEEK), expertTimes).get(i).getFrom());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Date dateTo = null;
+                    try {
+                        dateTo = sourceFormat.parse(filterExpertTimes(calendar.get(Calendar.DAY_OF_WEEK), expertTimes).get(i).getTo());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    String formattedDateFrom = DesiredFormat.format(dateFrom.getTime());
+                    String fromatedDateTo = DesiredFormat.format(dateTo.getTime());
+
+                    timesFrom.add(formattedDateFrom);
+                    timesTo.add(fromatedDateTo);
+                    fromToTv.add(formattedDateFrom + " - " + fromatedDateTo);
+
+                }
+
+                avalibalTimesSp.setAdapter(new ArrayAdapter<>(context, R.layout.drop_down_list_custome, fromToTv));
+                avalibalTimesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        fromKey = timesFrom.get(position);
+                        toKey = timesTo.get(position);
+                    }
+                });
+
+
+            }
+        });
+
+
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                save.clearAnimation();
+                save.setAnimation(anim);
+                if(avalibalTimesSp.getText().toString().isEmpty()){
+                    avalibalTimesSp.setError("!");
+                }else {
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    Calendar today = Calendar.getInstance();
+                    try {
+                        Date selected = sdf.parse(dateKey);
+
+                        if(selected.compareTo(today.getTime())>0){
+
+
+
+                            //place id and date and time to order
+
+                            Toast.makeText(context,"id : "+serviceId+" "+dateKey +" // "+fromKey + "--" + toKey, Toast.LENGTH_SHORT).show();
+                            dialogBuildercard.dismiss();
+
+                        }else {
+                            Toast.makeText(context,"Invalid Date"+selected.compareTo(today.getTime()), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+
+                }
+
+            }
+        });
+
+
+
+
+    }
+
+
+
+    public static List<ExpertTime>filterExpertTimes(int day,List<ExpertTime>expertTimes){
+        List<ExpertTime>expertTimes1=new ArrayList<>();
+        for (int i=0;i<expertTimes.size();i++){
+            if(expertTimes.get(i).getDay()==day){
+                expertTimes1.add(expertTimes.get(i));
+            }
+
+        }
+        return expertTimes1;
+
+    }
 
 
 

@@ -15,6 +15,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
 import rihanna.appsmatic.com.rihanna.API.Models.Experinces.GetExperinces;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.GetExpertPhotos;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
+import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
@@ -94,5 +95,10 @@ public interface RihannaAPI {
     //Get Expert Reviews
     @GET("api/expert/rating/{id}")
     Call<GetReviews>getReviews(@Path("id")String expId);
+
+
+    //Get Expert Schedules
+    @GET("api/vendors/schedule/{id}")
+    Call<SchdulesResponse>getExpertSchadules(@Path("id")String id);
 
 }

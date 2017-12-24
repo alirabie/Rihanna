@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
+import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
 import rihanna.appsmatic.com.rihanna.R;
 
 /**
@@ -47,8 +48,9 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                 holder.unSubscribeBtn.clearAnimation();
                 holder.unSubscribeBtn.setAnimation(anim);
 
-                //Add service to order list or shopping cart
-                
+                FireDialog.pickService(context,holder.unSubscribeBtn,expertServices.getServices().get(position).getExpertId()+"",expertServices.getServices().get(position).getServiceId()+ "",expertServices.getServices().get(position).getServiceName());
+
+
             }
         });
 

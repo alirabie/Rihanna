@@ -151,6 +151,8 @@
     <string name="startbooking">Booking Now</string>
     <string name="areyousure">Exit Application ?</string>
     <string name="rviewsnum">Reviews</string>
+    <string name="selectfromtimes">Select From Expert Available Times</string>
+    <string name="didntwork">Day Off</string>
 
 
     <!-- Facebook Key -->

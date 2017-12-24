@@ -155,4 +155,6 @@
     <string name="areyousure">الخروج من التطبيق ؟</string>
     <string name="title_activity_order_screen">صفحة الطلب</string>
     <string name="rviewsnum">التقييمات</string>
+    <string name="selectfromtimes">أختر من المواعيد المتاحة لدى الخبيرة</string>
+    <string name="didntwork">يوم عطلة</string>
 </resources>
