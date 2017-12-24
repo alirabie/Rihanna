@@ -22,7 +22,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/login_tb_title"
                     android:textColor="#ffffff"
-                    android:textSize="20dp"
+                    android:textSize="13dp"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="@string/locationtittle"
@@ -41,158 +41,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/customerlocation_input_data_box"
         android:layout_below="@+id/view"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/linearLayout14">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center">
-
-        <ImageView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView6"
-            android:layout_weight="6"
-            android:layout_gravity="left" />
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="#bbbbbb">
 
-        <EditText
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/avalibale_expert_disrictes_sp"
+                android:background="#ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:hint="@string/expertoutdoors"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:inputType="phone"
+                android:layout_margin="1dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/customer_location_city_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start|right"
-            android:textAlignment="textStart"
-            android:hint="@string/city"
-            android:layout_weight="1"
-            android:layout_gravity="right"
-            android:textSize="20dp" />
+            android:layout_height="55dp"
+            android:background="@drawable/addressinput"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView3"
+                android:layout_weight="6" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/customer_location_street_input"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:hint="@string/street"
+                android:layout_weight="1"
+                android:textSize="20dp" />
+        </LinearLayout>
 
-        <ImageView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView5"
-            android:layout_weight="6" />
+            android:layout_height="55dp"
+            android:background="@drawable/addressinput"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/customer_location_district_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:hint="@string/district"
-            android:layout_weight="1"
-            android:textSize="20dp" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2"
+                android:layout_weight="6" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/customer_location_phone_input"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:hint="@string/phonehintinputlogin" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView4"
-            android:layout_weight="6" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/customer_location_nagbourhood_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:hint="@string/neborhoode"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            android:inputType="phone" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView3"
-            android:layout_weight="6" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/customer_location_street_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:hint="@string/street"
-            android:layout_weight="1"
-            android:textSize="20dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView2"
-            android:layout_weight="6" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/customer_location_phone_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            android:hint="@string/phonehintinputlogin" />
-
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -221,7 +156,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/locatononmap"
             android:id="@+id/textView18"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -243,7 +178,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             tools:context="rihanna.appsmatic.com.rihanna.Activities.CustomerLocation"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="false"
@@ -255,16 +190,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/resume"
         android:id="@+id/date_time_next_btn"
         android:padding="10dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="25dp"
+        android:textSize="15dp"
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:text="@string/resume" />
 
     <LinearLayout
         android:orientation="horizontal"

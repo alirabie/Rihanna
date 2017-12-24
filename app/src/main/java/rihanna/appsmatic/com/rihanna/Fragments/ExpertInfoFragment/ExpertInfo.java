@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +34,17 @@ import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.Activities.CustomerLocation;
 import rihanna.appsmatic.com.rihanna.Activities.DateTimeScreen;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Activities.OrderScreen;
 import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CustomFragmentPagerAdapter;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.AboutExpertFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.LatestOffersFrag;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fragments.ServicesFrag;
+import rihanna.appsmatic.com.rihanna.Fragments.OrderInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.RatingandComments;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
@@ -233,7 +239,35 @@ public class ExpertInfo extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 bookingBtn.clearAnimation();
                 bookingBtn.setAnimation(anim);
-                startActivity(new Intent(getContext(), DateTimeScreen.class));
+                if(expertserviceIndoor){
+                    //Initialize Done Dialog
+                    final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(getContext());
+                    dialogBuildercard
+                            .withDuration(700)//def
+                            .withEffect(Effectstype.Fall)
+                            .withDialogColor(getResources().getColor(R.color.colorPrimary))
+                            .withTitleColor(Color.BLACK)
+                            .withMessage(getResources().getString(R.string.servicetypeask))
+                            .withTitle(getResources().getString(R.string.app_name))
+                            .isCancelableOnTouchOutside(false)
+                                    .withButton1Text(getResources().getString(R.string.indoor))
+                                            .withButton2Text(getResources().getString(R.string.outdoor))
+                            .setButton1Click(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            startActivity(new Intent(getContext(),OrderScreen.class));
+                                                            dialogBuildercard.dismiss();
+                                                        }})
+                            .setButton2Click(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            startActivity(new Intent(getContext(),CustomerLocation.class));
+                                                            dialogBuildercard.dismiss();
+                                                        }}).show();
+                }else {
+                    startActivity(new Intent(getContext(),CustomerLocation.class));
+                }
+
             }
         });
 

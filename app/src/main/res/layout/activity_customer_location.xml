@@ -48,93 +48,28 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/linearLayout14">
 
-    <LinearLayout
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center">
+            android:gravity="center"
+        android:layout_marginTop="5dp"
+            android:background="#bbbbbb">
 
-        <ImageView
+            <com.weiwangcn.betterspinner.library.BetterSpinner
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView6"
-            android:layout_weight="6"
-            android:layout_gravity="left" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/customer_location_city_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start|right"
-            android:textAlignment="textStart"
-            android:hint="@string/city"
-            android:layout_weight="1"
-            android:layout_gravity="right"
-            android:textSize="15dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView5"
-            android:layout_weight="6" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/customer_location_district_input"
-            android:background="#00ffffff"
+            android:id="@+id/avalibale_expert_disrictes_sp"
+            android:background="#ffffff"
             android:padding="6dp"
             android:gravity="center|start"
             android:textAlignment="textStart"
-            android:hint="@string/district"
-            android:layout_weight="1"
-            android:textSize="15dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/addressinput"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView4"
-            android:layout_weight="6" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/customer_location_nagbourhood_input"
-            android:background="#00ffffff"
-            android:padding="6dp"
-            android:gravity="center|start"
-            android:textAlignment="textStart"
-            android:hint="@string/neborhoode"
+            android:hint="@string/expertoutdoors"
             android:layout_weight="1"
             android:textSize="15dp"
-            android:inputType="phone" />
+            android:inputType="phone"
+                android:layout_margin="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -243,7 +178,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             tools:context="rihanna.appsmatic.com.rihanna.Activities.CustomerLocation"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="false"

@@ -148,6 +148,7 @@ public class FireDialog {
     }
 
 
+    //Get Expert Certificates
     public static void certificatesDialog(final Context context,String expId,View view,String name){
 
         final RecyclerView certList;
@@ -221,6 +222,7 @@ public class FireDialog {
     }
 
 
+    //Review Expert Dialog
     public static void experrReviewDailog(final Context context,View view, final String expertId, final String customerId,String name){
 
         final TextView send;

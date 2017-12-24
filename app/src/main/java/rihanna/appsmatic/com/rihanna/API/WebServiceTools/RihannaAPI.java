@@ -73,9 +73,12 @@ public interface RihannaAPI {
 
     //Get Experts by service category or email or state or all
     @GET("api/experts?")
-    Call<ExpertsResponse> getExpertsByFilterComp(@Query("service_category")String serviceCategory,
-                                                      @Query("email")String email,
-                                                      @Query("state")String state);
+    Call<ExpertsResponse> getExpertsByFilterComp(
+            @Query("service_category")String serviceCategory,
+            @Query("email")String email,
+            @Query("state")String state,
+            @Query("rating")String rate);
+
     //Get Experiences
     @GET("api/expert/expertise/{id}")
     Call<GetExperinces> getExperinces(@Path("id") String id);

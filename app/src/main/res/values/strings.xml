@@ -153,6 +153,10 @@
     <string name="rviewsnum">Reviews</string>
     <string name="selectfromtimes">Select From Expert Available Times</string>
     <string name="didntwork">Day Off</string>
+    <string name="servicetypeask">What is Service Type You Want ?</string>
+    <string name="outdoor">Outdoor Service</string>
+    <string name="indoor">In Expert Center</string>
+    <string name="expertoutdoors">The district to which the expert goes</string>
 
 
     <!-- Facebook Key -->

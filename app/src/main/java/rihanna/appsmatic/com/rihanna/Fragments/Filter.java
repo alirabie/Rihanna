@@ -1,9 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -48,6 +45,7 @@ public class Filter extends Fragment {
     private static String stateId;
     private static String districtKey="";
     private static String categoryKey="";
+    private static String rateVal="0";
 
     private static List<String> statesIds;
     private static List<String>statesNames;
@@ -55,6 +53,7 @@ public class Filter extends Fragment {
     private static List<String> districtsNames;
     private static List<String>categoriesNames;
     private static List<String>categoriesIds;
+    private static List<String> rates;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -221,6 +220,23 @@ public class Filter extends Fragment {
         });
         
 
+
+        //Rate Spinner
+        rates =new ArrayList<>();
+        for(int i=0;i<=5;i++){
+            rates.add(i + "");
+        }
+
+        expertRateSpinner.setAdapter(new ArrayAdapter<>(getContext(), R.layout.drop_down_list_custome, rates));
+        expertRateSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                rateVal=rates.get(position);
+                Log.e("rate",rateVal);
+            }
+        });
+
+
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -233,6 +249,7 @@ public class Filter extends Fragment {
                 bundle.putString("category",categoryKey);
                 bundle.putString("state",stateKey);
                 bundle.putString("email",email.getText().toString());
+                bundle.putString("rate",rateVal);
                 services.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -157,4 +157,8 @@
     <string name="rviewsnum">التقييمات</string>
     <string name="selectfromtimes">أختر من المواعيد المتاحة لدى الخبيرة</string>
     <string name="didntwork">يوم عطلة</string>
+    <string name="indoor">الخدمة فى الصالون</string>
+    <string name="servicetypeask">نوع الخدمة التى ترغبيها ؟</string>
+    <string name="outdoor">خدمة خارجية</string>
+    <string name="expertoutdoors">المناطق التى تذهب اليها الخبيرة</string>
 </resources>

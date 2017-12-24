@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import rihanna.appsmatic.com.rihanna.GPS.GPSTracker;
 import rihanna.appsmatic.com.rihanna.R;
@@ -36,6 +38,7 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
     private Marker marker;
     private GPSTracker gpsTracker;
     private TextView next;
+    private BetterSpinner avalibalelocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
 
 
         next=(TextView)findViewById(R.id.date_time_next_btn);
+        avalibalelocations=(BetterSpinner)findViewById(R.id.avalibale_expert_disrictes_sp);
+        avalibalelocations.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.drop_down_list_custome));
 
 
         lat=0.0;
