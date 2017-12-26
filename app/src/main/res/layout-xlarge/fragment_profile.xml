@@ -223,25 +223,6 @@
                     android:textSize="25dp"
                     android:inputType="textPassword" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/dropdwonlistbg"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp">
-                <com.weiwangcn.betterspinner.library.BetterSpinner
-                    android:id="@+id/profile_countery_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown"
-                    android:textSize="25dp"
-                    android:padding="5dp" />
-            </LinearLayout>
 
 
             <LinearLayout
@@ -251,26 +232,6 @@
                 android:layout_marginTop="20dp"
                 android:layoutDirection="ltr"
                 android:gravity="center">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/dropdwonlistbg"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp">
-                    <com.weiwangcn.betterspinner.library.BetterSpinner
-                        android:id="@+id/profile_states_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown"
-                        android:textSize="25dp"
-                        android:padding="5dp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -291,6 +252,27 @@
                         android:gravity="center"
                         android:spinnerMode="dropdown"
                         android:textSize="25dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/dropdwonlistbg"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp">
+                    <com.weiwangcn.betterspinner.library.BetterSpinner
+                        android:id="@+id/profile_states_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown"
+                        android:textSize="25dp"
+                        android:padding="5dp" />
                 </LinearLayout>
 
             </LinearLayout>

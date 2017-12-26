@@ -51,7 +51,6 @@ public class SignUpScreen extends AppCompatActivity {
     private TextView signUpBtn;
     private EditText emailInput,passwordInput,fNameInput,lNameInput,phoneInput,repass,verificationCodeInput,address1;
     private TextView verifyMobile;
-    private BetterSpinner filterCountries;
     private BetterSpinner filterStates;
     private BetterSpinner filterdistructs;
     private static List<String> countriesIds= new ArrayList<>();
@@ -60,7 +59,7 @@ public class SignUpScreen extends AppCompatActivity {
     private static List<String>statesNames= new ArrayList<>();
     private static List<String> districtsIds=new ArrayList<>();
     private static List<String> districtsNames=new ArrayList<>();
-    private static final String SAUDI_ID="52";
+    private static final String SAUDI_ID="69";
     private static final String KUWAIT_ID="69";
     private static String countryKey,stateKey,districtkey,statusid,countryid;
 
@@ -94,14 +93,11 @@ public class SignUpScreen extends AppCompatActivity {
 
 
 
-        filterCountries = (BetterSpinner) findViewById(R.id.signup_countery_spinner);
+
         filterStates =(BetterSpinner)findViewById(R.id.signup_states_spinner2);
         filterdistructs=(BetterSpinner)findViewById(R.id.signup_districts_spinner);
-        filterCountries.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item));
         filterStates.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item));
         filterdistructs.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item));
-        filterCountries.setHint(getResources().getString(R.string.selectcounery));
-        filterCountries.setHintTextColor(getResources().getColor(R.color.colorPrimary));
         filterStates.setHint(getResources().getString(R.string.selectstate));
         filterStates.setHintTextColor(getResources().getColor(R.color.colorPrimary));
         filterdistructs.setHintTextColor(getResources().getColor(R.color.colorPrimary));
@@ -109,40 +105,10 @@ public class SignUpScreen extends AppCompatActivity {
 
 
 
-        //get countries by id
-        Generator.createService(RihannaAPI.class).getCountries(KUWAIT_ID + "," + SAUDI_ID).enqueue(new Callback<ResCountry>() {
-            @Override
-            public void onResponse(Call<ResCountry> call, Response<ResCountry> response) {
-                if (response.isSuccessful()) {
 
-                    //fill names and ids to spinner list from response
-                    for (int i = 0; i < response.body().getCountries().size(); i++) {
-                        countriesNames.add(response.body().getCountries().get(i).getName());
-                        countriesIds.add(response.body().getCountries().get(i).getId());
-                    }
-                    //add names to spinner list
-                    ArrayAdapter<String> cuntryadapter = new ArrayAdapter<>(SignUpScreen.this, android.R.layout.simple_spinner_dropdown_item, countriesNames);
-                    cuntryadapter.notifyDataSetChanged();
-                    filterCountries.setAdapter(cuntryadapter);
-                    filterCountries.setHint(getResources().getString(R.string.selectcounery));
-                    filterCountries.setHintTextColor(Color.GRAY);
-                    //counters list selection action
-                    filterCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            if (!statesNames.isEmpty()) {
-                                statesNames.clear();
-                                statesIds.clear();
-                            }
 
-                            countryKey = countriesNames.get(position);
-                            countryid = countriesIds.get(position);
-
-                            //get states by id
-                            Generator.createService(RihannaAPI.class).getStates(countriesIds.get(position)).enqueue(new Callback<ResStates>() {
-
-                                int currentPosition = position;
-
+                            //get states by Country id
+                            Generator.createService(RihannaAPI.class).getStates(SAUDI_ID).enqueue(new Callback<ResStates>() {
 
                                 @Override
                                 public void onResponse(Call<ResStates> call, Response<ResStates> response) {
@@ -169,7 +135,7 @@ public class SignUpScreen extends AppCompatActivity {
                                                 statusid = statesIds.get(position);
 
                                                 //Get districts
-                                                Generator.createService(RihannaAPI.class).getDestrics(countryKey, stateKey).enqueue(new Callback<Districts>() {
+                                                Generator.createService(RihannaAPI.class).getDestrics("Saudi Arabia", stateKey).enqueue(new Callback<Districts>() {
                                                     @Override
                                                     public void onResponse(Call<Districts> call, final Response<Districts> response) {
 
@@ -240,29 +206,9 @@ public class SignUpScreen extends AppCompatActivity {
                             });
 
 
-                        }
-                    });
 
-                } else {
-                    Toast.makeText(getApplication(), "Response not sucsess from countries ", Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ResCountry> call, Throwable t) {
 
-                NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(SignUpScreen.this);
-                dialogBuilder
-                        .withTitle(getResources().getString(R.string.connectionerror))
-                        .withDialogColor(R.color.colorPrimary)
-                        .withTitleColor("#FFFFFF")
-                        .withDuration(700)                                          //def
-                        .withEffect(Effectstype.RotateBottom)
-                        .withMessage(t.getMessage() + ":From countries ")
-                        .show();
-
-            }
-        });
 
 
 
@@ -319,10 +265,8 @@ public class SignUpScreen extends AppCompatActivity {
                 } else if (address1.getText().length() == 0) {
 
                     address1.setError(getResources().getString(R.string.addreesserorr));
-                } else if (filterCountries.getText().length() == 0) {
-
-                    filterCountries.setError(getResources().getString(R.string.selectcounery));
-                } else if (filterStates.getText().length() == 0) {
+                }
+                else if (filterStates.getText().length() == 0) {
 
                     filterStates.setError(getResources().getString(R.string.selectstate));
                 } else if (filterdistructs.getText().length() == 0) {
@@ -337,7 +281,7 @@ public class SignUpScreen extends AppCompatActivity {
 
                     //fill billing address
                     BillingAddress billingAddress = new BillingAddress();
-                    billingAddress.setCountryId(countryid);
+                    billingAddress.setCountryId(SAUDI_ID);
                     billingAddress.setEmail(emailInput.getText().toString() + "");
                     billingAddress.setFirstName(fNameInput.getText().toString() + "");
                     billingAddress.setLastName(lNameInput.getText().toString() + "");

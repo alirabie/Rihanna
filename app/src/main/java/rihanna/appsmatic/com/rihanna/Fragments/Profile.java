@@ -40,6 +40,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.Registration.RCustomer;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
@@ -50,7 +51,6 @@ public class Profile extends Fragment {
 
     private EditText emailInput,passwordInput,fNameInput,lNameInput,phoneInput,repass,verificationCodeInput,address1;
     private TextView verifyMobile;
-    private BetterSpinner filterCountries;
     private BetterSpinner filterStates;
     private BetterSpinner filterdistructs;
     private static List<String> countriesIds= new ArrayList<>();
@@ -59,7 +59,7 @@ public class Profile extends Fragment {
     private static List<String>statesNames= new ArrayList<>();
     private static List<String> districtsIds=new ArrayList<>();
     private static List<String> districtsNames=new ArrayList<>();
-    private static final String SAUDI_ID="52";
+    private static final String SAUDI_ID="69";
     private static final String KUWAIT_ID="69";
     private static String countryKey,stateKey,districtkey,statusid,countryid;
     private TextView signUpBtn;
@@ -99,14 +99,11 @@ public class Profile extends Fragment {
 
 
 
-        filterCountries = (BetterSpinner)view.findViewById(R.id.profile_countery_spinner);
+
         filterStates =(BetterSpinner)view.findViewById(R.id.profile_states_spinner);
         filterdistructs=(BetterSpinner)view.findViewById(R.id.profile_districts_spinner);
-        filterCountries.setAdapter(new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item));
         filterStates.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item));
         filterdistructs.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item));
-        filterCountries.setHint(getResources().getString(R.string.selectcounery));
-        filterCountries.setHintTextColor(getResources().getColor(R.color.colorPrimary));
         filterStates.setHint(getResources().getString(R.string.selectstate));
         filterStates.setHintTextColor(getResources().getColor(R.color.colorPrimary));
         filterdistructs.setHintTextColor(getResources().getColor(R.color.colorPrimary));
@@ -126,40 +123,12 @@ public class Profile extends Fragment {
 
 
 
-        //get countries by id
-        Generator.createService(RihannaAPI.class).getCountries(KUWAIT_ID + "," + SAUDI_ID).enqueue(new Callback<ResCountry>() {
-            @Override
-            public void onResponse(Call<ResCountry> call, Response<ResCountry> response) {
-                if (response.isSuccessful()) {
 
-                    //fill names and ids to spinner list from response
-                    for (int i = 0; i < response.body().getCountries().size(); i++) {
-                        countriesNames.add(response.body().getCountries().get(i).getName());
-                        countriesIds.add(response.body().getCountries().get(i).getId());
-                    }
-                    //add names to spinner list
-                    ArrayAdapter<String> cuntryadapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, countriesNames);
-                    cuntryadapter.notifyDataSetChanged();
-                    filterCountries.setAdapter(cuntryadapter);
-                    filterCountries.setHint(getResources().getString(R.string.selectcounery));
-                    filterCountries.setHintTextColor(Color.GRAY);
-                    //counters list selection action
-                    filterCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            if (!statesNames.isEmpty()) {
-                                statesNames.clear();
-                                statesIds.clear();
-                            }
-
-                            countryKey = countriesNames.get(position);
-                            countryid = countriesIds.get(position);
 
 
                             //get states by id
-                            Generator.createService(RihannaAPI.class).getStates(countriesIds.get(position)).enqueue(new Callback<ResStates>() {
+                            Generator.createService(RihannaAPI.class).getStates(SAUDI_ID).enqueue(new Callback<ResStates>() {
 
-                                int currentPosition = position;
 
 
                                 @Override
@@ -187,7 +156,7 @@ public class Profile extends Fragment {
                                                 statusid = statesIds.get(position);
 
                                                 //Get districts
-                                                Generator.createService(RihannaAPI.class).getDestrics(countryKey, stateKey).enqueue(new Callback<Districts>() {
+                                                Generator.createService(RihannaAPI.class).getDestrics("Saudi Arabia", stateKey).enqueue(new Callback<Districts>() {
                                                     @Override
                                                     public void onResponse(Call<Districts> call, final Response<Districts> response) {
 
@@ -258,29 +227,6 @@ public class Profile extends Fragment {
                             });
 
 
-                        }
-                    });
-
-                } else {
-                    Toast.makeText(getContext(), "Response not sucsess from countries ", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResCountry> call, Throwable t) {
-
-                NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(getContext());
-                dialogBuilder
-                        .withTitle(getResources().getString(R.string.connectionerror))
-                        .withDialogColor(R.color.colorPrimary)
-                        .withTitleColor("#FFFFFF")
-                        .withDuration(700)                                          //def
-                        .withEffect(Effectstype.RotateBottom)
-                        .withMessage(t.getMessage() + ":From countries ")
-                        .show();
-
-            }
-        });
 
 
 
@@ -330,9 +276,6 @@ public class Profile extends Fragment {
                 } else if (address1.getText().length() == 0) {
 
                     address1.setError(getResources().getString(R.string.addreesserorr));
-                } else if (filterCountries.getText().length() == 0) {
-
-                    filterCountries.setError(getResources().getString(R.string.selectcounery));
                 } else if (filterStates.getText().length() == 0) {
 
                     filterStates.setError(getResources().getString(R.string.selectstate));
@@ -354,7 +297,7 @@ public class Profile extends Fragment {
                     RCustomer customer = new RCustomer();
                     //fill billing address
                     BillingAddress billingAddress = new BillingAddress();
-                    billingAddress.setCountryId(countryid);
+                    billingAddress.setCountryId(SAUDI_ID);
                     billingAddress.setEmail(emailInput.getText().toString() + "");
                     billingAddress.setFirstName(fNameInput.getText().toString() + "");
                     billingAddress.setLastName(lNameInput.getText().toString() + "");
@@ -404,14 +347,15 @@ public class Profile extends Fragment {
                                     districtsIds.clear();
 
                                     //Change Fragment
-                                    Services services = new Services();
-                                    Bundle bundle = new Bundle();
-                                    services.setArguments(bundle);
-                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                                    Services services=new Services();
+                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)getContext()).getSupportFragmentManager();
                                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.fragmentcontener, services);
+                                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                                     fragmentTransaction.commit();
-
+                                    Home.tittle.setVisibility(View.INVISIBLE);
+                                    Home.topButtons.setVisibility(View.VISIBLE);
+                                    Home.spainnersBox.setVisibility(View.VISIBLE);
 
                                 } else if (response.body().getErrors() != null) {
                                     Toast.makeText(getContext(), getResources().getString(R.string.faild) + " " + response.body().getErrors().getAccount() + "", Toast.LENGTH_LONG).show();

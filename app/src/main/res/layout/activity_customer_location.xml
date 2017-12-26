@@ -125,7 +125,8 @@
             android:textAlignment="textStart"
             android:layout_weight="1"
             android:textSize="15dp"
-            android:hint="@string/phonehintinputlogin" />
+            android:hint="@string/phonehintinputlogin"
+            android:inputType="phone" />
 
     </LinearLayout>
 

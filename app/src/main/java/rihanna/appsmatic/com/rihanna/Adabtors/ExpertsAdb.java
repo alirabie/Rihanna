@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
@@ -79,10 +80,16 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                 holder.expertProfileBtn.clearAnimation();
                 holder.expertProfileBtn.setAnimation(anim);
 
+                //reset offline order data
+                Home.offOrderModel.reset();
+                Home.customerCount=1;
+                Home.orderItems.clear();
+
+
                 ExpertInfo expertInfo=new ExpertInfo();
                 Bundle bundle=new Bundle();
                 bundle.putString("expertId",expertsResponse.getVendors().get(position).getId());
-                bundle.putString("name",expertsResponse.getVendors().get(position).getName());
+                bundle.putString("name",expertsResponse.getVendors().get(position).getName()+"");
                 bundle.putString("expaddrss",expertsResponse.getVendors().get(position).getAddress());
                 bundle.putString("expcert",expertsResponse.getVendors().get(position).getCertifications()+"");
                 bundle.putBoolean("expisindoorserv",expertsResponse.getVendors().get(position).getIndoor());

@@ -1,5 +1,7 @@
 package rihanna.appsmatic.com.rihanna.API.WebServiceTools;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,6 +19,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.GetExpertPhotos;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
+import rihanna.appsmatic.com.rihanna.API.Models.OutdoorLocations.ResAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
@@ -103,5 +106,8 @@ public interface RihannaAPI {
     //Get Expert Schedules
     @GET("api/vendors/schedule/{id}")
     Call<SchdulesResponse>getExpertSchadules(@Path("id")String id);
+
+    @GET("api/expert/addresses?")
+    Call<List<ResAddress>>getOutdoorAddress(@Query("ExpertId")String expId);
 
 }

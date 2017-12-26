@@ -108,6 +108,7 @@ public class ExpertInfo extends Fragment {
         bannerSlider.setVisibility(View.INVISIBLE);
 
 
+
         //Setup Photos Slider if images On from settings
         if(SaveSharedPreference.getImgLoadingSatatus(getContext())) {
             Generator.createService(RihannaAPI.class).getExpertPhotos(getArguments().get("expertId").toString()).enqueue(new Callback<GetExpertPhotos>() {
@@ -150,6 +151,10 @@ public class ExpertInfo extends Fragment {
             });
         }
 
+
+        //add expert Info to offline order
+        Home.offOrderModel.setExpertId(expertId);
+        Home.offOrderModel.setExpertName(getArguments().getString("name"));
 
 
         servicesFrag=new ServicesFrag();
@@ -239,35 +244,45 @@ public class ExpertInfo extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 bookingBtn.clearAnimation();
                 bookingBtn.setAnimation(anim);
-                if(expertserviceIndoor){
-                    //Initialize Done Dialog
-                    final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(getContext());
-                    dialogBuildercard
-                            .withDuration(700)//def
-                            .withEffect(Effectstype.Fall)
-                            .withDialogColor(getResources().getColor(R.color.colorPrimary))
-                            .withTitleColor(Color.BLACK)
-                            .withMessage(getResources().getString(R.string.servicetypeask))
-                            .withTitle(getResources().getString(R.string.app_name))
-                            .isCancelableOnTouchOutside(false)
-                                    .withButton1Text(getResources().getString(R.string.indoor))
-                                            .withButton2Text(getResources().getString(R.string.outdoor))
-                            .setButton1Click(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            startActivity(new Intent(getContext(),OrderScreen.class));
-                                                            dialogBuildercard.dismiss();
-                                                        }})
-                            .setButton2Click(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            startActivity(new Intent(getContext(),CustomerLocation.class));
-                                                            dialogBuildercard.dismiss();
-                                                        }}).show();
-                }else {
-                    startActivity(new Intent(getContext(),CustomerLocation.class));
-                }
+                if (!Home.orderItems.isEmpty()) {
+                    if (expertserviceIndoor) {
+                        //Initialize Done Dialog
+                        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(getContext());
+                        dialogBuildercard
+                                .withDuration(700)//def
+                                .withEffect(Effectstype.Fall)
+                                .withDialogColor(getResources().getColor(R.color.colorPrimary))
+                                .withTitleColor(Color.BLACK)
+                                .withMessage(getResources().getString(R.string.servicetypeask))
+                                .withTitle(getResources().getString(R.string.app_name))
+                                .isCancelableOnTouchOutside(false)
+                                .withButton1Text(getResources().getString(R.string.indoor))
+                                .withButton2Text(getResources().getString(R.string.outdoor))
+                                .setButton1Click(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        //Set service type to offline order indoor
+                                        Home.offOrderModel.setServiceType(getResources().getString(R.string.indoor));
+                                        startActivity(new Intent(getContext(), OrderScreen.class));
+                                        dialogBuildercard.dismiss();
+                                    }
+                                })
+                                .setButton2Click(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        //Set service type to offline order outdoor
+                                        Home.offOrderModel.setServiceType(getResources().getString(R.string.outdoor));
+                                        startActivity(new Intent(getContext(), CustomerLocation.class).putExtra("expId", expertId));
+                                        dialogBuildercard.dismiss();
+                                    }
+                                }).show();
+                    } else {
+                        startActivity(new Intent(getContext(), CustomerLocation.class));
+                    }
 
+                }else {
+                    Toast.makeText(getContext(),getResources().getString(R.string.picfirst),Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

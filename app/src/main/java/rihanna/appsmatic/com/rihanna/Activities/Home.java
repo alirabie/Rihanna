@@ -69,16 +69,23 @@ import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Fragments.Settings;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderModel;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    //Offline Order
+    public static OffOrderModel offOrderModel ;
+    public static List<OffOrderItem>orderItems;
+    public static int customerCount=1;
+
     private BetterSpinner cities;
     private BetterSpinner categories;
     private static List<String> citesNames;
     private static List<String>citesIds;
-
     private static List<String>categoriesNames;
     private static List<String>categoriesIds;
     private LinearLayout sideMenuButtons;
@@ -103,6 +110,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        offOrderModel=new OffOrderModel();
+        orderItems=new ArrayList<>();
+
          face= Typeface.createFromAsset(getAssets(), "arabic.ttf");
          drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
          tittle=(TextView)findViewById(R.id.filtertitle);

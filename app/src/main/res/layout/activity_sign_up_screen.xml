@@ -236,25 +236,6 @@
                     android:inputType="phone" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@drawable/dropdwonlistbg"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:gravity="center"
-                android:layout_weight="1">
-                <com.weiwangcn.betterspinner.library.BetterSpinner
-                    android:id="@+id/signup_countery_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:spinnerMode="dropdown"
-                    android:textSize="11dp"
-                    android:padding="5dp" />
-            </LinearLayout>
-
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -263,26 +244,6 @@
                 android:layout_marginTop="5dp"
                 android:layoutDirection="ltr"
                 android:gravity="center">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/dropdwonlistbg"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp">
-                    <com.weiwangcn.betterspinner.library.BetterSpinner
-                        android:id="@+id/signup_states_spinner2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown"
-                        android:textSize="11dp"
-                        android:padding="5dp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -303,6 +264,27 @@
                         android:gravity="center"
                         android:spinnerMode="dropdown"
                         android:textSize="11dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/dropdwonlistbg"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp">
+                    <com.weiwangcn.betterspinner.library.BetterSpinner
+                        android:id="@+id/signup_states_spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown"
+                        android:textSize="11dp"
+                        android:padding="5dp" />
                 </LinearLayout>
 
             </LinearLayout>

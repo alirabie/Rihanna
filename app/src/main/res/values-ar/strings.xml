@@ -161,4 +161,7 @@
     <string name="servicetypeask">نوع الخدمة التى ترغبيها ؟</string>
     <string name="outdoor">خدمة خارجية</string>
     <string name="expertoutdoors">المناطق التى تذهب اليها الخبيرة</string>
+    <string name="serviceselected">تم اختيار الخدمة</string>
+    <string name="minimumorderprice">الحد الادنى لإتمام الطلب 300 رس</string>
+    <string name="picfirst">أختر الخدمات اولا</string>
 </resources>

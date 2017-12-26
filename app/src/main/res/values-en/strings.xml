@@ -161,4 +161,7 @@
     <string name="servicetypeask">What is Service Type You Want ?</string>
     <string name="outdoor">Outdoor Service</string>
     <string name="expertoutdoors">The district to which the expert goes</string>
+    <string name="serviceselected">Service has been Picked</string>
+    <string name="minimumorderprice">Minimum total price to confirm order 300 SR</string>
+    <string name="picfirst">Pick Services First</string>
 </resources>

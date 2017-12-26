@@ -48,7 +48,9 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                 holder.unSubscribeBtn.clearAnimation();
                 holder.unSubscribeBtn.setAnimation(anim);
 
-                FireDialog.pickService(context,holder.unSubscribeBtn,expertServices.getServices().get(position).getExpertId()+"",expertServices.getServices().get(position).getServiceId()+ "",expertServices.getServices().get(position).getServiceName());
+                FireDialog.pickService(context,holder.unSubscribeBtn,expertServices.getServices().get(position).getExpertId()+"",expertServices.getServices().get(position).getServiceId()+ "",
+                        expertServices.getServices().get(position).getServiceName(),
+                        expertServices.getServices().get(position).getPrice());
 
 
             }

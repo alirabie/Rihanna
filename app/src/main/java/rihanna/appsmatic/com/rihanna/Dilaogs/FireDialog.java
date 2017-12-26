@@ -48,8 +48,10 @@ import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResRe
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CertificatesAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
 import rihanna.appsmatic.com.rihanna.R;
 import rihanna.appsmatic.com.rihanna.SQLiteDB.DB;
 import rihanna.appsmatic.com.rihanna.SQLiteDB.DB_Models.ExpertTime;
@@ -309,7 +311,7 @@ public class FireDialog {
     }
 
 
-    public static void pickService (final Context context,View view,String expertId, final String serviceId,String serviceName){
+    public static void pickService (final Context context,View view,String expertId, final String serviceId, final String serviceName, final float price){
 
         MaterialCalendarView calendarView;
         final BetterSpinner avalibalTimesSp;
@@ -470,9 +472,16 @@ public class FireDialog {
 
 
 
-                            //place id and date and time to order
-
-                            Toast.makeText(context,"id : "+serviceId+" "+dateKey +" // "+fromKey + "--" + toKey, Toast.LENGTH_SHORT).show();
+                            //place id and date and time to offline order
+                            OffOrderItem offOrderItem=new OffOrderItem();
+                            offOrderItem.setId(serviceId);
+                            offOrderItem.setName(serviceName);
+                            offOrderItem.setFromTime(fromKey);
+                            offOrderItem.setToTime(toKey);
+                            offOrderItem.setDate(dateKey);
+                            offOrderItem.setPrice(price);
+                            Home.orderItems.add(offOrderItem);
+                            Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
                             dialogBuildercard.dismiss();
 
                         }else {
