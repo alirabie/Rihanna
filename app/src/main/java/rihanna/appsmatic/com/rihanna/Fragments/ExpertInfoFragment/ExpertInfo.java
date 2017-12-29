@@ -47,6 +47,7 @@ import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo3Fra
 import rihanna.appsmatic.com.rihanna.Fragments.OrderInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.RatingandComments;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.offAddress;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 import ss.com.bannerslider.banners.Banner;
@@ -262,7 +263,18 @@ public class ExpertInfo extends Fragment {
                                     @Override
                                     public void onClick(View v) {
                                         //Set service type to offline order indoor
-                                        Home.offOrderModel.setServiceType(getResources().getString(R.string.indoor));
+                                        Home.offOrderModel.setServiceType("in");
+                                        //set address to offline order
+                                        offAddress offAddress=new offAddress();
+                                        offAddress.setStateId(Integer.parseInt(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getStateProvinceId().toString()));
+                                        offAddress.setDistrictId(Integer.parseInt(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getStateProvinceId().toString()));
+                                        offAddress.setStateName(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getProvince().toString() + "");
+                                        offAddress.setDistrictName(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getCity().toString() + "");
+                                        offAddress.setAddr(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getAddress1().toString() + "");
+                                        offAddress.setPhoneNum(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getBillingAddress().getPhoneNumber().toString()+"");
+                                        offAddress.setLat(0.0);
+                                        offAddress.setLng(0.0);
+                                        Home.offOrderModel.setOffAddress(offAddress);
                                         startActivity(new Intent(getContext(), OrderScreen.class));
                                         dialogBuildercard.dismiss();
                                     }
@@ -271,7 +283,7 @@ public class ExpertInfo extends Fragment {
                                     @Override
                                     public void onClick(View v) {
                                         //Set service type to offline order outdoor
-                                        Home.offOrderModel.setServiceType(getResources().getString(R.string.outdoor));
+                                        Home.offOrderModel.setServiceType("out");
                                         startActivity(new Intent(getContext(), CustomerLocation.class).putExtra("expId", expertId));
                                         dialogBuildercard.dismiss();
                                     }

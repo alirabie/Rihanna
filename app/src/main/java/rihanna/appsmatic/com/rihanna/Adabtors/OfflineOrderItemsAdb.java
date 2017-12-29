@@ -69,8 +69,8 @@ public class OfflineOrderItemsAdb extends RecyclerView.Adapter<OfflineOrderItems
         return offOrderItems.size();
     }
 
-    public float getSum(){
-        float x=0;
+    public Double getSum(){
+        Double x=0.0;
         for(int i=0;i<offOrderItems.size();i++){
             x=x+offOrderItems.get(i).getPrice();
         }

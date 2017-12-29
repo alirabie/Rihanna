@@ -5,27 +5,31 @@ package rihanna.appsmatic.com.rihanna.OffLineOrder;
  */
 public class offAddress {
 
-    private String countryId;
-    private String stateId;
-    private String districtId;
+
+    private String countryName;
+    private int countryId;
+    private String stateName;
+    private int stateId;
+    private String districtName;
+    private int districtId;
     private String addr;
     private String phoneNum;
     private Double lat;
     private Double lng;
 
-    public String getCountryId() {
+    public int getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(String countryId) {
+    public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
 
-    public String getStateId() {
+    public int getStateId() {
         return stateId;
     }
 
-    public void setStateId(String stateId) {
+    public void setStateId(int stateId) {
         this.stateId = stateId;
     }
 
@@ -61,11 +65,35 @@ public class offAddress {
         this.lng = lng;
     }
 
-    public String getDistrictId() {
+    public int getDistrictId() {
         return districtId;
     }
 
-    public void setDistrictId(String districtId) {
+    public void setDistrictId(int districtId) {
         this.districtId = districtId;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }

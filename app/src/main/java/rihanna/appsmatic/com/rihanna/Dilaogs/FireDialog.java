@@ -311,7 +311,7 @@ public class FireDialog {
     }
 
 
-    public static void pickService (final Context context,View view,String expertId, final String serviceId, final String serviceName, final float price){
+    public static void pickService (final Context context,View view,String expertId, final String serviceId, final String serviceName, final Double price){
 
         MaterialCalendarView calendarView;
         final BetterSpinner avalibalTimesSp;

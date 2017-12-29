@@ -58,6 +58,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.BillingAddress;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.PostOrder;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
@@ -771,13 +774,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
-
-
-
-
-
-
-
     //Turn GPS ON Method
     public static void turnLocationOn(final Context ctx){
 
@@ -861,15 +857,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
 
-        expertNameTv.setText(" "+exName);
+        expertNameTv.setText(" " + exName);
         dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 return keyCode == KeyEvent.KEYCODE_BACK;
             }
-
-
-
 
 
         });
@@ -901,4 +894,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
         return true;
     }
+
+
+
+
+
+
+
 }

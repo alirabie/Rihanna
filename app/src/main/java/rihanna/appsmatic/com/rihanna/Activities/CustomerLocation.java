@@ -65,7 +65,9 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
     private static List<String> districtsNames;
     private static List<String> locations;
     private EditText addr,phone;
+    static String districtNam="";
     static String districtId="";
+    static String stateName="";
     static String stateId="";
 
 
@@ -102,14 +104,18 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
             public void onResponse(Call<List<ResAddress>> call, Response<List<ResAddress>> response) {
                 if(response.isSuccessful()){
                     statesIds=new ArrayList<String>();
+                    statesNames=new ArrayList<String>();
                     districtsIds=new ArrayList<String>();
+                    districtsNames=new ArrayList<String>();
                     locations=new ArrayList<String>();
 
                     if(response.body()!=null){
 
                         for(int i=0;i<response.body().size();i++){
                            statesIds.add(response.body().get(i).getStateId()+"");
+                            statesNames.add(response.body().get(i).getState());
                            districtsIds.add(response.body().get(i).getDistrictId()+"");
+                            districtsNames.add(response.body().get(i).getDistrict());
                            locations.add(response.body().get(i).getState() + " / " + response.body().get(i).getDistrict());
                         }
 
@@ -121,6 +127,8 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
 
                                 stateId=statesIds.get(position);
                                 districtId=districtsIds.get(position);
+                                stateName=statesNames.get(position);
+                                districtNam=districtsNames.get(position);
 
                                 Toast.makeText(getApplicationContext(),stateId+" "+districtId,Toast.LENGTH_SHORT).show();
 
@@ -213,10 +221,12 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
 
                     //set address to offline order
                     offAddress offAddress=new offAddress();
-                    offAddress.setCountryId("69");
-                    offAddress.setStateId(stateId);
-                    offAddress.setDistrictId(districtId);
+                    offAddress.setStateId(Integer.parseInt(stateId));
+                    offAddress.setDistrictId(Integer.parseInt(districtId));
+                    offAddress.setStateName(stateName);
+                    offAddress.setDistrictName(districtNam);
                     offAddress.setAddr(addr.getText().toString());
+                    offAddress.setPhoneNum(phone.getText().toString());
                     offAddress.setLat(lat);
                     offAddress.setLng(lang);
                     Home.offOrderModel.setOffAddress(offAddress);

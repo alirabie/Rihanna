@@ -24,13 +24,13 @@ public class BillingAddress {
     private Object company;
     @SerializedName("country_id")
     @Expose
-    private Object countryId;
+    private int countryId;
     @SerializedName("country")
     @Expose
     private Object country;
     @SerializedName("state_province_id")
     @Expose
-    private Object stateProvinceId;
+    private int stateProvinceId;
     @SerializedName("city")
     @Expose
     private Object city;
@@ -103,7 +103,7 @@ public class BillingAddress {
         return countryId;
     }
 
-    public void setCountryId(Object countryId) {
+    public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
 
@@ -119,7 +119,7 @@ public class BillingAddress {
         return stateProvinceId;
     }
 
-    public void setStateProvinceId(Object stateProvinceId) {
+    public void setStateProvinceId(int stateProvinceId) {
         this.stateProvinceId = stateProvinceId;
     }
 

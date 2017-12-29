@@ -6,7 +6,7 @@ package rihanna.appsmatic.com.rihanna.OffLineOrder;
 public class OffOrderItem {
     private String id;
     private String name;
-    private float price;
+    private Double price;
     private String fromTime;
     private String toTime;
     private String date;
@@ -19,11 +19,11 @@ public class OffOrderItem {
         this.name = name;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

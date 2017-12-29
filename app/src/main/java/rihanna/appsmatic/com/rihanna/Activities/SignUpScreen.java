@@ -281,11 +281,11 @@ public class SignUpScreen extends AppCompatActivity {
 
                     //fill billing address
                     BillingAddress billingAddress = new BillingAddress();
-                    billingAddress.setCountryId(SAUDI_ID);
+                    billingAddress.setCountryId(Integer.parseInt(SAUDI_ID));
                     billingAddress.setEmail(emailInput.getText().toString() + "");
                     billingAddress.setFirstName(fNameInput.getText().toString() + "");
                     billingAddress.setLastName(lNameInput.getText().toString() + "");
-                    billingAddress.setStateProvinceId(statusid);
+                    billingAddress.setStateProvinceId(Integer.parseInt(statusid));
                     billingAddress.setCity(districtkey);
                     billingAddress.setPhoneNumber(phoneInput.getText().toString() + "");
                     billingAddress.setAddress1(address1.getText() + "");

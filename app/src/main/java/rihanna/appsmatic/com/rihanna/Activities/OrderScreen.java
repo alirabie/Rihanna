@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +22,17 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.Image;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.BillingAddress;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.OrderItem;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.PostOrder;
 import rihanna.appsmatic.com.rihanna.Adabtors.OfflineOrderItemsAdb;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderModel;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class OrderScreen extends AppCompatActivity {
@@ -60,7 +70,16 @@ public class OrderScreen extends AppCompatActivity {
 
 
         expertName.setText(Home.offOrderModel.getExpertName());
-        serviceTypeTv.setText(Home.offOrderModel.getServiceType());
+
+
+        //Check service type
+        if(Home.offOrderModel.getServiceType().equals("in")){
+            serviceTypeTv.setText(getResources().getString(R.string.indoor));
+        }else if (Home.offOrderModel.getServiceType().equals("out")){
+            serviceTypeTv.setText(getResources().getString(R.string.outdoor));
+        }
+
+
 
         
         orderItemsList=(RecyclerView)findViewById(R.id.shopping_cart_orderinfo_list);
@@ -106,13 +125,69 @@ public class OrderScreen extends AppCompatActivity {
                 orderNow.clearAnimation();
                 orderNow.setAnimation(anim);
                 Home.offOrderModel.setOffOrderItems(Home.orderItems);
+
+
+
                 Gson gson =new Gson();
-                Log.e("order : ",gson.toJson(Home.offOrderModel).toString());
+                Log.e("order : ", gson.toJson(convertToPostOrder(getApplicationContext(), Home.offOrderModel)).toString());
             }
         });
 
     }
 
+
+
+    public static PostOrder convertToPostOrder(Context context,OffOrderModel offOrderModel){
+        PostOrder postOrder=new PostOrder();
+        Order order =new Order();
+        List<OrderItem> orderItems=new ArrayList<>();
+        BillingAddress billingAddress=new BillingAddress();
+        billingAddress.setAddress1(offOrderModel.getOffAddress().getAddr());
+        billingAddress.setPhoneNumber(offOrderModel.getOffAddress().getPhoneNum());
+        billingAddress.setCity(offOrderModel.getOffAddress().getDistrictName());
+        billingAddress.setStateProvinceId(offOrderModel.getOffAddress().getStateId());
+        billingAddress.setProvince(offOrderModel.getOffAddress().getStateName());
+
+
+        billingAddress.setCountryId(69);
+        billingAddress.setCountry("Saudi Arabia");
+        billingAddress.setCreatedOnUtc("2017-09-05T21:12:45.233");
+        billingAddress.setZipPostalCode("00");
+        billingAddress.setEmail(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getEmail());
+        billingAddress.setFirstName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getFirstName().toString());
+        billingAddress.setLastName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getLastName().toString());
+
+        for(int i=0;i<offOrderModel.getOffOrderItems().size();i++){
+            OrderItem orderItem =new OrderItem();
+            orderItem.setProductId(Integer.parseInt(offOrderModel.getOffOrderItems().get(i).getId()));
+            orderItem.setQuantity(1);
+            orderItem.setServiceDate(offOrderModel.getOffOrderItems().get(i).getDate());
+            orderItem.setServiceTimeFrom(offOrderModel.getOffOrderItems().get(i).getFromTime());
+            orderItem.setServiceTimeTo(offOrderModel.getOffOrderItems().get(i).getToTime());
+            orderItems.add(orderItem);
+        }
+
+
+        order.setBillingAddress(billingAddress);
+        order.setCustomerId(Integer.parseInt(SaveSharedPreference.getCustomerId(context)));
+        order.setExpertId(Integer.parseInt(Home.offOrderModel.getExpertId()));
+        order.setOrderItems(orderItems);
+        order.setPaymentMethodSystemName("Payments.Manual");
+
+        if(offOrderModel.getServiceType().equals("in"))
+        {
+            order.setServiceType("indoor");
+        }else if(offOrderModel.getServiceType().equals("out"))
+        {
+            order.setServiceType("outdoor");
+        }
+
+        postOrder.setOrder(order);
+
+
+        return postOrder;
+
+    }
 
 
 }
