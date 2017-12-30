@@ -49,7 +49,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
         animate(holder);
         holder.indoorImge.setVisibility(View.INVISIBLE);
         holder.certificateImge.setVisibility(View.INVISIBLE);
-        holder.classImge.setVisibility(View.INVISIBLE);
+
 
         if(expertsResponse.getVendors().get(position).getCertifications()==0){
             holder.certificateImge.setVisibility(View.INVISIBLE);
@@ -72,6 +72,22 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                     .into(holder.expertImg);
         }
 
+        //set Expert Class
+
+        if(expertsResponse.getVendors().get(position).getCustomerRoleName()!=null) {
+            if (expertsResponse.getVendors().get(position).getCustomerRoleName().toString().equals("Expert A")) {
+                holder.classImge.setImageResource(R.drawable.a_icon);
+            } else if (expertsResponse.getVendors().get(position).getCustomerRoleName().toString().equals("Expert B")) {
+                holder.classImge.setImageResource(R.drawable.b_icon);
+            }
+        }
+
+
+
+
+
+
+
         holder.ratingBar.setRating(expertsResponse.getVendors().get(position).getRating());
         holder.expertProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +106,13 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                 Bundle bundle=new Bundle();
                 bundle.putString("expertId",expertsResponse.getVendors().get(position).getId());
                 bundle.putString("name",expertsResponse.getVendors().get(position).getName()+"");
-                bundle.putString("expaddrss",expertsResponse.getVendors().get(position).getAddress());
-                bundle.putString("expcert",expertsResponse.getVendors().get(position).getCertifications()+"");
-                bundle.putBoolean("expisindoorserv",expertsResponse.getVendors().get(position).getIndoor());
-                bundle.putInt("rate",expertsResponse.getVendors().get(position).getRating());
+                bundle.putString("expaddrss", expertsResponse.getVendors().get(position).getAddress());
+                bundle.putString("expcert", expertsResponse.getVendors().get(position).getCertifications() + "");
+                bundle.putBoolean("expisindoorserv", expertsResponse.getVendors().get(position).getIndoor());
+                bundle.putInt("rate", expertsResponse.getVendors().get(position).getRating());
+                if(expertsResponse.getVendors().get(position).getCustomerRoleName()!=null) {
+                    bundle.putString("expertclass", expertsResponse.getVendors().get(position).getCustomerRoleName());
+                }
 
                 expertInfo.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
@@ -122,7 +141,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
 
     public static class Vholder extends RecyclerView.ViewHolder{
         private TextView name,address;
-        private ImageView expertImg,certificateImge,classImge,indoorImge;
+        private ImageView expertImg,certificateImge,indoorImge,classImge;
         private RelativeLayout expertProfileBtn;
         private RatingBar ratingBar;
         public Vholder(View itemView) {

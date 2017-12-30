@@ -90,24 +90,23 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/cert_icon"
                     android:src="@drawable/cert_icon"
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/arrw_icon"
                     android:src="@drawable/arrw_icon"
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
                     android:id="@+id/a_icon"
-                    android:src="@drawable/a_icon"
                     android:layout_weight="1" />
             </LinearLayout>
 

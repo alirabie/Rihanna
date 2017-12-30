@@ -25,7 +25,7 @@ import rihanna.appsmatic.com.rihanna.R;
 
 public class AboutExpertFrag extends Fragment {
 
-    TextView address,serviceType,cert,expyears,aboutExpert;
+    TextView address,serviceType,cert,expyears,aboutExpert,expClass;
     private TextView viewCertificates;
 
     @Override
@@ -50,7 +50,24 @@ public class AboutExpertFrag extends Fragment {
         expyears=(TextView)view.findViewById(R.id.aboutex_frag_expyears_tv);
         aboutExpert=(TextView)view.findViewById(R.id.aboutex_frag_expinfo_tv);
         viewCertificates=(TextView)view.findViewById(R.id.show_cert_btn);
+        expClass=(TextView)view.findViewById(R.id.aboutex_frag_level_tv);
         viewCertificates.setVisibility(View.INVISIBLE);
+
+
+
+        //get expert class
+        if(ExpertInfo.expertClass.equals("Expert A")){
+            expClass.setText("A");
+        }else if(ExpertInfo.expertClass.equals("Expert B")) {
+            expClass.setText("B");
+        }
+
+
+
+
+
+
+
 
         address.setText(ExpertInfo.expertAddress);
         if(ExpertInfo.expertcert.equals("0")){
@@ -108,7 +125,7 @@ public class AboutExpertFrag extends Fragment {
                 viewCertificates.clearAnimation();
                 viewCertificates.setAnimation(anim);
 
-                FireDialog.certificatesDialog(getContext(),ExpertInfo.expertId,viewCertificates,getResources().getString(R.string.certification));
+                FireDialog.certificatesDialog(getContext(), ExpertInfo.expertId, viewCertificates, getResources().getString(R.string.certification));
             }
         });
     }

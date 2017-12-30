@@ -28,6 +28,10 @@ public class Vendor {
     @SerializedName("indoor")
     @Expose
     private Boolean indoor;
+    @SerializedName("customer_role_name")
+    @Expose
+    private String customerRoleName;
+
 
 
     public String getId() {
@@ -84,5 +88,13 @@ public class Vendor {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public String getCustomerRoleName() {
+        return customerRoleName;
+    }
+
+    public void setCustomerRoleName(String customerRoleName) {
+        this.customerRoleName = customerRoleName;
     }
 }

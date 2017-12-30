@@ -68,6 +68,7 @@ public class ExpertInfo extends Fragment {
     public static String expertId ="";
     public static String expertAddress="";
     public static String expertcert="";
+    public static String expertClass="";
     public static boolean expertserviceIndoor =false;
     private ImageView goToRatesComments;
     private TextView name;
@@ -99,6 +100,9 @@ public class ExpertInfo extends Fragment {
         expertAddress=getArguments().getString("expaddrss");
         expertcert=getArguments().getString("expcert");
         expertserviceIndoor=getArguments().getBoolean("expisindoorserv");
+        expertClass=getArguments().getString("expertclass");
+
+
         goToRatesComments =(ImageView)view.findViewById(R.id.expert_details_goto_customercomments);
         name=(TextView)view.findViewById(R.id.expert_details_name_tv);
         bookingBtn=(TextView)view.findViewById(R.id.booking_btn);
@@ -289,6 +293,8 @@ public class ExpertInfo extends Fragment {
                                     }
                                 }).show();
                     } else {
+
+                        Home.offOrderModel.setServiceType("out");
                         startActivity(new Intent(getContext(), CustomerLocation.class));
                     }
 

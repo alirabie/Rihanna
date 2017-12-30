@@ -397,7 +397,7 @@ public class FireDialog {
 
                 Calendar calendar2 = Calendar.getInstance();
                 calendar2.set(date.getYear(), date.getMonth(), date.getDay());
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy",Locale.ENGLISH);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
                 dateKey = format.format(calendar.getTime());
 
                 timesFrom = new ArrayList<String>();
@@ -463,7 +463,7 @@ public class FireDialog {
                     avalibalTimesSp.setError("!");
                 }else {
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Calendar today = Calendar.getInstance();
                     try {
                         Date selected = sdf.parse(dateKey);
