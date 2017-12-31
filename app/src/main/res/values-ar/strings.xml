@@ -164,4 +164,6 @@
     <string name="serviceselected">تم اختيار الخدمة</string>
     <string name="minimumorderprice">الحد الادنى لإتمام الطلب 300 رس</string>
     <string name="picfirst">أختر الخدمات اولا</string>
+    <string name="nooffers">لا توجد عروض</string>
+    <string name="confirm">أكد طلبك</string>
 </resources>

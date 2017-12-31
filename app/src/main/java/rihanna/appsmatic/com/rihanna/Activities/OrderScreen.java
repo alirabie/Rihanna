@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -31,6 +32,8 @@ import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.OrderItem;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.PostOrder;
 import rihanna.appsmatic.com.rihanna.Adabtors.OfflineOrderItemsAdb;
+import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
+import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderModel;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
@@ -127,6 +130,11 @@ public class OrderScreen extends AppCompatActivity {
                 Home.offOrderModel.setOffOrderItems(Home.orderItems);
 
 
+               // Home.fireDoneDialog(OrderScreen.this,Home.offOrderModel.getExpertName(),orderNow);
+              //  FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
+
+
+
 
                 Gson gson =new Gson();
                 Log.e("order : ", gson.toJson(convertToPostOrder(getApplicationContext(), Home.offOrderModel)).toString());
@@ -165,8 +173,8 @@ public class OrderScreen extends AppCompatActivity {
             orderItem.setServiceTimeFrom(offOrderModel.getOffOrderItems().get(i).getFromTime());
             orderItem.setServiceTimeTo(offOrderModel.getOffOrderItems().get(i).getToTime());
             orderItems.add(orderItem);
-        }
 
+        }
 
         order.setBillingAddress(billingAddress);
         order.setCustomerId(Integer.parseInt(SaveSharedPreference.getCustomerId(context)));

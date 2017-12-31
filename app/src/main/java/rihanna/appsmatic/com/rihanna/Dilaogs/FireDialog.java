@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Dilaogs;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -271,6 +272,7 @@ public class FireDialog {
                         if (response.isSuccessful()) {
                             if (response.body().getRatings() != null) {
                                 dialogBuildercard.dismiss();
+                                ((Activity)context).finish();
                             } else {
                                 Toast.makeText(context, "Null from rating API ", Toast.LENGTH_SHORT).show();
                             }

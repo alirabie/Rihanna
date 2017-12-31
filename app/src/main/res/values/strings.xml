@@ -160,6 +160,8 @@
     <string name="serviceselected">Service has been Picked</string>
     <string name="minimumorderprice">Minimum total price to confirm order 300 SR</string>
     <string name="picfirst">Pick Services First</string>
+    <string name="nooffers">No Offers</string>
+    <string name="confirm">Confirm Your Order</string>
 
 
     <!-- Facebook Key -->

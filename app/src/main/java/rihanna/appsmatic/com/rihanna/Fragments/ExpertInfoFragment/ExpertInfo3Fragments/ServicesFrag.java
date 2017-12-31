@@ -13,11 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
+import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.Service;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Adabtors.ExpertServicesAdb;
@@ -68,10 +71,24 @@ public class ServicesFrag extends Fragment {
                         if (response.body().getServices().isEmpty()) {
                             emptyFlag.setVisibility(View.VISIBLE);
                         } else {
-                            emptyFlag.setVisibility(View.INVISIBLE);
-                            servicesList = (RecyclerView) view.findViewById(R.id.sevecices_frag_list);
-                            servicesList.setAdapter(new ExpertServicesAdb(getContext(), response.body(), ServicesFrag.this));
-                            servicesList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            //Collect none discounted services
+                            List<Service>services=new ArrayList<Service>();
+                            for(int i=0;i<response.body().getServices().size();i++){
+                                if(response.body().getServices().get(i).getDiscountAmount()==0.0||response.body().getServices().get(i).getDiscountPercentage()==0.0){
+                                    services.add(response.body().getServices().get(i));
+                                }
+                            }
+
+                            if(services.isEmpty()){
+                                emptyFlag.setVisibility(View.VISIBLE);
+                            }else {
+                                emptyFlag.setVisibility(View.INVISIBLE);
+                                servicesList = (RecyclerView) view.findViewById(R.id.sevecices_frag_list);
+                                servicesList.setAdapter(new ExpertServicesAdb(getContext(),services, ServicesFrag.this));
+                                servicesList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            }
+
+
                         }
                     } else {
                         Toast.makeText(getContext(), "Null From get Expert Services", Toast.LENGTH_SHORT).show();

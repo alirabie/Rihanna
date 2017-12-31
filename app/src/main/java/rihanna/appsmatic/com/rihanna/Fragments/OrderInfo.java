@@ -39,8 +39,8 @@ public class OrderInfo extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bookBtn=(TextView)view.findViewById(R.id.shopping_cart_orderinfo_booknow_btn);
-        header=(ImageView)view.findViewById(R.id.shopping_cart_orderinfo_heder_txt);
+        //bookBtn=(TextView)view.findViewById(R.id.shopping_cart_orderinfo_booknow_btn);
+        //header=(ImageView)view.findViewById(R.id.shopping_cart_orderinfo_heder_txt);
 
 
         bookBtn.setOnClickListener(new View.OnClickListener() {

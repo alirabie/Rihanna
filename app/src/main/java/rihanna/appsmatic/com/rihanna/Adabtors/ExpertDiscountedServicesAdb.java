@@ -12,23 +12,21 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.Service;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
-import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.R;
 
 /**
  * Created by Eng Ali on 12/11/2017.
  */
-public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh002> {
+public class ExpertDiscountedServicesAdb extends RecyclerView.Adapter<ExpertDiscountedServicesAdb.Vh002> {
 
     private Context context;
     private List<Service> expertServices;
     private Fragment fragment;
 
 
-    public ExpertServicesAdb(Context context, List<Service> expertServices, Fragment fragment) {
+    public ExpertDiscountedServicesAdb(Context context, List<Service> expertServices, Fragment fragment) {
         this.context = context;
         this.expertServices = expertServices;
         this.fragment = fragment;
@@ -36,7 +34,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
 
     @Override
     public Vh002 onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Vh002(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_expert_service,parent,false));
+        return new Vh002(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_expert_discounted_service,parent,false));
     }
 
     @Override
@@ -45,6 +43,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
         animate(holder);
             holder.serviceName.setText(expertServices.get(position).getServiceName() + "");
             holder.price.setText(expertServices.get(position).getPrice() + "");
+            holder.discount.setText(expertServices.get(position).getPrice()-expertServices.get(position).getDiscountAmount()+"");
             holder.unSubscribeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -53,7 +52,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                     holder.unSubscribeBtn.setAnimation(anim);
                     FireDialog.pickService(context, holder.unSubscribeBtn, expertServices.get(position).getExpertId() + "", expertServices.get(position).getServiceId() + "",
                             expertServices.get(position).getServiceName(),
-                            expertServices.get(position).getPrice());
+                            expertServices.get(position).getPrice()-expertServices.get(position).getDiscountAmount());
                 }
 
             });
@@ -72,12 +71,13 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
     }
     public static class Vh002 extends RecyclerView.ViewHolder{
 
-        TextView serviceName,price,unSubscribeBtn;
+        TextView serviceName,price,discount,unSubscribeBtn;
 
         public Vh002(View itemView) {
             super(itemView);
             serviceName=(TextView)itemView.findViewById(R.id.item_layout_service_name);
             price=(TextView)itemView.findViewById(R.id.item_layout_service_price);
+            discount=(TextView)itemView.findViewById(R.id.discounted_price);
             unSubscribeBtn=(TextView)itemView.findViewById(R.id.item_layout_service_subscribe_btn);
         }
     }
