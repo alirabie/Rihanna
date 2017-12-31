@@ -130,8 +130,7 @@ public class OrderScreen extends AppCompatActivity {
                 Home.offOrderModel.setOffOrderItems(Home.orderItems);
 
 
-               // Home.fireDoneDialog(OrderScreen.this,Home.offOrderModel.getExpertName(),orderNow);
-              //  FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
+                FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
 
 
 

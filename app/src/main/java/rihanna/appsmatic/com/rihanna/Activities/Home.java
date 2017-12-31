@@ -822,64 +822,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
-    //Done Dialog method
-    public static void fireDoneDialog(Context context,String exName,View button){
-        //Initialize Done Dialog
-        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
-        dialogBuildercard
-                .withDuration(700)//def
-                .withDialogColor(Color.WHITE)
-                .withEffect(Effectstype.Newspager)
-                .withTitleColor(context.getResources().getColor(R.color.colorPrimary))
-                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
-                .setCustomView(R.layout.thanks_dialog_layout, button.getContext())
-                .withButton1Text(context.getResources().getString(R.string.dissmis))
-                .withDialogColor(R.color.colorPrimary)
-                .withTitle(context.getResources().getString(R.string.app_name))
-                .setButton1Click(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogBuildercard.dismiss();
-                    }
-                })
-                .show();
-
-        //Setup Items
-        ImageView thanksMsg=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_smilemessage);
-        ImageView advBanner=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_addv_img);
-        TextView expertNameTv=(TextView)dialogBuildercard.findViewById(R.id.thanks_dialog_expert_name_tv);
-
-        //check language
-        if(SaveSharedPreference.getLangId(context).equals("ar")){
-            thanksMsg.setImageResource(R.drawable.thanks);
-        }else{
-            thanksMsg.setImageResource(R.drawable.thanks_en);
-        }
-
-
-        expertNameTv.setText(" " + exName);
-        dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                return keyCode == KeyEvent.KEYCODE_BACK;
-            }
-
-
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
 
 
     //Check Google Service

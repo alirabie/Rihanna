@@ -53,6 +53,7 @@ import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Adabtors.CertificatesAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 import rihanna.appsmatic.com.rihanna.SQLiteDB.DB;
 import rihanna.appsmatic.com.rihanna.SQLiteDB.DB_Models.ExpertTime;
@@ -231,6 +232,8 @@ public class FireDialog {
         final TextView send;
         final EditText comment;
         final RatingBar ratingBar;
+        final ImageView thanksMsg;
+        final TextView expertNameTv;
 
 
         //Initialize Done Dialog
@@ -248,7 +251,23 @@ public class FireDialog {
         send=(TextView)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_send_btn);
         comment=(EditText)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_comment_input);
         ratingBar=(RatingBar)dialogBuildercard.findViewById(R.id.expert_details_ratingfrag_rateoursevices);
+        thanksMsg=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_smilemessage);
+        expertNameTv=(TextView)dialogBuildercard.findViewById(R.id.thanks_dialog_expert_name_tv);
         ratingBar.setRating(0);
+
+
+
+
+        //check language
+        if(SaveSharedPreference.getLangId(context).equals("ar")){
+            thanksMsg.setImageResource(R.drawable.thanks);
+        }else{
+            thanksMsg.setImageResource(R.drawable.thanks_en);
+        }
+
+
+        expertNameTv.setText(" " + name);
+
 
         ratingBar.setMax(5);
         send.setOnClickListener(new View.OnClickListener() {

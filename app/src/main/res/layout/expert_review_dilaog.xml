@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout16"
         android:background="#e9e9e9"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/thanks_dialog_expert_name_tv"
         android:layout_alignParentEnd="true">
         <LinearLayout
             android:orientation="vertical"
@@ -76,7 +76,33 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:textSize="15dp" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/thanks_dialog_smilemessage"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/thanks"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:background="#eaead2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="خبيرة التجميل جويل"
+        android:id="@+id/thanks_dialog_expert_name_tv"
+        android:layout_below="@+id/thanks_dialog_smilemessage"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:background="#eaead2" />
 
 </RelativeLayout>
