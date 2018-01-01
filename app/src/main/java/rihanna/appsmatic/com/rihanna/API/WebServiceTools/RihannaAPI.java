@@ -22,6 +22,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.OutdoorLocations.ResAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Response.Order;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Response.ResOrderCreation;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.Models.verifications.VerificationCode;
@@ -117,6 +118,8 @@ public interface RihannaAPI {
     Call<ResOrderCreation>createOrder(@Body Object obj);
 
 
-
+    //Get Customer Orders By Id
+    @GET("api/orders?")
+    Call<ResOrderCreation>getCustomerOrdersById(@Query("customerid")String expId);
 
 }

@@ -162,7 +162,15 @@
     <string name="picfirst">Pick Services First</string>
     <string name="nooffers">No Offers</string>
     <string name="confirm">Confirm Your Order</string>
-
+    <string name="paymentstatus">Payment Status</string>
+    <string name="orderstatus">Request Status</string>
+    <string name="ordernum">Order Num #</string>
+    <string name="norequists">No Requested Orders</string>
+    <string name="noaccipted">No Accepted Orders</string>
+    <string name="customerinfo">Customer Info</string>
+    <string name="pay">Pay</string>
+    <string name="orderaccepted">Paid Order</string>
+    <string name="orderdetails">Order Details</string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>

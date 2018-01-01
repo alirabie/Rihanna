@@ -166,4 +166,13 @@
     <string name="picfirst">أختر الخدمات اولا</string>
     <string name="nooffers">لا توجد عروض</string>
     <string name="confirm">أكد طلبك</string>
+    <string name="orderstatus">حالة الطلب</string>
+    <string name="paymentstatus">حالة الدفع</string>
+    <string name="ordernum">رقم الطلب #</string>
+    <string name="noaccipted">لا توجد طلبات مقبوله</string>
+    <string name="norequists">لا توجد طلبات مقدمة</string>
+    <string name="customerinfo">بيانات العميلة</string>
+    <string name="pay">أدفع</string>
+    <string name="orderaccepted">طلب مدفوع</string>
+    <string name="orderdetails">تفاصيل الطلب</string>
 </resources>

@@ -62,16 +62,16 @@ public class Order {
     private String taxRates;
     @SerializedName("order_tax")
     @Expose
-    private Integer orderTax;
+    private Double orderTax;
     @SerializedName("order_discount")
     @Expose
-    private Integer orderDiscount;
+    private Double orderDiscount;
     @SerializedName("order_total")
     @Expose
-    private Integer orderTotal;
+    private Double orderTotal;
     @SerializedName("refunded_amount")
     @Expose
-    private Integer refundedAmount;
+    private Double refundedAmount;
     @SerializedName("checkout_attribute_description")
     @Expose
     private String checkoutAttributeDescription;
@@ -290,35 +290,35 @@ public class Order {
         this.taxRates = taxRates;
     }
 
-    public Integer getOrderTax() {
+    public Double getOrderTax() {
         return orderTax;
     }
 
-    public void setOrderTax(Integer orderTax) {
+    public void setOrderTax(Double orderTax) {
         this.orderTax = orderTax;
     }
 
-    public Integer getOrderDiscount() {
+    public Double getOrderDiscount() {
         return orderDiscount;
     }
 
-    public void setOrderDiscount(Integer orderDiscount) {
+    public void setOrderDiscount(Double orderDiscount) {
         this.orderDiscount = orderDiscount;
     }
 
-    public Integer getOrderTotal() {
+    public Double getOrderTotal() {
         return orderTotal;
     }
 
-    public void setOrderTotal(Integer orderTotal) {
+    public void setOrderTotal(Double orderTotal) {
         this.orderTotal = orderTotal;
     }
 
-    public Integer getRefundedAmount() {
+    public Double getRefundedAmount() {
         return refundedAmount;
     }
 
-    public void setRefundedAmount(Integer refundedAmount) {
+    public void setRefundedAmount(Double refundedAmount) {
         this.refundedAmount = refundedAmount;
     }
 
