@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -20,17 +21,25 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.Image;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.BillingAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.OrderItem;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.PostOrder;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Response.ResOrderCreation;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Adabtors.OfflineOrderItemsAdb;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
@@ -129,14 +138,47 @@ public class OrderScreen extends AppCompatActivity {
                 orderNow.setAnimation(anim);
                 Home.offOrderModel.setOffOrderItems(Home.orderItems);
 
-
-                FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
-
-
-
-
                 Gson gson =new Gson();
                 Log.e("order : ", gson.toJson(convertToPostOrder(getApplicationContext(), Home.offOrderModel)).toString());
+                //Loading Dialog
+                final ProgressDialog mProgressDialog = new ProgressDialog(OrderScreen.this);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setMessage(getResources().getString(R.string.pleasewait));
+                mProgressDialog.show();
+                Generator.createService(RihannaAPI.class).createOrder(convertToPostOrder(getApplicationContext(), Home.offOrderModel)).enqueue(new Callback<ResOrderCreation>() {
+                    @Override
+                    public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
+                        if (response.isSuccessful()) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            if (response.body().getOrders() != null) {
+                                FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
+                                //reset offline order data
+                                Home.offOrderModel.reset();
+                                Home.customerCount=1;
+                                Home.orderItems.clear();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Null from order creation API ", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            try {
+                                Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResOrderCreation> call, Throwable t) {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Connection error from order creation API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

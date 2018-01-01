@@ -253,27 +253,6 @@
                     android:padding="5dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginLeft="3dp">
-                    <com.weiwangcn.betterspinner.library.BetterSpinner
-                        android:id="@+id/signup_districts_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="5dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown"
-                        android:textSize="11dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/dropdwonlistbg"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp">
                     <com.weiwangcn.betterspinner.library.BetterSpinner
@@ -285,6 +264,27 @@
                         android:spinnerMode="dropdown"
                         android:textSize="11dp"
                         android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/dropdwonlistbg"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp">
+                    <com.weiwangcn.betterspinner.library.BetterSpinner
+                        android:id="@+id/signup_districts_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown"
+                        android:textSize="11dp"/>
                 </LinearLayout>
 
             </LinearLayout>
