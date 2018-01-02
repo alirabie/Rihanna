@@ -13,6 +13,9 @@ public class Rating {
     @SerializedName("customer_id")
     @Expose
     private Integer customerId;
+    @SerializedName("customer_name")
+    @Expose
+    private String customerName;
     @SerializedName("expert_id")
     @Expose
     private Integer expertId;
@@ -140,4 +143,11 @@ public class Rating {
         this.createdOnUtc = createdOnUtc;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 }

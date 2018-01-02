@@ -34,7 +34,7 @@ public class CommentsAdb extends RecyclerView.Adapter<CommentsAdb.CommentsVh> {
     @Override
     public void onBindViewHolder(CommentsVh holder, int position) {
         animate(holder);
-        holder.name.setText("Customer");
+        holder.name.setText(getReviews.getRatings().get(position).getCustomerName());
         holder.comment.setText(getReviews.getRatings().get(position).getReviewText());
         holder.ratingBar.setRating(getReviews.getRatings().get(position).getRating());
 
