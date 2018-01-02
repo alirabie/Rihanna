@@ -67,9 +67,16 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
         holder.address.setText(expertsResponse.getVendors().get(position).getAddress() + "");
 
         if(SaveSharedPreference.getImgLoadingSatatus(context)) {
-            Picasso.with(context).load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg")
-                    .placeholder(R.drawable.loadinggif).fit()
-                    .into(holder.expertImg);
+
+            if(expertsResponse.getVendors().get(position).getProfileImage()!=null) {
+                Picasso.with(context).load(expertsResponse.getVendors().get(position).getProfileImage())
+                        .placeholder(R.drawable.loadinggif).fit()
+                        .into(holder.expertImg);
+            }else {
+                Picasso.with(context).load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg")
+                        .placeholder(R.drawable.loadinggif).fit()
+                        .into(holder.expertImg);
+            }
         }
 
         //set Expert Class

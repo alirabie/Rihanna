@@ -31,6 +31,9 @@ public class Vendor {
     @SerializedName("customer_role_name")
     @Expose
     private String customerRoleName;
+    @SerializedName("profile_image")
+    @Expose
+    private String profileImage;
 
 
 
@@ -96,5 +99,13 @@ public class Vendor {
 
     public void setCustomerRoleName(String customerRoleName) {
         this.customerRoleName = customerRoleName;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }
