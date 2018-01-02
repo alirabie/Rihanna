@@ -82,9 +82,10 @@ public class AboutApp extends Fragment {
 
 
                 txt1=(TextView)expandableLayout1.findViewById(R.id.text1);
-                txt1.setText("sjdddddddddddddddddxcxcccccccccc.kfmvvfd+dflv" +
-                        "dnvldnv" +
-                        "m;dvm;ldl;m;lmddddddddddd111111111111111");
+                txt1.setText("تتألف شروط الاستخدام هذه من الشروط والأحكام الواردة أدناه بالإضافة إلى الشروط الموضحة في سياسة الخصوصية (وفقًا للتعديلات التي يتم إجراؤها من حين لآخر)" +
+                        "\n"+"تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده"+
+                        "\n"+"التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا"+
+                        "\n"+"التعامل بمهنية مع العميلات وحفظ خصوصياتهم ");
                 expandableLayout1.toggle(); // toggle expand and collapse
             }
         });
@@ -95,7 +96,7 @@ public class AboutApp extends Fragment {
 
 
                 txt2=(TextView)expandableLayout2.findViewById(R.id.text2);
-                txt2.setText("eirhiehvehvehvoehoiiehvoehroherovhoe2222222222");
+                txt2.setText("");
                 expandableLayout2.toggle(); // toggle expand and collapse
 
             }

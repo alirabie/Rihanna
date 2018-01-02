@@ -73,7 +73,7 @@ public interface RihannaAPI {
     Call<ResExpertServices> getExpertServices(@Query("ExpertId") String id);
 
     //Get All Experts
-    @GET("api/experts")
+    @GET("api/experts?limit=200")
     Call<ExpertsResponse> getAllExperts();
 
     //Get Experts by service category or email or state or all

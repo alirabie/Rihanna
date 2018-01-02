@@ -99,8 +99,9 @@ public class ListOfOrders extends Fragment {
 
                         //fill accepted orders
                         if(acceptedOrders.isEmpty()){
-                            noacceptedFlag.setVisibility(View.INVISIBLE);
+                            noacceptedFlag.setVisibility(View.VISIBLE);
                         }else {
+                            noacceptedFlag.setVisibility(View.INVISIBLE);
                             RecyclerView acceptedOrdersList=(RecyclerView)view.findViewById(R.id.acepted_requsted_list);
                             acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),acceptedOrders));
                             acceptedOrdersList.setLayoutManager(new LinearLayoutManager(getContext()));

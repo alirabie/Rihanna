@@ -26,27 +26,12 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/shopping_cart_orderinfo_heder_txt"
-        android:src="@drawable/mincharge"
-        android:padding="10dp"
-        android:layout_below="@+id/view"
-        android:layout_alignParentStart="true"
-        android:text="@string/minimumorderprice"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:textSize="20dp" />
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/shopping_cart_orderinfo_list"
-        android:layout_below="@+id/shopping_cart_orderinfo_heder_txt"
-        android:layout_above="@+id/linearLayout35">
+        android:layout_above="@+id/linearLayout35"
+        android:layout_below="@+id/view">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -55,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout35"
-        android:layout_above="@+id/linearLayout20"
+        android:layout_above="@+id/linearLayout22"
         android:layout_alignParentStart="true">
 
         <LinearLayout
@@ -73,26 +58,23 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/linearLayout17"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:id="@+id/linearLayout19"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:id="@+id/linearLayout20"
+            android:layout_above="@+id/linearLayout22"
+            android:layout_alignParentEnd="true">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView14"
+                android:text="@string/totalprice"
+                android:id="@+id/textView26"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="18dp"
                 android:textColor="#000000"
-                android:textStyle="bold"
-                android:text="@string/cstomernumber" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -100,33 +82,29 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/upcountcustomerts"
-                    android:src="@android:drawable/arrow_up_float" />
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="2"
-                    android:id="@+id/shopping_cart_orderinfo_client_number"
+                    android:text="100"
+                    android:id="@+id/shopping_cart_orderinfo_totalprice"
                     android:gravity="center"
+                    android:layout_weight="1"
                     android:textSize="18dp"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:textColor="@color/colorPrimary" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/dwoncountcustomerts"
-                    android:src="@android:drawable/arrow_down_float" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/sr"
+                    android:id="@+id/textView30"
+                    android:textColor="#000000"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="18dp" />
 
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -139,58 +117,6 @@
             android:id="@+id/linearLayout18"
             android:layout_below="@+id/linearLayout19"
             android:layout_centerHorizontal="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/linearLayout20"
-        android:layout_above="@+id/linearLayout22"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/totalprice"
-            android:id="@+id/textView26"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="100"
-                android:id="@+id/shopping_cart_orderinfo_totalprice"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textSize="18dp"
-                android:textColor="@color/colorPrimary" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/sr"
-                android:id="@+id/textView30"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="18dp" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -219,7 +145,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="xxx"
             android:id="@+id/shopping_cart_orderinfo_discaddservice"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
@@ -293,7 +218,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/textView36"
-            android:textSize="20dp"
+            android:textSize="19dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:textColor="#000000"
@@ -344,12 +269,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/shopping_cart_orderinfo_payinbutesenter_check"
-                android:checked="false"
+                android:checked="true"
                 android:padding="10dp"
                 android:button="@drawable/checkbox_selector"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="6dp"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:enabled="true" />
 
         </LinearLayout>
 
@@ -392,7 +318,8 @@
                 android:button="@drawable/checkbox_selector"
                 android:layout_marginRight="6dp"
                 android:layout_marginLeft="6dp"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:enabled="true" />
         </LinearLayout>
 
     </LinearLayout>

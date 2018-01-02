@@ -77,7 +77,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:textSize="15dp" />
+            android:textSize="12dp" />
     </LinearLayout>
 
     <ImageView

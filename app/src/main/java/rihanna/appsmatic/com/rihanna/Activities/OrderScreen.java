@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,8 @@ public class OrderScreen extends AppCompatActivity {
     private TextView serviceTypeTv,expertName,orderNow;
     public static TextView totlPrice,count;
 
+    CheckBox paynoline,cod;
+
 
     private ImageView up,down;
 
@@ -71,14 +74,24 @@ public class OrderScreen extends AppCompatActivity {
         }
 
         totlPrice=(TextView)findViewById(R.id.shopping_cart_orderinfo_totalprice);
-        up=(ImageView)findViewById(R.id.upcountcustomerts);
-        down=(ImageView)findViewById(R.id.dwoncountcustomerts);
-        count=(TextView)findViewById(R.id.shopping_cart_orderinfo_client_number);
+      //  up=(ImageView)findViewById(R.id.upcountcustomerts);
+       // down=(ImageView)findViewById(R.id.dwoncountcustomerts);
+      //  count=(TextView)findViewById(R.id.shopping_cart_orderinfo_client_number);
         serviceTypeTv=(TextView)findViewById(R.id.service_type_tv);
         expertName=(TextView)findViewById(R.id.expert_name_tv);
         orderNow=(TextView)findViewById(R.id.shopping_cart_orderinfo_booknow_btn);
+        cod=(CheckBox)findViewById(R.id.shopping_cart_orderinfo_payinbutesenter_check);
+        paynoline=(CheckBox)findViewById(R.id.shopping_cart_orderinfo_payonline_check);
 
-        count.setText(Home.customerCount+"");
+
+        paynoline.setEnabled(false);
+
+
+
+
+
+
+      //  count.setText(Home.customerCount+"");
 
 
         expertName.setText(Home.offOrderModel.getExpertName());
@@ -100,6 +113,7 @@ public class OrderScreen extends AppCompatActivity {
         orderItemsList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         totlPrice.setText(offlineOrderItemsAdb.getSum() * Home.customerCount + "");
 
+        /*
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +142,7 @@ public class OrderScreen extends AppCompatActivity {
         });
 
 
-
+*/
 
         orderNow.setOnClickListener(new View.OnClickListener() {
             @Override

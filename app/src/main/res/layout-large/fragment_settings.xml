@@ -120,57 +120,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:padding="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/linearLayout7"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/notificationstoggle"
-                android:id="@+id/rr"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_weight="2"
-                android:padding="5dp">
-
-
-                <ToggleButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/notification_on_off"
-                    android:button="@drawable/custom_check_box"
-                    android:checked="false"
-                    android:padding="10dp"
-                    android:textOff="@null"
-                    android:textOn="@null"
-                    android:textSize="0dp"
-                    android:background="#00ffffff"
-                    android:gravity="center"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:layout_gravity="center"
-                    style="?android:attr/borderlessButtonStyle" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

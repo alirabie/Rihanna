@@ -46,7 +46,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
     @Override
     public void onBindViewHolder(final Vholder holder, final int position) {
 
-        animate(holder);
+      //  animate(holder);
         holder.indoorImge.setVisibility(View.INVISIBLE);
         holder.certificateImge.setVisibility(View.INVISIBLE);
 
