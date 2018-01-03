@@ -175,4 +175,5 @@
     <string name="pay">Pay</string>
     <string name="orderaccepted">Paid Order</string>
     <string name="orderdetails">Order Details</string>
+    <string name="noarieas">No Cities / Districts are Registered By this Expert</string>
 </resources>

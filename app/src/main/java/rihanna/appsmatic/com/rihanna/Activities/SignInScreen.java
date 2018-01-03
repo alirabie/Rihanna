@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +87,7 @@ public class SignInScreen extends AppCompatActivity  {
     private GoogleApiClient mGoogleApiClient;
     private AccessTokenTracker accessTokenTracker;
     private ImageView fblogin,twitterlogin,gmailLogin;
+    private LinearLayout socialmedisButtons,socialtitle;
 
 
 
@@ -155,6 +157,13 @@ public class SignInScreen extends AppCompatActivity  {
         fblogin=(ImageView)findViewById(R.id.fbloginbutton);
         twitterlogin=(ImageView)findViewById(R.id.twitterloginbutton);
         gmailLogin=(ImageView)findViewById(R.id.gmailloginbutton);
+
+        //hide social media login
+        socialmedisButtons=(LinearLayout)findViewById(R.id.linearLayout);
+        socialtitle=(LinearLayout)findViewById(R.id.linearLayout2);
+        socialmedisButtons.setVisibility(View.INVISIBLE);
+        socialtitle.setVisibility(View.INVISIBLE);
+
 
 
         //Check Os Ver

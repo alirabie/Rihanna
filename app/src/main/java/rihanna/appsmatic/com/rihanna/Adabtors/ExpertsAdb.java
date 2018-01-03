@@ -46,7 +46,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
     @Override
     public void onBindViewHolder(final Vholder holder, final int position) {
 
-      //  animate(holder);
+       // animate(holder);
         holder.indoorImge.setVisibility(View.INVISIBLE);
         holder.certificateImge.setVisibility(View.INVISIBLE);
 
@@ -142,7 +142,7 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
     }
 
     public void animate(RecyclerView.ViewHolder viewHolder) {
-        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.bounce_interpolator);
         viewHolder.itemView.setAnimation(animAnticipateOvershoot);
     }
 

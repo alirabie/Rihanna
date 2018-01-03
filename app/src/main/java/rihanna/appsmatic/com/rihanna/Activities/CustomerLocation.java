@@ -111,31 +111,35 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
 
                     if(response.body()!=null){
 
-                        for(int i=0;i<response.body().size();i++){
-                           statesIds.add(response.body().get(i).getStateId()+"");
-                            statesNames.add(response.body().get(i).getState());
-                           districtsIds.add(response.body().get(i).getDistrictId()+"");
-                            districtsNames.add(response.body().get(i).getDistrict());
-                           locations.add(response.body().get(i).getState() + " / " + response.body().get(i).getDistrict());
-                        }
-
-
-                        avalibalelocations.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.drop_down_list_custome,locations));
-                        avalibalelocations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                stateId=statesIds.get(position);
-                                districtId=districtsIds.get(position);
-                                stateName=statesNames.get(position);
-                                districtNam=districtsNames.get(position);
-
-                                Toast.makeText(getApplicationContext(),stateId+" "+districtId,Toast.LENGTH_SHORT).show();
-
+                        if(!response.body().isEmpty()) {
+                            for (int i = 0; i < response.body().size(); i++) {
+                                statesIds.add(response.body().get(i).getStateId() + "");
+                                statesNames.add(response.body().get(i).getState());
+                                districtsIds.add(response.body().get(i).getDistrictId() + "");
+                                districtsNames.add(response.body().get(i).getDistrict());
+                                locations.add(response.body().get(i).getState() + " / " + response.body().get(i).getDistrict());
                             }
-                        });
 
 
+                            avalibalelocations.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.drop_down_list_custome, locations));
+                            avalibalelocations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                    stateId = statesIds.get(position);
+                                    districtId = districtsIds.get(position);
+                                    stateName = statesNames.get(position);
+                                    districtNam = districtsNames.get(position);
+
+                                    Toast.makeText(getApplicationContext(), stateId + " " + districtId, Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+                        }else {
+                            avalibalelocations.setHint(getResources().getString(R.string.noarieas));
+
+                        }
 
 
                     }else {

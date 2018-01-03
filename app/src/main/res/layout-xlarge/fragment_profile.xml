@@ -24,12 +24,6 @@
             android:layout_gravity="center"
             android:id="@+id/profile_pic" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addphoto_btn"
-            android:layout_gravity="center_horizontal|bottom"
-            android:src="@drawable/addprofilephoto" />
     </FrameLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -317,7 +311,8 @@
                 android:textStyle="bold"
                 android:textSize="35dp"
                 android:typeface="serif"
-                android:id="@+id/save_profile_btn">
+                android:id="@+id/save_profile_btn"
+                android:layout_marginBottom="15dp">
 
             </TextView>
 

@@ -175,4 +175,5 @@
     <string name="pay">أدفع</string>
     <string name="orderaccepted">طلب مدفوع</string>
     <string name="orderdetails">تفاصيل الطلب</string>
+    <string name="noarieas">لا توجد مدن / مناطق مسجلة من قبل هذه الخبيرة</string>
 </resources>

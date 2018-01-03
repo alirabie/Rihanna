@@ -295,7 +295,7 @@ public class ExpertInfo extends Fragment {
                     } else {
 
                         Home.offOrderModel.setServiceType("out");
-                        startActivity(new Intent(getContext(), CustomerLocation.class));
+                        startActivity(new Intent(getContext(), CustomerLocation.class).putExtra("expId", expertId));
                     }
 
                 }else {

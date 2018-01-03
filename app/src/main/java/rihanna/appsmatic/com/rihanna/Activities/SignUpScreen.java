@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class SignUpScreen extends AppCompatActivity {
     private static final String SAUDI_ID="69";
     private static final String KUWAIT_ID="69";
     private static String countryKey,stateKey,districtkey,statusid,countryid;
+    private LinearLayout socialmedisButtons,socialtitle;
 
 
 
@@ -92,6 +94,11 @@ public class SignUpScreen extends AppCompatActivity {
         address1=(EditText)findViewById(R.id.address_input_reg);
 
 
+        //hide social media login
+        socialmedisButtons=(LinearLayout)findViewById(R.id.sm);
+        socialtitle=(LinearLayout)findViewById(R.id.linearLayout2);
+        socialmedisButtons.setVisibility(View.INVISIBLE);
+        socialtitle.setVisibility(View.INVISIBLE);
 
 
         filterStates =(BetterSpinner)findViewById(R.id.signup_states_spinner2);
