@@ -106,8 +106,8 @@ public interface RihannaAPI {
 
 
     //Get Expert Schedules
-    @GET("api/vendors/schedule/{id}")
-    Call<SchdulesResponse>getExpertSchadules(@Path("id")String id);
+    @GET("api/vendors/schedule?&IsClientApp=true")
+    Call<SchdulesResponse>getExpertSchadules(@Query("VendorId")String id);
 
     //Get outdoor address
     @GET("api/expert/addresses?")

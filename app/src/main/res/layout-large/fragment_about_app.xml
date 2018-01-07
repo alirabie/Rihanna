@@ -299,7 +299,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="01234567890"
+                            android:text="@string/phonenum"
                             android:id="@+id/textView9"
                             android:textSize="15dp"
                             android:padding="2dp"
@@ -313,14 +313,6 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_marginTop="10dp" >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/fb_btn"
-                        android:src="@drawable/fb"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp" />
 
                     <ImageView
                         android:layout_width="wrap_content"

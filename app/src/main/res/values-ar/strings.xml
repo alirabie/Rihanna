@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="userhintinputlogin">الاسم الاول</string>
     <string name="emailhintinputlogin">البريد الإلكترونى</string>
-    <string name="phonehintinputlogin">رقم الجوال</string>
+    <string name="phonehintinputlogin">(e.g : 966555526710)</string>
     <string name="passwordhintinputlogin">كلمة المرور</string>
     <string name="repasswordhintinputlogin">تأكيد كلمة المرور</string>
     <string name="resumeregisterregister">إكمال التسجيل</string>
@@ -176,4 +176,5 @@
     <string name="orderaccepted">طلب مدفوع</string>
     <string name="orderdetails">تفاصيل الطلب</string>
     <string name="noarieas">لا توجد مدن / مناطق مسجلة من قبل هذه الخبيرة</string>
+    <string name="phonenum">+966565161868</string>
 </resources>

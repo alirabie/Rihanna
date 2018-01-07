@@ -53,7 +53,6 @@ public class AboutApp extends Fragment {
         //Social media buttons
         twBtn=(ImageView)view.findViewById(R.id.tw_btn);
         instaBtn=(ImageView)view.findViewById(R.id.insta_btn);
-        fbBtn=(ImageView)view.findViewById(R.id.fb_btn);
         gmBtn=(ImageView)view.findViewById(R.id.gm_btn);
 
 
@@ -151,30 +150,6 @@ public class AboutApp extends Fragment {
             }
         });
 
-
-
-
-        fbBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                fbBtn.clearAnimation();
-                fbBtn.setAnimation(anim);
-                String facebookUrl = "https://www.facebook.com/<id_here>";
-                try {
-                    int versionCode =getContext().getPackageManager().getPackageInfo("com.facebook.katana", 0).versionCode;
-                    if (versionCode >= 3002850) {
-                        Uri uri = Uri.parse("fb://facewebmodal/f?href=" + facebookUrl);
-                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    } else {
-                        Uri uri = Uri.parse("fb://page/<id_here>");
-                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    }
-                } catch (PackageManager.NameNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)));
-                }
-            }
-        });
 
 
         instaBtn.setOnClickListener(new View.OnClickListener() {

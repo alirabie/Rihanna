@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="userhintinputlogin">First Name</string>
     <string name="emailhintinputlogin">Email</string>
-    <string name="phonehintinputlogin">Phone Number</string>
+    <string name="phonehintinputlogin">Phone Number (e.g : 966555526710)</string>
     <string name="passwordhintinputlogin">Password</string>
     <string name="repasswordhintinputlogin">Re-Password</string>
     <string name="resumeregisterregister">Resume Registration</string>
@@ -172,6 +172,7 @@
     <string name="orderaccepted">Paid Order</string>
     <string name="orderdetails">Order Details</string>
     <string name="noarieas">No Cities / Districts are Registered By this Expert</string>
+    <string name="phonenum">+966565161868</string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>
