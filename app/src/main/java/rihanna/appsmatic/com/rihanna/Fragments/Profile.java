@@ -23,6 +23,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.gson.Gson;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -236,9 +237,7 @@ public class Profile extends Fragment {
             public void onClick(View v) {
                 Pattern p = Pattern.compile("^(.+)@(.+)$");
                 Matcher m = p.matcher(emailInput.getText().toString());
-                Pattern pPhone = Pattern.compile("(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|\n" +
-                        "2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|\n" +
-                        "4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$");
+                Pattern pPhone = Pattern.compile("^(009665|9665|\\+9665|05|5)([0-9]{8})$");
                 Matcher mPhone = pPhone.matcher(phoneInput.getText().toString());
 
                 //Inputs validations
@@ -303,7 +302,7 @@ public class Profile extends Fragment {
                     billingAddress.setLastName(lNameInput.getText().toString() + "");
                     billingAddress.setStateProvinceId(Integer.parseInt(statusid));
                     billingAddress.setCity(districtkey);
-                    billingAddress.setPhoneNumber(phoneInput.getText().toString() + "");
+                    billingAddress.setPhoneNumber("966" + phoneInput.getText().toString().substring(phoneInput.getText().toString().indexOf("5")) + "");
                     billingAddress.setAddress1(address1.getText() + "");
                     billingAddress.setZipPostalCode("00");
                     List<Integer> rollIds = new ArrayList<Integer>();
@@ -314,7 +313,7 @@ public class Profile extends Fragment {
                     customer.setPassword(passwordInput.getText().toString() + "");
                     customer.setFirstName(fNameInput.getText().toString() + "");
                     customer.setLastName(lNameInput.getText().toString() + "");
-                    customer.setPhone(phoneInput.getText().toString() + "");
+                    customer.setPhone("966"+phoneInput.getText().toString().substring(phoneInput.getText().toString().indexOf("5"))+"");
                     customer.setVerificationcode("0000");
                     customer.setBillingAddress(billingAddress);
 
@@ -366,7 +365,11 @@ public class Profile extends Fragment {
                                 if (mProgressDialog.isShowing())
                                     mProgressDialog.dismiss();
 
-                                Toast.makeText(getContext(), "Not success from update user", Toast.LENGTH_LONG).show();
+                                try {
+                                    Toast.makeText(getContext(),response.errorBody().string(), Toast.LENGTH_LONG).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
                             }
 

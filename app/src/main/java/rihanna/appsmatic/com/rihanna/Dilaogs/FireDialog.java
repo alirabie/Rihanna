@@ -43,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
+import rihanna.appsmatic.com.rihanna.API.Models.IsBusy.IsBusyRes;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.PostReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
@@ -332,7 +333,7 @@ public class FireDialog {
     }
 
 
-    public static void pickService (final Context context,View view,String expertId, final String serviceId, final String serviceName, final Double price){
+    public static void pickService (final Context context,View view, final String expertId, final String serviceId, final String serviceName, final Double price){
 
         MaterialCalendarView calendarView;
         final BetterSpinner avalibalTimesSp;
@@ -493,17 +494,76 @@ public class FireDialog {
 
 
 
-                            //place id and date and time to offline order
-                            OffOrderItem offOrderItem=new OffOrderItem();
-                            offOrderItem.setId(serviceId);
-                            offOrderItem.setName(serviceName);
-                            offOrderItem.setFromTime(fromKey);
-                            offOrderItem.setToTime(toKey);
-                            offOrderItem.setDate(dateKey);
-                            offOrderItem.setPrice(price);
-                            Home.orderItems.add(offOrderItem);
-                            Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
-                            dialogBuildercard.dismiss();
+                            SimpleDateFormat sourceTimeFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                            SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+                            Date timefrom = null;
+                            try {
+                                timefrom = sourceTimeFormat.parse(fromKey);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            Date timeto = null;
+                            try {
+                                timeto = sourceTimeFormat.parse(toKey);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            String timeFrom=targetTimeFormat.format(timefrom);
+                            String timeTo=targetTimeFormat.format(timeto);
+
+                            Log.e("ddd",dateKey+timeFrom+timeTo);
+
+
+                            //Check time
+                            Generator.createService(RihannaAPI.class).IsBuSYtime(expertId,dateKey,timeFrom,timeTo).enqueue(new Callback<IsBusyRes>() {
+                                @Override
+                                public void onResponse(Call<IsBusyRes> call, Response<IsBusyRes> response) {
+                                    if(response.isSuccessful()){
+                                        if(response.body().getStatus()!=null){
+                                            if(response.body().getStatus()){
+                                                final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(context);
+                                                dialogBuilder
+                                                        .withTitle(context.getString(R.string.app_name))
+                                                        .withDialogColor(R.color.colorPrimary)
+                                                        .withTitleColor("#FFFFFF")
+                                                        .withDuration(700)                                          //def
+                                                        .withEffect(Effectstype.RotateBottom)
+                                                        .withMessage(context.getString(R.string.timebusy))
+                                                        .show();
+                                            }else {
+                                                //place id and date and time to offline order
+                                                OffOrderItem offOrderItem=new OffOrderItem();
+                                                offOrderItem.setId(serviceId);
+                                                offOrderItem.setName(serviceName);
+                                                offOrderItem.setFromTime(fromKey);
+                                                offOrderItem.setToTime(toKey);
+                                                offOrderItem.setDate(dateKey);
+                                                offOrderItem.setPrice(price);
+                                                Home.orderItems.add(offOrderItem);
+                                                Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
+                                                dialogBuildercard.dismiss();
+                                            }
+                                        }else {
+                                            Toast.makeText(context,"Null from check time if busy ",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else {
+                                        try {
+                                            Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<IsBusyRes> call, Throwable t) {
+                                    Toast.makeText(context,"Connection error from check time if busy ",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
 
                         }else {
                             Toast.makeText(context,"Invalid Date"+selected.compareTo(today.getTime()), Toast.LENGTH_SHORT).show();

@@ -230,12 +230,11 @@ public class SignUpScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Pattern pPhone = Pattern.compile("^(009665|9665|\\+9665|05|5)([0-9]{8})$");
+                Matcher mPhone = pPhone.matcher(phoneInput.getText().toString());
                 Pattern p = Pattern.compile("^(.+)@(.+)$");
                 Matcher m = p.matcher(emailInput.getText().toString());
-                Pattern pPhone = Pattern.compile("(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|\n" +
-                        "2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|\n" +
-                        "4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$");
-                Matcher mPhone = pPhone.matcher(phoneInput.getText().toString());
+
 
                 //Inputs validations
                 if (emailInput.getText().toString().length() == 0) {
@@ -294,7 +293,7 @@ public class SignUpScreen extends AppCompatActivity {
                     billingAddress.setLastName(lNameInput.getText().toString() + "");
                     billingAddress.setStateProvinceId(Integer.parseInt(statusid));
                     billingAddress.setCity(districtkey);
-                    billingAddress.setPhoneNumber(phoneInput.getText().toString() + "");
+                    billingAddress.setPhoneNumber("966"+phoneInput.getText().toString().substring(phoneInput.getText().toString().indexOf("5"))+"");
                     billingAddress.setAddress1(address1.getText() + "");
                     billingAddress.setZipPostalCode("00");
 
@@ -305,7 +304,7 @@ public class SignUpScreen extends AppCompatActivity {
                     customer.setPassword(passwordInput.getText().toString() + "");
                     customer.setFirstName(fNameInput.getText().toString() + "");
                     customer.setLastName(lNameInput.getText().toString() + "");
-                    customer.setPhone(phoneInput.getText().toString() + "");
+                    customer.setPhone("966"+phoneInput.getText().toString().substring(phoneInput.getText().toString().indexOf("5"))+"");
                     customer.setBillingAddress(billingAddress);
                     //postNewCustomer.setCustomer(customer);
 
@@ -316,7 +315,7 @@ public class SignUpScreen extends AppCompatActivity {
 
 
                     //Activate phone Number
-                    Generator.createService(RihannaAPI.class).verifyMoblieNum(phoneInput.getText().toString()).enqueue(new Callback<VerificationCode>() {
+                    Generator.createService(RihannaAPI.class).verifyMoblieNum("966"+phoneInput.getText().toString().substring(phoneInput.getText().toString().indexOf("5"))+"").enqueue(new Callback<VerificationCode>() {
                         @Override
                         public void onResponse(Call<VerificationCode> call, Response<VerificationCode> response) {
 
@@ -343,13 +342,8 @@ public class SignUpScreen extends AppCompatActivity {
                         }
                     });
 
-
-
-
                     //Start Activation Screen and send data
                     startActivity(new Intent(SignUpScreen.this, ActivateAccountScreen.class).putExtra("regData", regDatajson));
-
-
                     countriesNames.clear();
                     countriesIds.clear();
                     statesNames.clear();

@@ -19,6 +19,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.GetExpertPhotos;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
+import rihanna.appsmatic.com.rihanna.API.Models.IsBusy.IsBusyRes;
 import rihanna.appsmatic.com.rihanna.API.Models.OutdoorLocations.ResAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
@@ -121,5 +122,13 @@ public interface RihannaAPI {
     //Get Customer Orders By Id
     @GET("api/orders?")
     Call<ResOrderCreation>getCustomerOrdersById(@Query("customerid")String expId);
+
+
+    //Check If Busy
+    @POST("api/expert/schedule/isbusy?")
+    Call<IsBusyRes>IsBuSYtime(@Query("expertid")String expId,
+                              @Query("servicedate")String date,
+                              @Query("timefrom")String timeFrom,
+                              @Query("timeto")String timeTo);
 
 }

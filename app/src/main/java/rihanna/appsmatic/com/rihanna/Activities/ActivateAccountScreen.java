@@ -84,11 +84,9 @@ public class ActivateAccountScreen extends AppCompatActivity {
                     codeInput.setError(getResources().getString(R.string.insertvercode));
                 }else {
 
-
-                   customer.setVerificationcode(codeInput.getText().toString()+"");
+                    customer.setVerificationcode(codeInput.getText().toString()+"");
                     postNewCustomer=new PostNewCustomer();
                     postNewCustomer.setCustomer(customer);
-
                     Generator.createService(RihannaAPI.class).regesterNewCustomer(postNewCustomer).enqueue(new Callback<RegResponse>() {
                         @Override
                         public void onResponse(Call<RegResponse> call, Response<RegResponse> response) {

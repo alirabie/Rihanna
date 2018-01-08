@@ -49,6 +49,7 @@ import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.GPS.GPSTracker;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.offAddress;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 
 public class CustomerLocation extends FragmentActivity implements OnMapReadyCallback {
@@ -209,36 +210,51 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
                 Animation anim = AnimationUtils.loadAnimation(CustomerLocation.this, R.anim.alpha);
                 next.clearAnimation();
                 next.setAnimation(anim);
-                Pattern pPhone = Pattern.compile("(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|\n" +
-                        "2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|\n" +
-                        "4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$");
+                Pattern pPhone = Pattern.compile("^(009665|9665|\\+9665|05|5)([0-9]{8})$");
                 Matcher mPhone = pPhone.matcher(phone.getText().toString());
-                if(addr.getText().toString().isEmpty()){
+                if (addr.getText().toString().isEmpty()) {
                     addr.setError(getResources().getString(R.string.addreesserorr));
-                }else if(phone.getText().toString().isEmpty()){
+                } else if (phone.getText().toString().isEmpty()) {
                     phone.setError(getResources().getString(R.string.phoneerror));
-                }else if(!mPhone.matches()){
+                } else if (!mPhone.matches()) {
                     phone.setError(getResources().getString(R.string.phonevalid));
-                }else if (avalibalelocations.getText().toString().isEmpty()) {
-                    avalibalelocations.setError("!");
-                }else {
+                } else {
 
                     //set address to offline order
-                    offAddress offAddress=new offAddress();
-                    offAddress.setStateId(Integer.parseInt(stateId));
-                    offAddress.setDistrictId(Integer.parseInt(districtId));
-                    offAddress.setStateName(stateName);
-                    offAddress.setDistrictName(districtNam);
-                    offAddress.setAddr(addr.getText().toString());
-                    offAddress.setPhoneNum(phone.getText().toString());
-                    offAddress.setLat(lat);
-                    offAddress.setLng(lang);
-                    Home.offOrderModel.setOffAddress(offAddress);
-                    startActivity(new Intent(CustomerLocation.this, OrderScreen.class));
-                    CustomerLocation.this.finish();
+                    offAddress offAddress = new offAddress();
+                    if (locations.isEmpty()) {
+                        offAddress.setStateId(Integer.parseInt(SaveSharedPreference.getCustomerInfo(CustomerLocation.this).getCustomers().get(0).getBillingAddress().getStateProvinceId().toString()));
+                        offAddress.setDistrictId(Integer.parseInt(SaveSharedPreference.getCustomerInfo(CustomerLocation.this).getCustomers().get(0).getBillingAddress().getStateProvinceId().toString()));
+                        offAddress.setStateName(SaveSharedPreference.getCustomerInfo(CustomerLocation.this).getCustomers().get(0).getBillingAddress().getProvince().toString() + "");
+                        offAddress.setDistrictName(SaveSharedPreference.getCustomerInfo(CustomerLocation.this).getCustomers().get(0).getBillingAddress().getCity().toString() + "");
+                        offAddress.setAddr(addr.getText().toString());
+                        offAddress.setPhoneNum(phone.getText().toString());
+                        offAddress.setLat(lat);
+                        offAddress.setLng(lang);
+                        Home.offOrderModel.setOffAddress(offAddress);
+                        startActivity(new Intent(CustomerLocation.this, OrderScreen.class));
+                        CustomerLocation.this.finish();
+                    } else {
+                        if(avalibalelocations.getText().toString().isEmpty()){
+                            avalibalelocations.setError("!");
+                        }else {
+                            offAddress.setStateId(Integer.parseInt(stateId));
+                            offAddress.setDistrictId(Integer.parseInt(districtId));
+                            offAddress.setStateName(stateName);
+                            offAddress.setDistrictName(districtNam);
+                            offAddress.setAddr(addr.getText().toString());
+                            offAddress.setPhoneNum(phone.getText().toString());
+                            offAddress.setLat(lat);
+                            offAddress.setLng(lang);
+                            Home.offOrderModel.setOffAddress(offAddress);
+                            startActivity(new Intent(CustomerLocation.this, OrderScreen.class));
+                            CustomerLocation.this.finish();
+                        }
+                    }
+
+
 
                 }
-
 
 
             }

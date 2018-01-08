@@ -88,6 +88,7 @@ public class SignInScreen extends AppCompatActivity  {
     private AccessTokenTracker accessTokenTracker;
     private ImageView fblogin,twitterlogin,gmailLogin;
     private LinearLayout socialmedisButtons,socialtitle;
+    private ImageView langBtn;
 
 
 
@@ -105,6 +106,32 @@ public class SignInScreen extends AppCompatActivity  {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
+
+        langBtn=(ImageView)findViewById(R.id.lang_btn);
+        //Set images languages
+        if(SaveSharedPreference.getLangId(this).equals("ar")){
+            langBtn.setImageResource(R.drawable.englishbtn);
+        }else{
+            langBtn.setImageResource(R.drawable.arabicbtn);
+        }
+
+        //Lang switch button action
+        langBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( SaveSharedPreference.getLangId(getApplicationContext()).equals("ar")) {
+                    SaveSharedPreference.setLangId(getApplicationContext(), "en");
+                    langBtn.setImageResource(R.drawable.arabicbtn);
+                    SignInScreen.this.finish();
+                    startActivity(new Intent(getApplicationContext(),Splash.class));
+                }else {
+                    SaveSharedPreference.setLangId(getApplicationContext(), "ar");
+                    langBtn.setImageResource(R.drawable.englishbtn);
+                    SignInScreen.this.finish();
+                    startActivity(new Intent(getApplicationContext(),Splash.class));
+                }
+            }
+        });
 
 
         //Google sign in API Configurations
