@@ -66,7 +66,7 @@ public interface RihannaAPI {
 
 
     //Get Categories
-    @GET("api/categories?fields=name,id")
+    @GET("api/categories?fields=name,id,description,image")
     Call<ResCategory> getCategories();
 
     //Get Expert Services

@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,10 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -65,6 +69,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
+import rihanna.appsmatic.com.rihanna.Fragments.Categories;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.ListOfOrders;
 import rihanna.appsmatic.com.rihanna.Fragments.OrderInfo;
@@ -373,10 +378,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //Action Side menu buttons :
 
         //START FIRST SCREEN
-        Services services=new Services();
+        Categories categories=new Categories();
         android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentcontener, services);
+        fragmentTransaction.replace(R.id.fragmentcontener, categories);
         fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         fragmentTransaction.commit();
 
@@ -388,10 +393,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 homeSide.clearAnimation();
                 homeSide.setAnimation(anim);
-                Services services=new Services();
+                Categories categories=new Categories();
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                fragmentTransaction.replace(R.id.fragmentcontener, categories);
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
                 tittle.setVisibility(View.INVISIBLE);
@@ -629,10 +634,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         } else {
 
             //START FIRST SCREEN
-            Services services = new Services();
+            Categories categories2=new Categories();
             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentcontener, services);
+            fragmentTransaction.replace(R.id.fragmentcontener, categories2);
             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             fragmentTransaction.commit();
             categories.setText("");
@@ -684,13 +689,69 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+
+
+
+
+
+
     //Option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+
+
+        //Setup Search view listener >>>
+
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint(getResources().getString(R.string.search));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                  if (query.length() > 0) {
+                      Services services = new Services();
+                      Bundle bundle = new Bundle();
+                      bundle.putString("sourceflag","filter");
+                      bundle.putString("keyword",query);
+                      bundle.putString("category","");
+                      bundle.putString("state","");
+                      bundle.putString("email","");
+                      bundle.putString("rate","");
+                      services.setArguments(bundle);
+                      android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)Home.this).getSupportFragmentManager();
+                      android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                      fragmentTransaction.replace(R.id.fragmentcontener, services);
+                      fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                      fragmentTransaction.commit();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+               /* if (newText.length() > 0) {
+                    search = new Search();
+                    Bundle args = new Bundle();
+                    args.putString("query_string",newText);
+                    search.setArguments(args);
+                    toolbartitle.setText(R.string.searchfrag);
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontener,search);
+                    fragmentTransaction.commit();
+                }
+                */
+
+                return false;
+            }
+        });
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

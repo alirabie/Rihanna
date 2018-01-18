@@ -13,9 +13,7 @@
         android:layout_gravity="center"
         android:fadingEdge="horizontal"
         android:scrollbarSize="50dp"
-        android:scrollbarStyle="insideOverlay"
-
-        />
+        android:scrollbarStyle="insideOverlay"/>
 
     <TextView
         android:layout_width="match_parent"

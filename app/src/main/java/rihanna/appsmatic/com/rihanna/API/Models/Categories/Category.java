@@ -13,6 +13,12 @@ public class Category {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("description")
+    @Expose
+    private Object description;
+    @SerializedName("image")
+    @Expose
+    private Image image;
 
     public String getId() {
         return id;
@@ -28,5 +34,21 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Object getDescription() {
+        return description;
+    }
+
+    public void setDescription(Object description) {
+        this.description = description;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
