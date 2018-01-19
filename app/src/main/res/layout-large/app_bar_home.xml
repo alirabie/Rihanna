@@ -45,23 +45,6 @@
                     android:gravity="center"
                     android:id="@+id/top_buttons_box">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/hair_btn"
-                        android:src="@drawable/hair_tab_active"
-                        android:layout_gravity="center"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mack_up_btn"
-                        android:src="@drawable/makeup_tab_active"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1" />
                 </LinearLayout>
 
             </FrameLayout>

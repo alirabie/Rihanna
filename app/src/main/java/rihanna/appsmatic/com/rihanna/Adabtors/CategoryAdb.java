@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Adabtors;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
     public void onBindViewHolder(final CateVh holder, final int position) {
 
         animate(holder);
+        Typeface face= Typeface.createFromAsset(context.getAssets(), "arabic.ttf");
         if(SaveSharedPreference.getImgLoadingSatatus(context)) {
 
             if (categories.getCategories().get(position).getImage() != null) {
@@ -62,6 +64,7 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
                     .into(holder.categoryImage);
         }
 
+        holder.categoryName.setTypeface(face);
         holder.categoryName.setText(categories.getCategories().get(position).getName());
 
 

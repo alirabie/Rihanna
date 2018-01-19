@@ -3,7 +3,6 @@ package rihanna.appsmatic.com.rihanna.Activities;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ActivityInfo;
@@ -17,7 +16,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,18 +51,13 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
-import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.BillingAddress;
-import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
-import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.PostOrder;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
@@ -72,7 +65,6 @@ import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Categories;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
 import rihanna.appsmatic.com.rihanna.Fragments.ListOfOrders;
-import rihanna.appsmatic.com.rihanna.Fragments.OrderInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
@@ -89,11 +81,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static OffOrderModel offOrderModel ;
     public static List<OffOrderItem>orderItems;
     public static int customerCount=1;
+    private static String districtKey="";
 
     private BetterSpinner cities;
-    private BetterSpinner categories;
+    private BetterSpinner districtes;
     private static List<String> citesNames;
     private static List<String>citesIds;
+    private static List<String> districtsIds;
+    private static List<String> districtsNames;
     private static List<String>categoriesNames;
     private static List<String>categoriesIds;
     private LinearLayout sideMenuButtons;
@@ -104,7 +99,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static LinearLayout topButtons ,spainnersBox;
     private boolean doubleBackToExitPressedOnce = false;
 
-    private ImageView hairBtn,makeUpBtn;
+
 
 
 
@@ -129,8 +124,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
          tittle.setVisibility(View.INVISIBLE);
          topButtons=(LinearLayout)findViewById(R.id.top_buttons_box);
          spainnersBox=(LinearLayout)findViewById(R.id.spinners_box);
-        hairBtn=(ImageView)findViewById(R.id.hair_btn);
-        makeUpBtn=(ImageView)findViewById(R.id.mack_up_btn);
 
 
 
@@ -148,6 +141,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         //Setup states spinner
+        districtes = (BetterSpinner) findViewById(R.id.countrydown);
+        districtes.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
+        districtes.setHint(getResources().getString(R.string.district));
+        districtes.setTypeface(face);
+        districtes.setHintTextColor(Color.WHITE);
         cities =(BetterSpinner)findViewById(R.id.citydown);
         cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
         cities.setHint(getResources().getString(R.string.city));
@@ -182,6 +180,62 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                             fragmentTransaction.commit();
                             Toast.makeText(getApplicationContext(), citesNames.get(position), Toast.LENGTH_SHORT).show();
+                            //Get districts
+                            Generator.createService(RihannaAPI.class).getDestrics("Saudi Arabia",citesNames.get(position)).enqueue(new Callback<Districts>() {
+                                @Override
+                                public void onResponse(Call<Districts> call, final Response<Districts> response) {
+
+                                    if (response.isSuccessful()) {
+                                        districtsNames = new ArrayList<String>();
+                                        districtsIds = new ArrayList<String>();
+
+                                        //fill names and ids to spinner list from response
+                                        for (int i = 0; i < response.body().getDistricts().size(); i++) {
+                                            districtsNames.add(response.body().getDistricts().get(i).getName());
+                                            districtsIds.add(response.body().getDistricts().get(i).getId());
+                                        }
+
+                                        //add names to spinner list
+                                        //setup districtes spinner
+                                        districtes = (BetterSpinner) findViewById(R.id.countrydown);
+                                        districtes.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
+                                        districtes.setHint(getResources().getString(R.string.district));
+                                        districtes.setTypeface(face);
+                                        districtes.setHintTextColor(Color.WHITE);
+                                        final ArrayAdapter<String> districtadapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, districtsNames);
+                                        districtadapter.notifyDataSetChanged();
+                                        districtes.setAdapter(districtadapter);
+                                        districtes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                districtKey = response.body().getDistricts().get(position).getName();
+                                                //Add district key
+                                                Services services = new Services();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString("sourceflag","cites");
+                                                bundle.putString("state", "");
+                                                services.setArguments(bundle);
+                                                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                                                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                fragmentTransaction.replace(R.id.fragmentcontener, services);
+                                                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                                fragmentTransaction.commit();
+                                                Toast.makeText(getApplicationContext(), citesNames.get(position), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), districtKey, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "response from filter districts not success", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Districts> call, Throwable t) {
+                                    Toast.makeText(getApplicationContext(), "response from filter districts failed" + " " + t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                         }
                     });
 
@@ -205,103 +259,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
 
 
-        //setup categories spinner
-        categories = (BetterSpinner) findViewById(R.id.countrydown);
-        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-        categories.setHint(getResources().getString(R.string.categoriy));
-        categories.setTypeface(face);
-        categories.setHintTextColor(Color.WHITE);
-        categoriesNames=new ArrayList<>();
-        categoriesIds=new ArrayList<>();
-        Generator.createService(RihannaAPI.class).getCategories().enqueue(new Callback<ResCategory>() {
-            @Override
-            public void onResponse(Call<ResCategory> call, Response<ResCategory> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getCategories() != null) {
-                        for (int i = 0; i < response.body().getCategories().size(); i++) {
-                            categoriesNames.add(response.body().getCategories().get(i).getName());
-                            categoriesIds.add(response.body().getCategories().get(i).getId());
-                        }
-
-                        categories.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome, categoriesNames));
-                        categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                Services services = new Services();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("sourceflag","categories");
-                                bundle.putString("category", categoriesNames.get(position));
-                                services.setArguments(bundle);
-                                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
-                                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragmentcontener, services);
-                                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                fragmentTransaction.commit();
-                                Toast.makeText(getApplicationContext(), categoriesNames.get(position), Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(Home.this, "Null from categories Api", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    try {
-                        Toast.makeText(Home.this, "Response Not Success from categories Api" + response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResCategory> call, Throwable t) {
-                Toast.makeText(Home.this, "Connection Error from categories Api" + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 
-        hairBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
-                hairBtn.clearAnimation();
-                hairBtn.setAnimation(anim);
-
-                Services services = new Services();
-                Bundle bundle = new Bundle();
-                bundle.putString("sourceflag","categories");
-                bundle.putString("category", "Hair");
-                services.setArguments(bundle);
-                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener, services);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-            }
-        });
-
-
-        makeUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
-                makeUpBtn.clearAnimation();
-                makeUpBtn.setAnimation(anim);
-                Services services = new Services();
-                Bundle bundle = new Bundle();
-                bundle.putString("sourceflag","categories");
-                bundle.putString("category", "Makeup");
-                services.setArguments(bundle);
-                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener, services);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-            }
-        });
 
 
         //Setup Side Menu Items
@@ -640,7 +600,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             fragmentTransaction.replace(R.id.fragmentcontener, categories2);
             fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             fragmentTransaction.commit();
-            categories.setText("");
+            districtes.setText("");
             cities.setText("");
             tittle.setText("");
             topButtons.setVisibility(View.VISIBLE);
@@ -707,7 +667,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint(getResources().getString(R.string.search));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

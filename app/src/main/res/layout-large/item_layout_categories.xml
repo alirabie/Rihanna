@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_margin="3dp"
-    android:layout_height="wrap_content">
+    xmlns:ndroid="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:shadowColor="@color/text_shadow"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="50"
+    android:layout_height="wrap_content"
+    android:background="#000000">
 
     <ImageView
         android:layout_width="match_parent"
@@ -10,22 +17,22 @@
         android:id="@+id/category_image"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/bgcategories"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:layout_margin="1dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Mackup"
         android:id="@+id/category_name"
         android:layout_gravity="center_horizontal|bottom"
         android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:typeface="serif"
-        android:shadowColor="#000000"
-        android:textSize="35dp"
-        android:textIsSelectable="false"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="#6a4c4c4c" />
+        android:textColor="@color/light_font"
+        android:shadowColor="@color/text_shadow"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="25"
+        android:textSize="65dp"
+        android:padding="5dp"
+        android:gravity="center"/>
 </FrameLayout>
