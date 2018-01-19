@@ -178,4 +178,9 @@
     <string name="noarieas">لا توجد مدن / مناطق مسجلة من قبل هذه الخبيرة</string>
     <string name="phonenum">+966565161868</string>
     <string name="timebusy">نأسف حيث ان هذا الوقت محجوز مسبقا من فضلك اختارى وقت اخر</string>
+    <string name="canceldorders">ملغى</string>
+    <string name="completedorders">منتهى</string>
+    <string name="pendingorders">إنتظار</string>
+    <string name="processingorders">مقبول</string>
+    <string name="setsametime">هل تريدي استخدام هذا الموعد مع كل الخدمات المختاره لاحقا ؟؟</string>
 </resources>

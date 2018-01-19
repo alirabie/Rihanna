@@ -170,6 +170,7 @@ public class OrderScreen extends AppCompatActivity {
                                 //reset offline order data
                                 Home.offOrderModel.reset();
                                 Home.customerCount=1;
+                                Home.SetTimeForAllServices=false;
                                 Home.orderItems.clear();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Null from order creation API ", Toast.LENGTH_SHORT).show();

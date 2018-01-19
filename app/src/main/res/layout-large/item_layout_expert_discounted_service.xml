@@ -110,7 +110,7 @@
 
         </LinearLayout>
 
-        <TextView
+        <CheckBox
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -118,8 +118,7 @@
             android:id="@+id/item_layout_service_subscribe_btn"
             android:gravity="center"
             android:textSize="15dp"
-            android:textColor="#ffffff"
-            android:background="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
             android:padding="3dp"
             android:layout_weight="4"
             android:layout_marginLeft="5dp"

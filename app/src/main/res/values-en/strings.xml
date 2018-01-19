@@ -178,4 +178,9 @@
     <string name="noarieas">No Cities / Districts are Registered By this Expert</string>
     <string name="phonenum">+966565161868</string>
     <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
+    <string name="canceldorders">Canceled</string>
+    <string name="completedorders">Completed</string>
+    <string name="pendingorders">Pending</string>
+    <string name="processingorders">Accepted</string>
+    <string name="setsametime">Do You Want Set This Time For All Next Selected Services ?</string>
 </resources>

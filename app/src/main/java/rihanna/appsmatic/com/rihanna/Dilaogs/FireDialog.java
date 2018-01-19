@@ -3,6 +3,7 @@ package rihanna.appsmatic.com.rihanna.Dilaogs;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,10 +51,14 @@ import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResRe
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.Activities.CustomerLocation;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Activities.OrderScreen;
 import rihanna.appsmatic.com.rihanna.Adabtors.CertificatesAdb;
 import rihanna.appsmatic.com.rihanna.Adabtors.CommentsAdb;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.offAddress;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 import rihanna.appsmatic.com.rihanna.SQLiteDB.DB;
@@ -481,6 +486,8 @@ public class FireDialog {
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 save.clearAnimation();
                 save.setAnimation(anim);
+
+
                 if(avalibalTimesSp.getText().toString().isEmpty()){
                     avalibalTimesSp.setError("!");
                 }else {
@@ -511,7 +518,7 @@ public class FireDialog {
                             }
 
                             String timeFrom=targetTimeFormat.format(timefrom);
-                            String timeTo=targetTimeFormat.format(timeto);
+                            final String timeTo=targetTimeFormat.format(timeto);
 
                             Log.e("ddd",dateKey+timeFrom+timeTo);
 
@@ -533,17 +540,61 @@ public class FireDialog {
                                                         .withMessage(context.getString(R.string.timebusy))
                                                         .show();
                                             }else {
-                                                //place id and date and time to offline order
-                                                OffOrderItem offOrderItem=new OffOrderItem();
-                                                offOrderItem.setId(serviceId);
-                                                offOrderItem.setName(serviceName);
-                                                offOrderItem.setFromTime(fromKey);
-                                                offOrderItem.setToTime(toKey);
-                                                offOrderItem.setDate(dateKey);
-                                                offOrderItem.setPrice(price);
-                                                Home.orderItems.add(offOrderItem);
-                                                Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
-                                                dialogBuildercard.dismiss();
+
+
+                                                final NiftyDialogBuilder dialogBuildercard2 = NiftyDialogBuilder.getInstance(context);
+                                                dialogBuildercard2
+                                                        .withDuration(700)//def
+                                                        .withEffect(Effectstype.Fall)
+                                                        .withDialogColor(context.getResources().getColor(R.color.colorPrimary))
+                                                        .withTitleColor(Color.BLACK)
+                                                        .withMessage(context.getResources().getString(R.string.setsametime))
+                                                        .withTitle(context.getResources().getString(R.string.app_name))
+                                                        .isCancelableOnTouchOutside(false)
+                                                        .withButton1Text(context.getResources().getString(R.string.yes))
+                                                        .withButton2Text(context.getResources().getString(R.string.no))
+                                                        .setButton1Click(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Home.SetTimeForAllServices=true;
+                                                                Home.offOrderItem.setDate(dateKey);
+                                                                Home.offOrderItem.setFromTime(fromKey);
+                                                                Home.offOrderItem.setToTime(toKey);
+
+                                                                //place id and date and time to offline order
+                                                                OffOrderItem offOrderItem=new OffOrderItem();
+                                                                offOrderItem.setId(serviceId);
+                                                                offOrderItem.setName(serviceName);
+                                                                offOrderItem.setFromTime(fromKey);
+                                                                offOrderItem.setToTime(toKey);
+                                                                offOrderItem.setDate(dateKey);
+                                                                offOrderItem.setPrice(price);
+                                                                Home.orderItems.add(offOrderItem);
+                                                                Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
+                                                                dialogBuildercard.dismiss();
+                                                                dialogBuildercard2.dismiss();
+                                                            }
+                                                        })
+                                                        .setButton2Click(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Home.SetTimeForAllServices=false;
+                                                                //place id and date and time to offline order
+                                                                OffOrderItem offOrderItem=new OffOrderItem();
+                                                                offOrderItem.setId(serviceId);
+                                                                offOrderItem.setName(serviceName);
+                                                                offOrderItem.setFromTime(fromKey);
+                                                                offOrderItem.setToTime(toKey);
+                                                                offOrderItem.setDate(dateKey);
+                                                                offOrderItem.setPrice(price);
+                                                                Home.orderItems.add(offOrderItem);
+                                                                Toast.makeText(context,context.getResources().getString(R.string.serviceselected), Toast.LENGTH_SHORT).show();
+                                                                dialogBuildercard.dismiss();
+                                                                dialogBuildercard2.dismiss();
+                                                            }
+                                                        }).show();
+
+
                                             }
                                         }else {
                                             Toast.makeText(context,"Null from check time if busy ",Toast.LENGTH_SHORT).show();

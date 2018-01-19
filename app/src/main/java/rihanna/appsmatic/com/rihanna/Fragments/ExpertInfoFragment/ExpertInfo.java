@@ -335,6 +335,15 @@ public class ExpertInfo extends Fragment {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
                     Services services = new Services();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("sourceflag","filter");
+                    bundle.putString("category",Home.selectedCategory);
+                    bundle.putString("keyword","");
+                    bundle.putString("state","");
+                    bundle.putString("district","");
+                    bundle.putString("email","");
+                    bundle.putString("rate","");
+                    services.setArguments(bundle);
                     android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentcontener, services);

@@ -6,11 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -36,6 +39,7 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,6 +62,7 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
     private Double lat,lang;
     private Marker marker;
     private GPSTracker gpsTracker;
+    private Geocoder geocoder;
     private TextView next;
     private BetterSpinner avalibalelocations;
     private static List<String> statesIds;
@@ -70,6 +75,9 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
     static String districtId="";
     static String stateName="";
     static String stateId="";
+    private String cityNamemap;
+    private String stateNamemap;
+    private String countryNamemap;
 
 
     @Override
@@ -97,6 +105,7 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
         lat=0.0;
         lang=0.0;
         gpsTracker = new GPSTracker(getApplicationContext());
+        geocoder = new Geocoder(CustomerLocation.this , Locale.getDefault());
 
 
         //get expert locations add expert id
@@ -294,7 +303,34 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
                         .draggable(true).visible(true).title(getResources().getString(R.string.locationdet)));
                 lat = latLng.latitude;
                 lang = latLng.longitude;
-                Toast.makeText(getApplicationContext(), lat + " " + lang + "", Toast.LENGTH_SHORT).show();
+                List<Address> addresses = null;
+
+                Log.e("lat ", lat + "  " + lang + "");
+                try {
+                    addresses = geocoder.getFromLocation(lat, lang, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("lat ", e.getMessage());
+                }
+
+                if(addresses!=null) {
+                    if (!addresses.isEmpty()) {
+                        cityNamemap = addresses.get(0).getLocality();
+                        stateNamemap = addresses.get(0).getAddressLine(0);
+                        countryNamemap=addresses.get(0).getCountryName();
+
+                        StringBuilder stringBuilder=new StringBuilder();
+                        if(cityNamemap!=null){
+                            stringBuilder.append(cityNamemap+",");
+                        }else if(stateNamemap!=null){
+                            stringBuilder.append(stateNamemap+",");
+                        }else if (countryNamemap!=null){
+                            stringBuilder.append(countryNamemap);
+                        }
+                        addr.setText(stringBuilder.toString());
+                    }
+                }
+
             }
         });
     }

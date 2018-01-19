@@ -43,8 +43,8 @@ public class OfflineOrderItemsAdb extends RecyclerView.Adapter<OfflineOrderItems
         holder.date.setText(offOrderItems.get(position).getDate());
         holder.fro.setText(offOrderItems.get(position).getFromTime());
         holder.to.setText(offOrderItems.get(position).getToTime());
-        holder.price.setText(offOrderItems.get(position).getPrice()+"");
-
+        holder.price.setText(offOrderItems.get(position).getPrice()+" "+context.getResources().getString(R.string.sr));
+/*
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class OfflineOrderItemsAdb extends RecyclerView.Adapter<OfflineOrderItems
                 }
             }
         });
-
+*/
     }
 
     @Override
@@ -89,7 +89,7 @@ public class OfflineOrderItemsAdb extends RecyclerView.Adapter<OfflineOrderItems
             fro=(TextView)itemView.findViewById(R.id.from_tv);
             to=(TextView)itemView.findViewById(R.id.to_tv);
             price=(TextView)itemView.findViewById(R.id.price_tv);
-            delete=(ImageView)itemView.findViewById(R.id.delete_btn);
+         //   delete=(ImageView)itemView.findViewById(R.id.delete_btn);
         }
 
     }

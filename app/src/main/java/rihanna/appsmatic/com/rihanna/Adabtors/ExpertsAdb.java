@@ -107,6 +107,9 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
                 Home.offOrderModel.reset();
                 Home.customerCount=1;
                 Home.orderItems.clear();
+                Home.SetTimeForAllServices=false;
+
+
 
 
                 ExpertInfo expertInfo=new ExpertInfo();

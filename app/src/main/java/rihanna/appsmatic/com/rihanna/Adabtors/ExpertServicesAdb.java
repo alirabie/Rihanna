@@ -8,14 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
 
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.Service;
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
+import rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment.ExpertInfo;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
 import rihanna.appsmatic.com.rihanna.R;
 
 /**
@@ -45,18 +50,52 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
         animate(holder);
             holder.serviceName.setText(expertServices.get(position).getServiceName() + "");
             holder.price.setText(expertServices.get(position).getPrice() + "");
-            holder.unSubscribeBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
-                    holder.unSubscribeBtn.clearAnimation();
-                    holder.unSubscribeBtn.setAnimation(anim);
-                    FireDialog.pickService(context, holder.unSubscribeBtn, expertServices.get(position).getExpertId() + "", expertServices.get(position).getServiceId() + "",
-                            expertServices.get(position).getServiceName(),
-                            expertServices.get(position).getPrice());
+
+
+
+
+
+        holder.unSubscribeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    if(Home.SetTimeForAllServices){
+                        OffOrderItem offOrderItem=new OffOrderItem();
+                        offOrderItem.setId(expertServices.get(position).getServiceId() + "");
+                        offOrderItem.setName(expertServices.get(position).getServiceName());
+                        offOrderItem.setFromTime(Home.offOrderItem.getFromTime());
+                        offOrderItem.setToTime(Home.offOrderItem.getToTime());
+                        offOrderItem.setDate(Home.offOrderItem.getDate());
+                        offOrderItem.setPrice(expertServices.get(position).getPrice());
+                        Home.orderItems.add(offOrderItem);
+
+                    }else {
+                        FireDialog.pickService(context, holder.unSubscribeBtn, expertServices.get(position).getExpertId() + "", expertServices.get(position).getServiceId() + "",
+                                expertServices.get(position).getServiceName(),
+                                expertServices.get(position).getPrice());
+                    }
+                }else {
+                    for (int i = 0; i < Home.orderItems.size(); i++) {
+                        if (expertServices.get(position).getServiceId().toString().equals(Home.orderItems.get(i).getId().toString())) {
+                            Home.orderItems.remove(i);
+                            if(Home.orderItems.isEmpty()){
+                                Home.SetTimeForAllServices=false;
+                            }
+                            break;
+                        }
+                    }
                 }
 
-            });
+
+
+            }
+        });
+
+
+
+
+
         }
 
 
@@ -72,13 +111,14 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
     }
     public static class Vh002 extends RecyclerView.ViewHolder{
 
-        TextView serviceName,price,unSubscribeBtn;
+        TextView serviceName,price;
+        CheckBox unSubscribeBtn;
 
         public Vh002(View itemView) {
             super(itemView);
             serviceName=(TextView)itemView.findViewById(R.id.item_layout_service_name);
             price=(TextView)itemView.findViewById(R.id.item_layout_service_price);
-            unSubscribeBtn=(TextView)itemView.findViewById(R.id.item_layout_service_subscribe_btn);
+            unSubscribeBtn=(CheckBox)itemView.findViewById(R.id.item_layout_service_subscribe_btn);
         }
     }
 }

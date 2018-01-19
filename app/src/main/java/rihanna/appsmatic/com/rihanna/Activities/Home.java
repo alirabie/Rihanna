@@ -81,7 +81,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static OffOrderModel offOrderModel ;
     public static List<OffOrderItem>orderItems;
     public static int customerCount=1;
+    public static boolean SetTimeForAllServices=false;
+    public static OffOrderItem offOrderItem=new OffOrderItem();
     private static String districtKey="";
+    public static String selectedCategory="";
 
     private BetterSpinner cities;
     private BetterSpinner districtes;
@@ -171,8 +174,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Services services = new Services();
                             Bundle bundle = new Bundle();
-                            bundle.putString("sourceflag","cites");
-                            bundle.putString("state", citesNames.get(position));
+                            bundle.putString("sourceflag","filter");
+                            bundle.putString("category",selectedCategory);
+                            bundle.putString("keyword","");
+                            bundle.putString("district","");
+                            bundle.putString("state",citesNames.get(position));
+                            bundle.putString("email","");
+                            bundle.putString("rate","");
                             services.setArguments(bundle);
                             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -212,8 +220,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 //Add district key
                                                 Services services = new Services();
                                                 Bundle bundle = new Bundle();
-                                                bundle.putString("sourceflag","cites");
-                                                bundle.putString("state", "");
+                                                bundle.putString("sourceflag","filter");
+                                                bundle.putString("category",Home.selectedCategory);
+                                                bundle.putString("keyword","");
+                                                bundle.putString("district",districtKey);
+                                                bundle.putString("state","");
+                                                bundle.putString("email","");
+                                                bundle.putString("rate", "");
                                                 services.setArguments(bundle);
                                                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                                                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -676,6 +689,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                       bundle.putString("sourceflag","filter");
                       bundle.putString("keyword",query);
                       bundle.putString("category","");
+                      bundle.putString("district","");
                       bundle.putString("state","");
                       bundle.putString("email","");
                       bundle.putString("rate","");

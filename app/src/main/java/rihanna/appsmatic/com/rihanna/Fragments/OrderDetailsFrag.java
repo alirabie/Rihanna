@@ -59,13 +59,74 @@ public class OrderDetailsFrag extends Fragment {
         orderConfirmedFlag.setVisibility(View.INVISIBLE);
 
 
-        orderNumTv.setText(getContext().getResources().getString(R.string.ordernum) + order.getId() + " " + order.getOrderStatus());
+
         customerName.setText(order.getBillingAddress().getFirstName() + " " + order.getBillingAddress().getLastName());
         customerAddress.setText(order.getBillingAddress().getAddress1());
         customerPhone.setText(order.getBillingAddress().getPhoneNumber());
         CustomerstateTv.setText(order.getBillingAddress().getCity()+" "+order.getBillingAddress().getProvince()+"");
         totalPrice.setText(order.getOrderTotal()+" "+getResources().getString(R.string.sr));
-        paymentType.setText(getContext().getResources().getString(R.string.paymentstatus) + " : " + order.getPaymentStatus());
+
+
+
+
+
+        switch (order.getOrderStatus()) {
+            case "Pending":
+                orderNumTv.setText(getContext().getResources().getString(R.string.ordernum) + order.getId() + " " +getResources().getString(R.string.pendingorders));
+                break;
+            case "Processing":
+                orderNumTv.setText(getContext().getResources().getString(R.string.ordernum) + order.getId() + " " +getResources().getString(R.string.processingorders));
+                break;
+            case "Complete":
+                orderNumTv.setText(getContext().getResources().getString(R.string.ordernum) + order.getId() + " " +getResources().getString(R.string.completedorders));
+                break;
+            case "Cancelled":
+                orderNumTv.setText(getContext().getResources().getString(R.string.ordernum) + order.getId() + " " +getResources().getString(R.string.canceldorders));
+                break;
+        }
+
+
+
+
+
+
+
+
+
+
+        switch (order.getPaymentStatus()){
+            case "Pending":
+                paymentType.setText(getContext().getResources().getString(R.string.paymentstatus) + " : " + getResources().getString(R.string.pendingorders));
+                break;
+            case "Processing":
+                paymentType.setText(getContext().getResources().getString(R.string.paymentstatus) + " : " + getResources().getString(R.string.processingorders));
+                break;
+            case "Complete":
+                paymentType.setText(getContext().getResources().getString(R.string.paymentstatus) + " : " + " : " + getResources().getString(R.string.completedorders));
+                break;
+            case "Cancelled":
+                paymentType.setText(getContext().getResources().getString(R.string.paymentstatus) + " : " + " : " + getResources().getString(R.string.canceldorders));
+                break;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (order.getServiceType()!=null) {
             if (order.getServiceType().toString().equals("indoor")) {
@@ -78,7 +139,7 @@ public class OrderDetailsFrag extends Fragment {
         }
 
 
-        if(order.getOrderStatus().equals("Pending")){
+        if(order.getOrderStatus().equals("Pending")||order.getOrderStatus().equals("Cancelled")||order.getOrderStatus().equals("Complete")) {
             finished.setVisibility(View.INVISIBLE);
         }
 

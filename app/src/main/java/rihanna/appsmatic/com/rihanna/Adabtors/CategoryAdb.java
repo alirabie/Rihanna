@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
+import rihanna.appsmatic.com.rihanna.Activities.Home;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
@@ -79,6 +80,7 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
                 Bundle bundle = new Bundle();
                 bundle.putString("sourceflag","filter");
                 bundle.putString("category",categories.getCategories().get(position).getName());
+                Home.selectedCategory=categories.getCategories().get(position).getName();
                 bundle.putString("state","");
                 bundle.putString("email","");
                 bundle.putString("rate","");

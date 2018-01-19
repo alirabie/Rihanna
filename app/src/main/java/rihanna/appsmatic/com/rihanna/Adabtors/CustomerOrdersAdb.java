@@ -55,17 +55,54 @@ public class CustomerOrdersAdb extends RecyclerView.Adapter<CustomerOrdersAdb.Or
         }else {
             holder.serviceType.setText(context.getResources().getString(R.string.notset));
         }
-        holder.orderStatus.setText(context.getResources().getString(R.string.orderstatus)+" : "+orders.get(position).getOrderStatus());
-        holder.paymentSataus.setText(context.getResources().getString(R.string.paymentstatus)+" : "+orders.get(position).getPaymentStatus());
-        holder.totalPrice.setText(orders.get(position).getOrderTotal()+"");
 
 
 
-        if(orders.get(position).getOrderStatus().equals("Pending")){
-            holder.statusIdcator.setImageResource(R.drawable.waitingstatus);
-        }else {
-            holder.statusIdcator.setImageResource(R.drawable.acceptedstatus);
+
+
+
+        holder.totalPrice.setText(orders.get(position).getOrderTotal() + "");
+
+
+
+
+        //status Control Logic
+        switch (orders.get(position).getOrderStatus()) {
+            case "Pending":
+                holder.statusIdcator.setImageResource(R.drawable.waitingstatus);
+                holder.orderStatus.setText(context.getResources().getString(R.string.orderstatus)+" : "+context.getResources().getString(R.string.pendingorders));
+                break;
+            case "Processing":
+                holder.statusIdcator.setImageResource(R.drawable.acceptedstatus);
+                holder.orderStatus.setText(context.getResources().getString(R.string.orderstatus)+" : "+context.getResources().getString(R.string.processingorders));
+                break;
+            case "Complete":
+                holder.statusIdcator.setImageResource(R.drawable.acceptedstatus);
+                holder.orderStatus.setText(context.getResources().getString(R.string.orderstatus)+" : "+context.getResources().getString(R.string.completedorders));
+                break;
+            case "Cancelled":
+                holder.statusIdcator.setImageResource(android.R.drawable.ic_delete);
+                holder.orderStatus.setText(context.getResources().getString(R.string.orderstatus)+" : "+context.getResources().getString(R.string.canceldorders));
+                break;
         }
+
+
+        switch (orders.get(position).getPaymentStatus()){
+            case "Pending":
+                holder.paymentSataus.setText(context.getResources().getString(R.string.paymentstatus) + " : " + context.getResources().getString(R.string.pendingorders));
+                break;
+            case "Processing":
+                holder.paymentSataus.setText(context.getResources().getString(R.string.paymentstatus) + " : " + context.getResources().getString(R.string.processingorders));
+                break;
+            case "Complete":
+                holder.paymentSataus.setText(context.getResources().getString(R.string.paymentstatus) + " : " + context.getResources().getString(R.string.completedorders));
+                break;
+            case "Cancelled":
+                holder.paymentSataus.setText(context.getResources().getString(R.string.paymentstatus) + " : " + context.getResources().getString(R.string.canceldorders));
+                break;
+
+        }
+
 
 
 
