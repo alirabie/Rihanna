@@ -10,7 +10,8 @@
         android:id="@+id/expert_img"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/placeholderimage" />
+        android:src="@drawable/placeholderimage"
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:orientation="horizontal"

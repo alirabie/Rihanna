@@ -2,6 +2,9 @@ package rihanna.appsmatic.com.rihanna.Adabtors;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
@@ -47,21 +51,27 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
         if(SaveSharedPreference.getImgLoadingSatatus(context)) {
 
             if (categories.getCategories().get(position).getImage() != null) {
-                Picasso.with(context)
+
+                Glide.with(context)
                         .load(categories.getCategories().get(position).getImage().getSrc().toString())
-                        .fit()
+                        .asBitmap().override(1080, 600)
                         .placeholder(R.drawable.bgcategories)
+                        .fitCenter()
                         .into(holder.categoryImage);
+
+
             } else {
-                Picasso.with(context)
+
+                Glide.with(context)
                         .load(R.drawable.bgcategories)
-                        .fit()
+                        .fitCenter()
                         .into(holder.categoryImage);
+
             }
         }else {
-            Picasso.with(context)
+            Glide.with(context)
                     .load(R.drawable.bgcategories)
-                    .fit()
+                    .fitCenter()
                     .into(holder.categoryImage);
         }
 

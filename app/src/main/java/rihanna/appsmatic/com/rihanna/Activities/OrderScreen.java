@@ -168,10 +168,10 @@ public class OrderScreen extends AppCompatActivity {
                             if (response.body().getOrders() != null) {
                                 FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
                                 //reset offline order data
-                                Home.offOrderModel.reset();
+                               // Home.offOrderModel.reset();
                                 Home.customerCount=1;
                                 Home.SetTimeForAllServices=false;
-                                Home.orderItems.clear();
+                                //Home.orderItems.clear();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Null from order creation API ", Toast.LENGTH_SHORT).show();
                             }

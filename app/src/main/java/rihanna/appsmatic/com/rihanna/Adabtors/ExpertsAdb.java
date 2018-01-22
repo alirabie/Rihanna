@@ -16,6 +16,7 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
@@ -69,12 +70,19 @@ public class ExpertsAdb extends RecyclerView.Adapter<ExpertsAdb.Vholder> {
         if(SaveSharedPreference.getImgLoadingSatatus(context)) {
 
             if(expertsResponse.getVendors().get(position).getProfileImage()!=null) {
-                Picasso.with(context).load(expertsResponse.getVendors().get(position).getProfileImage())
-                        .placeholder(R.drawable.loadinggif).fit()
+                Glide.with(context)
+                        .load(expertsResponse.getVendors().get(position).getProfileImage())
+                        .asBitmap().override(1080, 600)
+                        .placeholder(R.drawable.loadinggif)
+                        .fitCenter()
                         .into(holder.expertImg);
+
             }else {
-                Picasso.with(context).load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg")
-                        .placeholder(R.drawable.loadinggif).fit()
+
+                Glide.with(context)
+                        .load("http://mansour.msol5.com/wp-content/uploads/2016/09/banner_1.jpg")
+                        .placeholder(R.drawable.loadinggif)
+                        .fitCenter()
                         .into(holder.expertImg);
             }
         }
