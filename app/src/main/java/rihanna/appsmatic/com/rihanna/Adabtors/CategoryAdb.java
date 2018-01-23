@@ -92,6 +92,8 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
                 bundle.putString("category",categories.getCategories().get(position).getName());
                 Home.selectedCategory=categories.getCategories().get(position).getName();
                 bundle.putString("state","");
+                bundle.putString("district","");
+                bundle.putString("state","");
                 bundle.putString("email","");
                 bundle.putString("rate","");
                 services.setArguments(bundle);

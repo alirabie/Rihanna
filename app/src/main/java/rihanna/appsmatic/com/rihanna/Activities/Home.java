@@ -83,6 +83,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static int customerCount=1;
     public static boolean SetTimeForAllServices=false;
     public static OffOrderItem offOrderItem=new OffOrderItem();
+    private static String stateKey="";
     private static String districtKey="";
     public static String selectedCategory="";
 
@@ -168,10 +169,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         citesIds.add(response.body().getStates().get(i).getId());
                     }
 
+
                     cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome, citesNames));
                     cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            stateKey = citesNames.get(position);
                             Services services = new Services();
                             Bundle bundle = new Bundle();
                             bundle.putString("sourceflag","filter");
@@ -224,7 +227,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 bundle.putString("category",Home.selectedCategory);
                                                 bundle.putString("keyword","");
                                                 bundle.putString("district",districtKey);
-                                                bundle.putString("state","");
+                                                bundle.putString("state",stateKey);
                                                 bundle.putString("email","");
                                                 bundle.putString("rate", "");
                                                 services.setArguments(bundle);

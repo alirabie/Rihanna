@@ -103,7 +103,7 @@ public class Services extends Fragment {
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.setMessage(getResources().getString(R.string.pleasewait));
             mProgressDialog.show();
-            Generator.createService(RihannaAPI.class).getExpertsByFilterComp(getArguments().getString("category") + "", "", "","").enqueue(new Callback<ExpertsResponse>() {
+            Generator.createService(RihannaAPI.class).getExpertsByFilterComp(getArguments().getString("category") + "","", "", "","","").enqueue(new Callback<ExpertsResponse>() {
                 @Override
                 public void onResponse(Call<ExpertsResponse> call, Response<ExpertsResponse> response) {
                     if (response.isSuccessful()) {
@@ -147,7 +147,7 @@ public class Services extends Fragment {
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.setMessage(getResources().getString(R.string.pleasewait));
             mProgressDialog.show();
-            Generator.createService(RihannaAPI.class).getExpertsByFilterComp("", "",getArguments().getString("state") + "","").enqueue(new Callback<ExpertsResponse>() {
+            Generator.createService(RihannaAPI.class).getExpertsByFilterComp("", "",getArguments().getString("state") + "","","","").enqueue(new Callback<ExpertsResponse>() {
                 @Override
                 public void onResponse(Call<ExpertsResponse> call, Response<ExpertsResponse> response) {
                     if (response.isSuccessful()) {
@@ -187,8 +187,6 @@ public class Services extends Fragment {
             });
 
         }else if(getArguments().get("sourceflag").toString().equals("filter")){
-
-
             //Loading Dialog
             final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
             mProgressDialog.setIndeterminate(true);
@@ -198,7 +196,9 @@ public class Services extends Fragment {
                     getArguments().getString("category") + "",
                     getArguments().getString("email") + "",
                     getArguments().getString("state") + "",
-                    getArguments().getString("rate")+"")
+                    getArguments().getString("rate")+"",
+                    getArguments().getString("district")+"",
+                    getArguments().getString("keyword")+"")
             .enqueue(new Callback<ExpertsResponse>() {
                 @Override
                 public void onResponse(Call<ExpertsResponse> call, Response<ExpertsResponse> response) {

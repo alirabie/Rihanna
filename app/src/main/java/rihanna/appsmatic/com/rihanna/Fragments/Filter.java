@@ -54,6 +54,7 @@ public class Filter extends Fragment {
     private static List<String>categoriesNames;
     private static List<String>categoriesIds;
     private static List<String> rates;
+    private static boolean countriesDone,CategoriesDone;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +89,8 @@ public class Filter extends Fragment {
             @Override
             public void onResponse(Call<ResStates> call, Response<ResStates> response) {
                 if (response.isSuccessful()) {
+                    countriesDone=true;
+                    filterBtn.setEnabled(true);
                     statesNames=new ArrayList<String>();
                     statesIds=new ArrayList<String>();
                     //fill names and ids to spinner list from response
@@ -95,7 +98,6 @@ public class Filter extends Fragment {
                         statesNames.add(response.body().getStates().get(i).getName());
                         statesIds.add(response.body().getStates().get(i).getId());
                     }
-
                     //add names to spinner list
                     final ArrayAdapter<String> statesadabter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, statesNames);
                     statesadabter.notifyDataSetChanged();
@@ -125,7 +127,6 @@ public class Filter extends Fragment {
                                             districtsNames.add(response.body().getDistricts().get(i).getName());
                                             districtsIds.add(response.body().getDistricts().get(i).getId());
                                         }
-
 
                                         //add names to spinner list
                                         final ArrayAdapter<String> districtadapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, districtsNames);
@@ -183,6 +184,7 @@ public class Filter extends Fragment {
             @Override
             public void onResponse(Call<ResCategory> call, Response<ResCategory> response) {
                 if (response.isSuccessful()) {
+                    CategoriesDone=true;
                     categoriesNames=new ArrayList<String>();
                     categoriesIds=new ArrayList<String>();
                     if (response.body().getCategories() != null) {
@@ -243,25 +245,36 @@ public class Filter extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 filterBtn.clearAnimation();
                 filterBtn.setAnimation(anim);
-                Services services = new Services();
-                Bundle bundle = new Bundle();
-                bundle.putString("sourceflag","filter");
-                bundle.putString("category",categoryKey);
-                bundle.putString("state",stateKey);
-                bundle.putString("email",email.getText().toString());
-                bundle.putString("rate",rateVal);
-                services.setArguments(bundle);
-                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener, services);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-                districtKey="";
-                stateKey="";
-                categoryKey="";
-                Home.tittle.setVisibility(View.INVISIBLE);
-                Home.topButtons.setVisibility(View.VISIBLE);
-                Home.spainnersBox.setVisibility(View.VISIBLE);
+
+                //Check if all Spinners Complete loading
+                if(!countriesDone||!countriesDone) {
+                    return;
+                }
+                    Services services = new Services();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("sourceflag", "filter");
+                    bundle.putString("category", categoryKey + "");
+                    bundle.putString("state", stateKey + "");
+                    bundle.putString("email", email.getText().toString() + "");
+                    bundle.putString("rate", rateVal + "");
+                    bundle.putString("district", districtKey + "");
+                    bundle.putString("keyword", keyword.getText().toString());
+                    services.setArguments(bundle);
+                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontener, services);
+                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    fragmentTransaction.commit();
+                    districtKey = "";
+                    stateKey = "";
+                    categoryKey = "";
+                    districtKey="";
+                    countriesDone=false;
+                    CategoriesDone=false;
+                    Home.tittle.setVisibility(View.INVISIBLE);
+                    Home.topButtons.setVisibility(View.VISIBLE);
+                    Home.spainnersBox.setVisibility(View.VISIBLE);
+
             }
         });
 
