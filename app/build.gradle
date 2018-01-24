@@ -83,7 +83,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.+'
 }
 dependencies {
-    compile 'com.github.aakira:expandable-layout:1.4.2@aar'
+    compile 'com.github.aakira:expandable-layout:1.6.0@aar'
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'
@@ -127,4 +127,6 @@ dependencies {
 dependencies {
     compile 'com.google.android.gms:play-services-auth:9.8.0'
 }
-
+dependencies {
+    compile 'at.blogc:expandabletextview:1.0.5'
+}

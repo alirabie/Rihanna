@@ -85,7 +85,9 @@ public interface RihannaAPI {
             @Query("state")String state,
             @Query("rating")String rate,
             @Query("district")String district,
-            @Query("keyword")String keyWord);
+            @Query("keyword")String keyWord,
+            @Query("country")String country);
+
 
     //Get Experiences
     @GET("api/expert/expertise/{id}")

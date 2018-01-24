@@ -254,11 +254,16 @@ public class Filter extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("sourceflag", "filter");
                     bundle.putString("category", categoryKey + "");
+                    if(!stateKey.equals("")){
+                        bundle.putString("country","saudi arabia");
+                    }else {
+                        bundle.putString("country","");
+                    }
                     bundle.putString("state", stateKey + "");
                     bundle.putString("email", email.getText().toString() + "");
                     bundle.putString("rate", rateVal + "");
                     bundle.putString("district", districtKey + "");
-                    bundle.putString("keyword", keyword.getText().toString());
+                    bundle.putString("keyword", keyword.getText().toString()+"");
                     services.setArguments(bundle);
                     android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -269,6 +274,7 @@ public class Filter extends Fragment {
                     stateKey = "";
                     categoryKey = "";
                     districtKey="";
+                    rateVal="0";
                     countriesDone=false;
                     CategoriesDone=false;
                     Home.tittle.setVisibility(View.INVISIBLE);

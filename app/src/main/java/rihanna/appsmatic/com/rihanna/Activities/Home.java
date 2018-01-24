@@ -150,6 +150,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         districtes.setHint(getResources().getString(R.string.district));
         districtes.setTypeface(face);
         districtes.setHintTextColor(Color.WHITE);
+
+
         cities =(BetterSpinner)findViewById(R.id.citydown);
         cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
         cities.setHint(getResources().getString(R.string.city));
@@ -169,7 +171,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         citesIds.add(response.body().getStates().get(i).getId());
                     }
 
-
                     cities.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome, citesNames));
                     cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -184,6 +185,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                             bundle.putString("state",citesNames.get(position));
                             bundle.putString("email","");
                             bundle.putString("rate","");
+                            bundle.putString("country","saudi arabia");
                             services.setArguments(bundle);
                             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -205,15 +207,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                             districtsNames.add(response.body().getDistricts().get(i).getName());
                                             districtsIds.add(response.body().getDistricts().get(i).getId());
                                         }
-
                                         //add names to spinner list
-                                        //setup districtes spinner
-                                        districtes = (BetterSpinner) findViewById(R.id.countrydown);
-                                        districtes.setAdapter(new ArrayAdapter<>(Home.this, R.layout.drop_down_list_custome));
-                                        districtes.setHint(getResources().getString(R.string.district));
-                                        districtes.setTypeface(face);
-                                        districtes.setHintTextColor(Color.WHITE);
-                                        final ArrayAdapter<String> districtadapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, districtsNames);
+                                        //setup districts
+                                        final ArrayAdapter<String> districtadapter = new ArrayAdapter<>(getApplicationContext(),R.layout.drop_down_list_custome, districtsNames);
                                         districtadapter.notifyDataSetChanged();
                                         districtes.setAdapter(districtadapter);
                                         districtes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -226,6 +222,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 bundle.putString("sourceflag","filter");
                                                 bundle.putString("category",Home.selectedCategory);
                                                 bundle.putString("keyword","");
+                                                bundle.putString("country","saudi arabia");
                                                 bundle.putString("district",districtKey);
                                                 bundle.putString("state",stateKey);
                                                 bundle.putString("email","");
@@ -696,6 +693,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                       bundle.putString("state","");
                       bundle.putString("email","");
                       bundle.putString("rate","");
+                      bundle.putString("country","");
                       services.setArguments(bundle);
                       android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)Home.this).getSupportFragmentManager();
                       android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

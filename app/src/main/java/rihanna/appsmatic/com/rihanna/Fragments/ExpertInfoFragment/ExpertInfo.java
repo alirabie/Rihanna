@@ -206,6 +206,7 @@ public class ExpertInfo extends Fragment {
                 bundle.putString("rate", "");
                 bundle.putString("district", "");
                 bundle.putString("keyword","");
+                bundle.putString("country","");
                 services.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -350,6 +351,7 @@ public class ExpertInfo extends Fragment {
                     bundle.putString("rate","");
                     bundle.putString("district", "");
                     bundle.putString("keyword","");
+                    bundle.putString("country","");
                     services.setArguments(bundle);
                     android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

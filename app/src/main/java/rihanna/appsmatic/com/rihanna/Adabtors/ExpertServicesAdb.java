@@ -6,14 +6,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.github.aakira.expandablelayout.ExpandableLayout;
+import com.github.aakira.expandablelayout.ExpandableLinearLayout;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.util.List;
 
+import at.blogc.android.views.ExpandableTextView;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.Service;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
@@ -46,22 +55,20 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
 
     @Override
     public void onBindViewHolder(final Vh002 holder, final int position) {
+        holder.setIsRecyclable(false);
 
         animate(holder);
-            holder.serviceName.setText(expertServices.get(position).getServiceName() + "");
+        holder.serviceName.setText(expertServices.get(position).getServiceName() + "");
             holder.price.setText(expertServices.get(position).getPrice() + "");
-
-
-
 
 
         holder.unSubscribeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(isChecked){
-                    if(Home.SetTimeForAllServices){
-                        OffOrderItem offOrderItem=new OffOrderItem();
+                if (isChecked) {
+                    if (Home.SetTimeForAllServices) {
+                        OffOrderItem offOrderItem = new OffOrderItem();
                         offOrderItem.setId(expertServices.get(position).getServiceId() + "");
                         offOrderItem.setName(expertServices.get(position).getServiceName());
                         offOrderItem.setFromTime(Home.offOrderItem.getFromTime());
@@ -70,17 +77,17 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                         offOrderItem.setPrice(expertServices.get(position).getPrice());
                         Home.orderItems.add(offOrderItem);
 
-                    }else {
+                    } else {
                         FireDialog.pickService(context, holder.unSubscribeBtn, expertServices.get(position).getExpertId() + "", expertServices.get(position).getServiceId() + "",
                                 expertServices.get(position).getServiceName(),
                                 expertServices.get(position).getPrice());
                     }
-                }else {
+                } else {
                     for (int i = 0; i < Home.orderItems.size(); i++) {
                         if (expertServices.get(position).getServiceId().toString().equals(Home.orderItems.get(i).getId().toString())) {
                             Home.orderItems.remove(i);
-                            if(Home.orderItems.isEmpty()){
-                                Home.SetTimeForAllServices=false;
+                            if (Home.orderItems.isEmpty()) {
+                                Home.SetTimeForAllServices = false;
                             }
                             break;
                         }
@@ -88,15 +95,20 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                 }
 
 
-
             }
         });
 
 
-
-
-
-        }
+        holder.description.setText(expertServices.get(position).getDescription());
+        holder.expandableLayout.initLayout();
+        holder.expandableLayout.setInRecyclerView(true);
+        holder.toggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.expandableLayout.toggle();
+            }
+        });
+    }
 
 
     @Override
@@ -113,12 +125,18 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
 
         TextView serviceName,price;
         CheckBox unSubscribeBtn;
+        ExpandableLinearLayout expandableLayout ;
+        FrameLayout toggle;
+        TextView description;
 
         public Vh002(View itemView) {
             super(itemView);
             serviceName=(TextView)itemView.findViewById(R.id.item_layout_service_name);
             price=(TextView)itemView.findViewById(R.id.item_layout_service_price);
             unSubscribeBtn=(CheckBox)itemView.findViewById(R.id.item_layout_service_subscribe_btn);
+            expandableLayout=(ExpandableLinearLayout)itemView.findViewById(R.id.expandable);
+            description=(TextView)itemView.findViewById(R.id.discription_tv);
+            toggle=(FrameLayout)itemView.findViewById(R.id.togle);
         }
     }
 }

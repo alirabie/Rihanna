@@ -96,6 +96,7 @@ public class CategoryAdb extends RecyclerView.Adapter<CategoryAdb.CateVh> {
                 bundle.putString("state","");
                 bundle.putString("email","");
                 bundle.putString("rate","");
+                bundle.putString("country","");
                 services.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

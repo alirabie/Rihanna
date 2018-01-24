@@ -31,6 +31,9 @@ public class Service {
     @SerializedName("service_name")
     @Expose
     private String serviceName;
+    @SerializedName("description")
+    @Expose
+    private String description;
 
     public Integer getId() {
         return id;
@@ -94,5 +97,13 @@ public class Service {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
