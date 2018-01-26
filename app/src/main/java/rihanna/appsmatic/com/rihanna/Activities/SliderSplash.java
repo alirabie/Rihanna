@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -22,15 +24,22 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import rihanna.appsmatic.com.rihanna.API.Models.Advartisments.Responseadv;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
+import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
 import rihanna.appsmatic.com.rihanna.R;
+import ss.com.bannerslider.banners.Banner;
+import ss.com.bannerslider.views.BannerSlider;
 
 public class SliderSplash extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
-
-
     SliderLayout sliderLayout;
-    TextView text;
+    TextView text,skip;
     List<String>strings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,61 +58,67 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
 
         sliderLayout = (SliderLayout)findViewById(R.id.photo_slider);
         text=(TextView)findViewById(R.id.phototext);
+        skip=(TextView)findViewById(R.id.skip);
 
         text.setTypeface(Home.face);
-        TextSliderView textSliderView = new TextSliderView(SliderSplash.this);
-
 
         strings=new ArrayList<>();
+        Generator.createService(RihannaAPI.class).getAds().enqueue(new Callback<Responseadv>() {
+            @Override
+            public void onResponse(Call<Responseadv> call, Response<Responseadv> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getAdvertisements() != null) {
+                        if (response.body().getAdvertisements().isEmpty()) {
+                        } else {
+                            for (int i = 0; i < response.body().getAdvertisements().size(); i++) {
+                                TextSliderView textSliderView = new TextSliderView(SliderSplash.this);
+                                textSliderView
+                                        .image(response.body().getAdvertisements().get(i).getImages().get(0).getSrc().toString())
+                                        .setScaleType(BaseSliderView.ScaleType.Fit)
+                                        .setOnSliderClickListener(SliderSplash.this);
+                                sliderLayout.addSlider(textSliderView);
+                                strings.add(response.body().getAdvertisements().get(i).getText());
+                            }
 
-        strings.add("الاعلان رقم 1 ");
-        strings.add("نقدم افضل العروض لخدمات التجميل وخبيرات العنايه بالبشرة");
-        strings.add("نdfdfgdfgdfgdfgdfg بالبشرة");
-        strings.add("نقدssssفضل اdfgdfgdfgdfgلعنايه بالبشرة");
-        strings.add("نقدم افضل الtttttttttttttttttttبشرة");
-        strings.add("نقدم افضل العروض لخدمات التجميل وخبttyyyبشرة");
-
-
-
-      for (int i=0;i<strings.size();i++){
-          textSliderView
-                  .image(R.drawable.slidertest)
-                  .setScaleType(BaseSliderView.ScaleType.Fit)
-                  .setOnSliderClickListener(this);
-
-
-          sliderLayout.addSlider(textSliderView);
-
-      }
-
-
-
-
-
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.setCustomAnimation(new DescriptionAnimation());
-        sliderLayout.setDuration(3000);
-        sliderLayout.addOnPageChangeListener(this);
-        sliderLayout.setCurrentPosition(View.DRAWING_CACHE_QUALITY_AUTO);
+                            sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+                            sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                            sliderLayout.setCustomAnimation(new DescriptionAnimation());
+                            sliderLayout.setDuration(4000);
+                            sliderLayout.addOnPageChangeListener(SliderSplash.this);
+                            sliderLayout.setCurrentPosition(View.DRAWING_CACHE_QUALITY_AUTO);
 
 
+                        }
+                    }
 
 
+                } else {
 
 
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Responseadv> call, Throwable t) {
 
 
-
-
-
-
+            }
+        });
 
 
 
 
-
-
+        skip.setTypeface(Home.face);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(SliderSplash.this, R.anim.alpha);
+                skip.clearAnimation();
+                skip.setAnimation(anim);
+                startActivity(new Intent(SliderSplash.this, Home.class));
+                SliderSplash.this.finish();
+            }
+        });
 
 
 
@@ -123,11 +138,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
 
        text.setText(strings.get(position).toString());
         Log.e("indexxx",position+"");
-        if(strings.size()==position+1){
-            startActivity(new Intent(SliderSplash.this,Home.class));
-            SliderSplash.this.finish();
-            sliderLayout.stopAutoCycle();
-        }
+
     }
 
     @Override

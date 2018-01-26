@@ -247,7 +247,7 @@ public class SignInScreen extends AppCompatActivity  {
                                 if (response.body().getCustomers() != null) {
                                     SaveSharedPreference.setCustomerId(SignInScreen.this, response.body().getCustomers().get(0).getId());
                                     SaveSharedPreference.setCustomerInfo(SignInScreen.this, response.body());
-                                    startActivity(new Intent(SignInScreen.this, Home.class));
+                                    startActivity(new Intent(SignInScreen.this, SliderSplash.class));
                                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
                                     SignInScreen.this.finish();
                                     Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");

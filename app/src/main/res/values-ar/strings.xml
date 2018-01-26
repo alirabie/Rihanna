@@ -183,4 +183,5 @@
     <string name="pendingorders">إنتظار</string>
     <string name="processingorders">مقبول</string>
     <string name="setsametime">هل تريدي استخدام هذا الموعد مع كل الخدمات المختاره لاحقا ؟؟</string>
+    <string name="ignor">تخطى</string>
 </resources>

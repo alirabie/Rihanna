@@ -75,7 +75,7 @@ public class Splash extends AppCompatActivity {
                                     if (response.body().getCustomers() != null) {
                                         SaveSharedPreference.setCustomerId(Splash.this,response.body().getCustomers().get(0).getId());
                                         SaveSharedPreference.setCustomerInfo(Splash.this,response.body());
-                                        startActivity(new Intent(Splash.this, Home.class));
+                                        startActivity(new Intent(Splash.this, SliderSplash.class));
                                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
                                         Splash.this.finish();
                                         Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");

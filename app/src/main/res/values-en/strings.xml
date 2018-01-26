@@ -183,4 +183,5 @@
     <string name="pendingorders">Pending</string>
     <string name="processingorders">Accepted</string>
     <string name="setsametime">Do You Want Set This Time For All Next Selected Services ?</string>
+    <string name="ignor">Skip</string>
 </resources>

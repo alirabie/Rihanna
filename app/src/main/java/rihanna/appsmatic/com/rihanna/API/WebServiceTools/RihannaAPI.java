@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import rihanna.appsmatic.com.rihanna.API.Models.Advartisments.Responseadv;
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
@@ -134,5 +135,11 @@ public interface RihannaAPI {
                               @Query("servicedate")String date,
                               @Query("timefrom")String timeFrom,
                               @Query("timeto")String timeTo);
+
+
+
+    //adv
+    @GET("api/ads")
+    Call<Responseadv>getAds();
 
 }
