@@ -21,6 +21,7 @@ import rihanna.appsmatic.com.rihanna.API.Models.ExpertServices.ResExpertServices
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Experts.ExpertsResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.IsBusy.IsBusyRes;
+import rihanna.appsmatic.com.rihanna.API.Models.LangResponse.LangRes;
 import rihanna.appsmatic.com.rihanna.API.Models.OutdoorLocations.ResAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
@@ -142,4 +143,7 @@ public interface RihannaAPI {
     @GET("api/ads")
     Call<Responseadv>getAds();
 
+    //Change Language on server
+    @POST("api/languages?")
+    Call<LangRes>changeLang(@Query("languageid")String langId,@Query("customerid")String customerId);
 }

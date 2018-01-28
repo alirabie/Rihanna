@@ -51,6 +51,7 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
+import rihanna.appsmatic.com.rihanna.API.Models.LangResponse.LangRes;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
@@ -874,6 +876,38 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+    //Change Language on server
+    public static void changeLanguage(final Context context,String langId,String custId){
+
+        Generator.createService(RihannaAPI.class).changeLang(langId,custId).enqueue(new Callback<LangRes>() {
+            @Override
+            public void onResponse(Call<LangRes> call, Response<LangRes> response) {
+
+                if(response.isSuccessful()){
+                    if(response.body().getStatus().equals("ok")){
+                        Toast.makeText(context,"Changed",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context,"error"+response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+
+                    try {
+                        Toast.makeText(context,"Error from change lang API "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LangRes> call, Throwable t) {
+                Toast.makeText(context,"Connection error from change lang API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
 
 
 

@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -21,6 +22,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,8 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
                 if (response.isSuccessful()) {
                     if (response.body().getAdvertisements() != null) {
                         if (response.body().getAdvertisements().isEmpty()) {
+                            startActivity(new Intent(SliderSplash.this, Home.class));
+                            SliderSplash.this.finish();
                         } else {
                             for (int i = 0; i < response.body().getAdvertisements().size(); i++) {
                                 TextSliderView textSliderView = new TextSliderView(SliderSplash.this);
@@ -83,7 +87,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
                             sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
                             sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                             sliderLayout.setCustomAnimation(new DescriptionAnimation());
-                            sliderLayout.setDuration(4000);
+                            sliderLayout.setDuration(3000);
                             sliderLayout.addOnPageChangeListener(SliderSplash.this);
                             sliderLayout.setCurrentPosition(View.DRAWING_CACHE_QUALITY_AUTO);
 
@@ -93,15 +97,17 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
 
 
                 } else {
-
-
+                    try {
+                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Responseadv> call, Throwable t) {
-
-
+                Toast.makeText(getApplicationContext(),"Connection Error from Images Slider Splash "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

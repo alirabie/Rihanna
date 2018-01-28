@@ -152,9 +152,11 @@ public class Settings extends Fragment {
                                             break;
                                         case 1:
                                             SaveSharedPreference.setLangId(getActivity().getApplicationContext(), "ar");
+                                            Home.changeLanguage(getContext(),"3",SaveSharedPreference.getCustomerId(getContext()));
                                             break;
                                         case 2:
                                             SaveSharedPreference.setLangId(getActivity().getApplicationContext(), "en");
+                                            Home.changeLanguage(getContext(), "1", SaveSharedPreference.getCustomerId(getContext()));
                                             break;
                                     }
 

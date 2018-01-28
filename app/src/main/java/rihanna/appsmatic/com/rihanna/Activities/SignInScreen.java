@@ -249,6 +249,12 @@ public class SignInScreen extends AppCompatActivity  {
                                     SaveSharedPreference.setCustomerInfo(SignInScreen.this, response.body());
                                     startActivity(new Intent(SignInScreen.this, SliderSplash.class));
                                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
+                                    //Change Lang from server
+                                    if(SaveSharedPreference.getLangId(getApplicationContext()).equals("ar")){
+                                        Home.changeLanguage(getApplicationContext(),"3",SaveSharedPreference.getCustomerId(getApplicationContext()));
+                                    }else {
+                                        Home.changeLanguage(getApplicationContext(),"1",SaveSharedPreference.getCustomerId(getApplicationContext()));
+                                    }
                                     SignInScreen.this.finish();
                                     Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");
 
