@@ -54,7 +54,8 @@ public class Filter extends Fragment {
     private static List<String>categoriesNames;
     private static List<String>categoriesIds;
     private static List<String> rates;
-    private static boolean countriesDone,CategoriesDone;
+    private static boolean countriesDone=false;
+    private static boolean CategoriesDone=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +90,6 @@ public class Filter extends Fragment {
             @Override
             public void onResponse(Call<ResStates> call, Response<ResStates> response) {
                 if (response.isSuccessful()) {
-                    countriesDone=true;
                     filterBtn.setEnabled(true);
                     statesNames=new ArrayList<String>();
                     statesIds=new ArrayList<String>();
@@ -98,6 +98,8 @@ public class Filter extends Fragment {
                         statesNames.add(response.body().getStates().get(i).getName());
                         statesIds.add(response.body().getStates().get(i).getId());
                     }
+
+                    countriesDone=true;
                     //add names to spinner list
                     final ArrayAdapter<String> statesadabter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, statesNames);
                     statesadabter.notifyDataSetChanged();
@@ -184,7 +186,7 @@ public class Filter extends Fragment {
             @Override
             public void onResponse(Call<ResCategory> call, Response<ResCategory> response) {
                 if (response.isSuccessful()) {
-                    CategoriesDone=true;
+
                     categoriesNames=new ArrayList<String>();
                     categoriesIds=new ArrayList<String>();
                     if (response.body().getCategories() != null) {
@@ -193,6 +195,7 @@ public class Filter extends Fragment {
                             categoriesIds.add(response.body().getCategories().get(i).getId());
                         }
 
+                        CategoriesDone=true;
                         categoriesSpainner.setAdapter(new ArrayAdapter<>(getContext(), R.layout.drop_down_list_custome, categoriesNames));
                         categoriesSpainner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -247,7 +250,7 @@ public class Filter extends Fragment {
                 filterBtn.setAnimation(anim);
 
                 //Check if all Spinners Complete loading
-                if(!countriesDone||!countriesDone) {
+                if(!countriesDone||!CategoriesDone) {
                     return;
                 }
                     Services services = new Services();
