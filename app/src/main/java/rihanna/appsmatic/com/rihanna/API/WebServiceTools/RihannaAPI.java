@@ -12,6 +12,7 @@ import retrofit2.http.Query;
 import rihanna.appsmatic.com.rihanna.API.Models.Advartisments.Responseadv;
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
+import rihanna.appsmatic.com.rihanna.API.Models.ContactUs.MessegeSentRes;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.Customers.RegResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
@@ -146,4 +147,9 @@ public interface RihannaAPI {
     //Change Language on server
     @POST("api/languages?")
     Call<LangRes>changeLang(@Query("languageid")String langId,@Query("customerid")String customerId);
+
+
+    //send message
+    @POST("api/contactus")
+    Call<MessegeSentRes>contactUs(@Body Object obj);
 }

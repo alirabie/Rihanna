@@ -184,4 +184,5 @@
     <string name="processingorders">Accepted</string>
     <string name="setsametime">Do You Want Set This Time For All Next Selected Services ?</string>
     <string name="ignor">Skip</string>
+    <string name="messagesent">Message has been Sent Successfully</string>
 </resources>
