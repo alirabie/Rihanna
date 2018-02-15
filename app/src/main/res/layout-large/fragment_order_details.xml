@@ -178,21 +178,48 @@
             android:layout_below="@+id/frameLayout"
             android:layout_alignParentEnd="true"
             android:background="@color/colorPrimary"
-            android:layout_gravity="center"
-            android:id="@+id/orderconfirmed_flag">
+            android:layout_gravity="right|center_vertical"
+            android:id="@+id/orderconfirmed_flag"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/orderaccepted"
-                android:id="@+id/textView13"
+                android:id="@+id/textView6"
                 android:background="#eaeaea"
                 android:layout_margin="1dp"
                 android:gravity="center"
                 android:textSize="25dp"
                 android:padding="5dp"
                 android:textColor="@color/colorPrimary" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frameLayout"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="left|center_vertical"
+            android:id="@+id/rate_expert_btn"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textView13"
+                android:background="#eaeaea"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/rate" />
         </FrameLayout>
 
         <TextView

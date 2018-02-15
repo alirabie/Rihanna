@@ -3,6 +3,7 @@ package rihanna.appsmatic.com.rihanna.Dilaogs;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,7 +120,7 @@ public class FireDialog {
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     if(response.body().getRatings()!=null){
-                        custreviewNum.setText(context.getResources().getString(R.string.rviewsnum)+" "+response.body().getRatings().size());
+                        custreviewNum.setText(context.getResources().getString(R.string.rviewsnum) + " " + response.body().getRatings().size());
                         if(response.body().getRatings().isEmpty()){
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
@@ -189,17 +190,17 @@ public class FireDialog {
             public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
 
                 if (response.isSuccessful()) {
-                    if(progressBar.isShown())
+                    if (progressBar.isShown())
                         progressBar.setVisibility(View.GONE);
                     if (response.body().getCertificates() != null) {
-                        certList.setAdapter(new CertificatesAdb(context,response.body()));
+                        certList.setAdapter(new CertificatesAdb(context, response.body()));
                         certList.setLayoutManager(new LinearLayoutManager(context));
                     } else {
                         Toast.makeText(context, "Null from get certificates", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    if(progressBar.isShown())
+                    if (progressBar.isShown())
                         progressBar.setVisibility(View.GONE);
                     try {
                         Toast.makeText(context, "Not success from get certificates " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
@@ -212,7 +213,7 @@ public class FireDialog {
 
             @Override
             public void onFailure(Call<CertificatesList> call, Throwable t) {
-                if(progressBar.isShown())
+                if (progressBar.isShown())
                     progressBar.setVisibility(View.GONE);
 
                 Toast.makeText(context, "Connection error from get certificates " + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -297,7 +298,7 @@ public class FireDialog {
                         if (response.isSuccessful()) {
                             if (response.body().getRatings() != null) {
                                 dialogBuildercard.dismiss();
-                                ((Activity)context).finish();
+                                ((Activity) context).finish();
                             } else {
                                 Toast.makeText(context, "Null from rating API ", Toast.LENGTH_SHORT).show();
                             }
@@ -336,6 +337,54 @@ public class FireDialog {
 
 
     }
+
+
+
+    //Thanks Dialog
+    public static void thanksDialog(final Context context,View view,String name){
+
+        final TextView send;
+        final EditText comment;
+        final RatingBar ratingBar;
+        final ImageView thanksMsg;
+        final TextView expertNameTv;
+
+
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withEffect(Effectstype.Slit)
+                .withDialogColor(Color.BLACK)
+                .withTitleColor(Color.WHITE)
+                .withTitle(context.getResources().getString(R.string.app_name))
+                .withIcon(context.getResources().getDrawable(R.drawable.logo))
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.thanks_dialog_layout, view.getContext())
+                .show();
+
+
+        thanksMsg=(ImageView)dialogBuildercard.findViewById(R.id.thanks_dialog_smilemessage);
+        expertNameTv=(TextView)dialogBuildercard.findViewById(R.id.thanks_dialog_expert_name_tv);
+
+        //check language
+        if(SaveSharedPreference.getLangId(context).equals("ar")){
+            thanksMsg.setImageResource(R.drawable.thanks);
+        }else{
+            thanksMsg.setImageResource(R.drawable.thanks_en);
+        }
+
+        expertNameTv.setText(" " + name);
+
+
+        dialogBuildercard.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                ((Activity)context).finish();
+            }
+        });
+    }
+
 
 
     public static void pickService (final Context context,View view, final String expertId, final String serviceId, final String serviceName, final Double price){

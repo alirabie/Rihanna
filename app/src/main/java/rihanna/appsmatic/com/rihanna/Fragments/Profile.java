@@ -157,7 +157,7 @@ public class Profile extends Fragment {
                                                 statusid = statesIds.get(position);
 
                                                 //Get districts
-                                                Generator.createService(RihannaAPI.class).getDestrics("Saudi Arabia", stateKey).enqueue(new Callback<Districts>() {
+                                                Generator.createService(RihannaAPI.class).getDestrics(Home.country, stateKey).enqueue(new Callback<Districts>() {
                                                     @Override
                                                     public void onResponse(Call<Districts> call, final Response<Districts> response) {
 

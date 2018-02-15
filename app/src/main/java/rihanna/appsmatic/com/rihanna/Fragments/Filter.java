@@ -86,7 +86,7 @@ public class Filter extends Fragment {
 
 
         //get States by id
-        Generator.createService(RihannaAPI.class).getStates("69").enqueue(new Callback<ResStates>() {
+        Generator.createService(RihannaAPI.class).getStates(Home.SAUDI_ID).enqueue(new Callback<ResStates>() {
             @Override
             public void onResponse(Call<ResStates> call, Response<ResStates> response) {
                 if (response.isSuccessful()) {
@@ -258,7 +258,7 @@ public class Filter extends Fragment {
                     bundle.putString("sourceflag", "filter");
                     bundle.putString("category", categoryKey + "");
                     if(!stateKey.equals("")){
-                        bundle.putString("country","saudi arabia");
+                        bundle.putString("country",Home.country);
                     }else {
                         bundle.putString("country","");
                     }

@@ -58,6 +58,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
 import rihanna.appsmatic.com.rihanna.API.Models.LangResponse.LangRes;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
@@ -88,7 +89,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private static String stateKey="";
     private static String districtKey="";
     public static String selectedCategory="";
-
     private BetterSpinner cities;
     private BetterSpinner districtes;
     private static List<String> citesNames;
@@ -108,6 +108,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+    public static final String SAUDI_ID="69";
+    public static  String country ="Saudi Arabia";
+
+
 
 
 
@@ -119,7 +123,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setCountryName(Home.this);
         offOrderModel=new OffOrderModel();
         orderItems=new ArrayList<>();
 
@@ -130,6 +134,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
          tittle.setVisibility(View.INVISIBLE);
          topButtons=(LinearLayout)findViewById(R.id.top_buttons_box);
          spainnersBox=(LinearLayout)findViewById(R.id.spinners_box);
+
 
 
 
@@ -187,7 +192,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                             bundle.putString("state",citesNames.get(position));
                             bundle.putString("email","");
                             bundle.putString("rate","");
-                            bundle.putString("country","saudi arabia");
+                            bundle.putString("country",country);
                             services.setArguments(bundle);
                             android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                             android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -224,7 +229,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 bundle.putString("sourceflag","filter");
                                                 bundle.putString("category",Home.selectedCategory);
                                                 bundle.putString("keyword","");
-                                                bundle.putString("country","saudi arabia");
+                                                bundle.putString("country",country);
                                                 bundle.putString("district",districtKey);
                                                 bundle.putString("state",stateKey);
                                                 bundle.putString("email","");
@@ -235,7 +240,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 fragmentTransaction.replace(R.id.fragmentcontener, services);
                                                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                                                 fragmentTransaction.commit();
-                                                Toast.makeText(getApplicationContext(), citesNames.get(position), Toast.LENGTH_SHORT).show();
                                                 Toast.makeText(getApplicationContext(), districtKey, Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -906,6 +910,37 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
 
 
+
+    }
+
+
+    public static void setCountryName(final Context context){
+        //request countries by id from server
+        Generator.createService(RihannaAPI.class).getCountries(SAUDI_ID).enqueue(new Callback<ResCountry>() {
+            @Override
+            public void onResponse(Call<ResCountry> call, final Response<ResCountry> response) {
+                if (response.isSuccessful()) {
+
+                    try{
+                        country = response.body().getCountries().get(0).getName();
+                    }catch (Exception e){
+                        Toast.makeText(context, " error from countries "+e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }else {
+                    try {
+                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResCountry> call, Throwable t) {
+                Toast.makeText(context, "Connection error from countries "+t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
 
     }
 

@@ -104,9 +104,6 @@ public class OrderScreen extends AppCompatActivity {
             serviceTypeTv.setText(getResources().getString(R.string.outdoor));
         }
 
-
-
-        
         orderItemsList=(RecyclerView)findViewById(R.id.shopping_cart_orderinfo_list);
         final OfflineOrderItemsAdb offlineOrderItemsAdb=new OfflineOrderItemsAdb(Home.orderItems, OrderScreen.this);
         orderItemsList.setAdapter(offlineOrderItemsAdb);
@@ -166,7 +163,7 @@ public class OrderScreen extends AppCompatActivity {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
                             if (response.body().getOrders() != null) {
-                                FireDialog.experrReviewDailog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertId() + "", SaveSharedPreference.getCustomerId(getApplicationContext()), Home.offOrderModel.getExpertName());
+                                FireDialog.thanksDialog(OrderScreen.this, orderNow,Home.offOrderModel.getExpertName());
                                 //reset offline order data
                                // Home.offOrderModel.reset();
                                 Home.customerCount=1;

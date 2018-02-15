@@ -152,4 +152,7 @@ public interface RihannaAPI {
     //send message
     @POST("api/contactus")
     Call<MessegeSentRes>contactUs(@Body Object obj);
+
+
+
 }

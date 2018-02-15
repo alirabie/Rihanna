@@ -44,7 +44,7 @@ public class CustomerOrdersAdb extends RecyclerView.Adapter<CustomerOrdersAdb.Or
     @Override
     public void onBindViewHolder(final OrdersVh holder, final int position) {
 
-        animate(holder);
+        //animate(holder);
         holder.orderNum.setText(context.getResources().getString(R.string.ordernum)+orders.get(position).getId());
         if (orders.get(position).getServiceType()!=null) {
             if (orders.get(position).getServiceType().toString().equals("indoor")) {

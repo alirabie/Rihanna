@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +29,7 @@ public class OrderDetailsFrag extends Fragment {
 
     private TextView orderNumTv,customerName,customerPhone,customerAddress,CustomerstateTv,finished,serviceTypeFlag,paymentType,totalPrice;
     private LinearLayout outDoorFlag,showOnmapBtn;
-    private FrameLayout orderConfirmedFlag;
+    private FrameLayout orderConfirmedFlag,rateExpertBtn;
     private RecyclerView orderitemsList;
     private LinearLayout customerInfoPannel;
     private ImageView callCust,sms;
@@ -54,9 +56,11 @@ public class OrderDetailsFrag extends Fragment {
         CustomerstateTv=(TextView)view.findViewById(R.id.state_tv);
         paymentType=(TextView)view.findViewById(R.id.paymentstatus);
         totalPrice=(TextView)view.findViewById(R.id.totalprice);
+        rateExpertBtn=(FrameLayout)view.findViewById(R.id.rate_expert_btn);
         orderConfirmedFlag=(FrameLayout)view.findViewById(R.id.orderconfirmed_flag);
         CustomerstateTv=(TextView)view.findViewById(R.id.state_tv);
         orderConfirmedFlag.setVisibility(View.INVISIBLE);
+        rateExpertBtn.setVisibility(View.INVISIBLE);
 
 
 
@@ -141,8 +145,12 @@ public class OrderDetailsFrag extends Fragment {
 
         if(order.getOrderStatus().equals("Pending")||order.getOrderStatus().equals("Cancelled")||order.getOrderStatus().equals("Complete")) {
             finished.setVisibility(View.INVISIBLE);
+            rateExpertBtn.setVisibility(View.INVISIBLE);
         }
 
+        if(order.getOrderStatus().equals("Complete")){
+            rateExpertBtn.setVisibility(View.VISIBLE);
+        }
 
 
         if(order.getOrderItems()!=null) {
@@ -152,6 +160,16 @@ public class OrderDetailsFrag extends Fragment {
         }
 
 
+        rateExpertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                rateExpertBtn.clearAnimation();
+                rateExpertBtn.setAnimation(anim);
+
+                //fire rate dialog
+            }
+        });
 
 
     }

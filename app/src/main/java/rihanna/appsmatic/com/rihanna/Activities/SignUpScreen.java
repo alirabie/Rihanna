@@ -1,6 +1,7 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.gson.Gson;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -61,9 +63,11 @@ public class SignUpScreen extends AppCompatActivity {
     private static List<String> districtsIds=new ArrayList<>();
     private static List<String> districtsNames=new ArrayList<>();
     private static final String SAUDI_ID="69";
+    public static  String country ="Saudi Arabia";
     private static final String KUWAIT_ID="69";
     private static String countryKey,stateKey,districtkey,statusid,countryid;
     private LinearLayout socialmedisButtons,socialtitle;
+
 
 
 
@@ -142,7 +146,7 @@ public class SignUpScreen extends AppCompatActivity {
                                                 statusid = statesIds.get(position);
 
                                                 //Get districts
-                                                Generator.createService(RihannaAPI.class).getDestrics("Saudi Arabia", stateKey).enqueue(new Callback<Districts>() {
+                                                Generator.createService(RihannaAPI.class).getDestrics(country, stateKey).enqueue(new Callback<Districts>() {
                                                     @Override
                                                     public void onResponse(Call<Districts> call, final Response<Districts> response) {
 
@@ -371,5 +375,36 @@ public class SignUpScreen extends AppCompatActivity {
         countriesIds.clear();
         districtsNames.clear();
         districtsIds.clear();
+    }
+
+    public static void setCountryName(final Context context){
+        //request countries by id from server
+        Generator.createService(RihannaAPI.class).getCountries(SAUDI_ID).enqueue(new Callback<ResCountry>() {
+            @Override
+            public void onResponse(Call<ResCountry> call, final Response<ResCountry> response) {
+                if (response.isSuccessful()) {
+
+                    try {
+                        country = response.body().getCountries().get(0).getName();
+                    } catch (Exception e) {
+                        Toast.makeText(context, " error from countries " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                } else {
+                    try {
+                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResCountry> call, Throwable t) {
+                Toast.makeText(context, "Connection error from countries " + t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 }
