@@ -26,11 +26,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="خبيرة التجميل جويل"
         android:id="@+id/thanks_dialog_expert_name_tv"
-        android:layout_below="@+id/thanks_dialog_smilemessage"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="15dp"
-        android:padding="20dp" />
+        android:padding="20dp"
+        android:layout_below="@+id/thanks_dialog_smilemessage"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/donemessage"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/thanks_dialog_expert_name_tv"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp" />
 </RelativeLayout>

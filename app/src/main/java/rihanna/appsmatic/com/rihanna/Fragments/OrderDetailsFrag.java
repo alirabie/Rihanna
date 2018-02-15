@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,10 @@ import android.widget.TextView;
 
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
 import rihanna.appsmatic.com.rihanna.Activities.Home;
+import rihanna.appsmatic.com.rihanna.Activities.OrderScreen;
 import rihanna.appsmatic.com.rihanna.Adabtors.OrderItemsAdb;
+import rihanna.appsmatic.com.rihanna.Dilaogs.FireDialog;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 import rihanna.appsmatic.com.rihanna.Utils;
 
@@ -160,14 +164,19 @@ public class OrderDetailsFrag extends Fragment {
         }
 
 
+        //fire review dialog if order state completed
         rateExpertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 rateExpertBtn.clearAnimation();
                 rateExpertBtn.setAnimation(anim);
-
-                //fire rate dialog
+                //fire rate dialog hard
+                try {
+                    FireDialog.experrReviewDailog(getContext(),rateExpertBtn,order.getExpertId(), SaveSharedPreference.getCustomerId(getContext()),order.getExpertName());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

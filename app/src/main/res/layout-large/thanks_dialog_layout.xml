@@ -33,4 +33,14 @@
         android:textColor="@color/colorPrimary"
         android:textSize="25dp"
         android:padding="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/donemessage"
+        android:id="@+id/textView14"
+        android:layout_below="@+id/thanks_dialog_expert_name_tv"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textSize="20dp" />
 </RelativeLayout>

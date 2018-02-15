@@ -185,5 +185,8 @@
     <string name="setsametime">هل تريدي استخدام هذا الموعد مع كل الخدمات المختاره لاحقا ؟؟</string>
     <string name="ignor">تخطى</string>
     <string name="messagesent">تم ارسال رسالتك بنجاح</string>
-    <string name="rate">قيمى الخبيرة</string>
+    <string name="rate">تقييم الخبيرة</string>
+    <string name="pressagain">أضغط مره اخرى للخروج من التطبيق</string>
+    <string name="donerating">شكرا لك تم ارسال تقييمك</string>
+    <string name="donemessage">تم قبول طلبك بنجاح وبنتظار موافقة الخبيرة </string>
 </resources>

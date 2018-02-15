@@ -144,6 +144,12 @@ public class Order {
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("expert_id")
+    @Expose
+    private String expertId;
+    @SerializedName("expert_name")
+    @Expose
+    private String expertName;
     @SerializedName("reward_points_were_added")
     @Expose
     private Object rewardPointsWereAdded;
@@ -536,5 +542,21 @@ public class Order {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public String getExpertId() {
+        return expertId;
+    }
+
+    public void setExpertId(String expertId) {
+        this.expertId = expertId;
+    }
+
+    public String getExpertName() {
+        return expertName;
+    }
+
+    public void setExpertName(String expertName) {
+        this.expertName = expertName;
     }
 }

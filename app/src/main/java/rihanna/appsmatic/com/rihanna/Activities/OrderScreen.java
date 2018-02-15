@@ -24,7 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rihanna.appsmatic.com.rihanna.API.Models.Error.ResErrors;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertImages.Image;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.BillingAddress;
 import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Order;
@@ -163,7 +167,7 @@ public class OrderScreen extends AppCompatActivity {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
                             if (response.body().getOrders() != null) {
-                                FireDialog.thanksDialog(OrderScreen.this, orderNow,Home.offOrderModel.getExpertName());
+                                FireDialog.thanksDialog(OrderScreen.this, orderNow, Home.offOrderModel.getExpertName());
                                 //reset offline order data
                                // Home.offOrderModel.reset();
                                 Home.customerCount=1;
@@ -176,7 +180,34 @@ public class OrderScreen extends AppCompatActivity {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
                             try {
-                                Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                //Handel Error
+                                Gson gson = new GsonBuilder().create();
+                                ResErrors resErrors = new ResErrors();
+                                resErrors = gson.fromJson(response.errorBody().string(), ResErrors.class);
+                                if (resErrors.getErrors().getOrderPlacement() != null) {
+                                    //Collect Error  Data
+                                    String error = "";
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    if (!resErrors.getErrors().getOrderPlacement().isEmpty()) {
+                                        //Put errors count
+                                        for (int i = 0; i < resErrors.getErrors().getOrderPlacement().size(); i++) {
+                                            stringBuilder.append(resErrors.getErrors().getOrderPlacement().get(i) + "\n");
+                                        }
+
+                                        error = stringBuilder.toString();
+                                        NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(OrderScreen.this);
+                                        dialogBuilder
+                                                .withTitle(getResources().getString(R.string.app_name))
+                                                .withDialogColor(R.color.colorPrimary)
+                                                .withTitleColor("#FFFFFF")
+                                                .withIcon(getResources().getDrawable(R.drawable.logo))
+                                                .withDuration(700)                                          //def
+                                                .withEffect(Effectstype.RotateBottom)
+                                                .withMessage(error + "")
+                                                .show();
+                                    }
+                                    }
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

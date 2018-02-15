@@ -58,7 +58,6 @@ public class DateTimeScreen extends AppCompatActivity {
 
 
         next=(TextView)findViewById(R.id.date_time_next_btn);
-
         //fill time tabs
         timetabs=(TabLayout)findViewById(R.id.time_tabs);
         for(int i=0;i<4;i++) {

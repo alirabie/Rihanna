@@ -9,6 +9,9 @@ import java.util.List;
  * Created by Eng Ali on 9/17/2017.
  */
 public class Errors {
+    @SerializedName("order placement")
+    @Expose
+    private List<String> orderPlacement = null;
     @SerializedName("Account")
     @Expose
     private String account;
@@ -41,4 +44,13 @@ public class Errors {
     public void setAccount(String account) {
         this.account = account;
     }
+
+    public List<String> getOrderPlacement() {
+        return orderPlacement;
+    }
+
+    public void setOrderPlacement(List<String> orderPlacement) {
+        this.orderPlacement = orderPlacement;
+    }
+
 }

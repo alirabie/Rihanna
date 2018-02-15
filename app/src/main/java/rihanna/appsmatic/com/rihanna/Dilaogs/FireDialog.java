@@ -297,8 +297,8 @@ public class FireDialog {
                     public void onResponse(Call<ResReview> call, Response<ResReview> response) {
                         if (response.isSuccessful()) {
                             if (response.body().getRatings() != null) {
+                                Toast.makeText(context,context.getString(R.string.donerating),Toast.LENGTH_SHORT).show();
                                 dialogBuildercard.dismiss();
-                                ((Activity) context).finish();
                             } else {
                                 Toast.makeText(context, "Null from rating API ", Toast.LENGTH_SHORT).show();
                             }

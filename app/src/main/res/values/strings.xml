@@ -182,6 +182,9 @@
     <string name="ignor">Skip</string>
     <string name="messagesent">Message has been Sent Successfully</string>
     <string name="rate">Rate This Expert</string>
+    <string name="pressagain">Press again to Exit App</string>
+    <string name="donerating">Thank you Your Review has been Placed</string>
+    <string name="donemessage">Service Request is Placed and is Pending Expert approval </string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>

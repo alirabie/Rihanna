@@ -550,25 +550,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Side menu
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -625,7 +606,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             topButtons.setVisibility(View.VISIBLE);
             spainnersBox.setVisibility(View.VISIBLE);
 
-            Toast.makeText(this, "Press Again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.pressagain), Toast.LENGTH_SHORT).show();
             if (doubleBackToExitPressedOnce) {
                 final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Home.this);
                 dialogBuilder
