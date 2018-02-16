@@ -173,7 +173,7 @@ public class OrderDetailsFrag extends Fragment {
                 rateExpertBtn.setAnimation(anim);
                 //fire rate dialog hard
                 try {
-                    FireDialog.experrReviewDailog(getContext(),rateExpertBtn,order.getExpertId(), SaveSharedPreference.getCustomerId(getContext()),order.getExpertName());
+                    FireDialog.experrReviewDailog(getContext(),rateExpertBtn,order.getExpertId()+"", SaveSharedPreference.getCustomerId(getContext()),order.getExpertName());
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -124,9 +124,12 @@ public class FireDialog {
                         if(response.body().getRatings().isEmpty()){
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             commentsList.setAdapter(new CommentsAdb(context, response.body()));
-                            commentsList.setLayoutManager(new LinearLayoutManager(context));
+                            commentsList.setLayoutManager(mLayoutManager);
                         }
                     }else {
                         Toast.makeText(context,"Null from get reviews API",Toast.LENGTH_SHORT).show();

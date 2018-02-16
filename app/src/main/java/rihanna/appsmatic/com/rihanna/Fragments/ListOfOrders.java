@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -74,14 +77,15 @@ public class ListOfOrders extends Fragment {
                         List<Order>pindingOrders=new ArrayList<Order>();
 
 
-                        //filter orders by status
-                        for (int i=0;i<response.body().getOrders().size();i++){
-                            if(response.body().getOrders().get(i).getOrderStatus().equals("Pending")){
-                                pindingOrders.add(response.body().getOrders().get(i));
-                            }else {
-                                acceptedOrders.add(response.body().getOrders().get(i));
-                            }
 
+
+                        //Split Orders
+                        for (Order order :response.body().getOrders()){
+                            if(order.getOrderStatus().equals("Pending")){
+                                pindingOrders.add(order);
+                            }else {
+                                acceptedOrders.add(order);
+                            }
                         }
 
 
@@ -89,10 +93,13 @@ public class ListOfOrders extends Fragment {
                         if(pindingOrders.isEmpty()){
                             noreqFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             noreqFlag.setVisibility(View.INVISIBLE);
                             RecyclerView acceptedOrdersList=(RecyclerView)view.findViewById(R.id.requsted_list);
                             acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),pindingOrders));
-                            acceptedOrdersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            acceptedOrdersList.setLayoutManager(mLayoutManager);
                         }
 
 
@@ -101,10 +108,13 @@ public class ListOfOrders extends Fragment {
                         if(acceptedOrders.isEmpty()){
                             noacceptedFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             noacceptedFlag.setVisibility(View.INVISIBLE);
                             RecyclerView acceptedOrdersList=(RecyclerView)view.findViewById(R.id.acepted_requsted_list);
                             acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),acceptedOrders));
-                            acceptedOrdersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            acceptedOrdersList.setLayoutManager(mLayoutManager);
                         }
 
 

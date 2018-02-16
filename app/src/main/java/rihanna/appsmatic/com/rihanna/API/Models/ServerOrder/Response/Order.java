@@ -146,7 +146,7 @@ public class Order {
     private String id;
     @SerializedName("expert_id")
     @Expose
-    private String expertId;
+    private Integer expertId;
     @SerializedName("expert_name")
     @Expose
     private String expertName;
@@ -544,11 +544,11 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public String getExpertId() {
+    public Integer getExpertId() {
         return expertId;
     }
 
-    public void setExpertId(String expertId) {
+    public void setExpertId(Integer expertId) {
         this.expertId = expertId;
     }
 
