@@ -82,6 +82,15 @@ public class Splash extends AppCompatActivity {
 
 
                                     } else if (response.body().getErrors().getAccount() != null) {
+
+                                        //Logout and clear all data
+                                        SaveSharedPreference.setCustomerId(Splash.this,"");
+                                        SaveSharedPreference.setCustomerInfo(Splash.this, null);
+                                        SaveSharedPreference.setUserName(Splash.this, "", "");
+                                        startActivity(new Intent(Splash.this, Splash.class));
+                                        Splash.this.finish();
+
+
                                         //Show Error
                                         NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Splash.this);
                                         dialogBuilder
