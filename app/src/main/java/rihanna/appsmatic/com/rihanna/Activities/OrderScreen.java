@@ -246,8 +246,8 @@ public class OrderScreen extends AppCompatActivity {
         billingAddress.setCreatedOnUtc("2017-09-05T21:12:45.233");
         billingAddress.setZipPostalCode("00");
         billingAddress.setEmail(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getEmail());
-        billingAddress.setFirstName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getFirstName().toString());
-        billingAddress.setLastName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getLastName().toString());
+        billingAddress.setFirstName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getFirstName()+"");
+        billingAddress.setLastName(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getLastName()+"");
 
         for(int i=0;i<offOrderModel.getOffOrderItems().size();i++){
             OrderItem orderItem =new OrderItem();

@@ -127,8 +127,8 @@ public interface RihannaAPI {
 
 
     //Get Customer Orders By Id
-    @GET("api/orders/customer/{customerid}")
-    Call<ResOrderCreation>getCustomerOrdersById(@Path("customerid")String Id);
+    @GET("api/orders?")
+    Call<ResOrderCreation>getCustomerOrdersById(@Query("customerid")String Id);
 
 
     //Check If Busy

@@ -1,19 +1,28 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +63,7 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,9 +71,12 @@ import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Countries.ResCountry;
 import rihanna.appsmatic.com.rihanna.API.Models.District.Districts;
 import rihanna.appsmatic.com.rihanna.API.Models.LangResponse.LangRes;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Response.Order;
+import rihanna.appsmatic.com.rihanna.API.Models.ServerOrder.Response.ResOrderCreation;
 import rihanna.appsmatic.com.rihanna.API.Models.States.ResStates;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.Adabtors.CustomerOrdersAdb;
 import rihanna.appsmatic.com.rihanna.Fragments.AboutApp;
 import rihanna.appsmatic.com.rihanna.Fragments.Categories;
 import rihanna.appsmatic.com.rihanna.Fragments.Filter;
@@ -72,6 +85,7 @@ import rihanna.appsmatic.com.rihanna.Fragments.Profile;
 import rihanna.appsmatic.com.rihanna.Fragments.Sale;
 import rihanna.appsmatic.com.rihanna.Fragments.Services;
 import rihanna.appsmatic.com.rihanna.Fragments.Settings;
+import rihanna.appsmatic.com.rihanna.NotificationsService;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderItem;
 import rihanna.appsmatic.com.rihanna.OffLineOrder.OffOrderModel;
 import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
@@ -105,7 +119,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static LinearLayout topButtons ,spainnersBox;
     private boolean doubleBackToExitPressedOnce = false;
 
-
+    public static int ordersCount=0;
+    public static NotificationManager manager;
+    static int notId=0;
 
 
     public static final String SAUDI_ID="69";
@@ -121,9 +137,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setLang(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+       // setLang(R.layout.activity_home);
         setCountryName(Home.this);
+        setOrdersCount(Home.this);
         offOrderModel=new OffOrderModel();
         orderItems=new ArrayList<>();
 
@@ -146,6 +165,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //Setup two header spinners
@@ -364,6 +396,25 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         fragmentTransaction.commit();
 
+        //Open Orders from Notifications
+        if (getIntent().getStringExtra("target")!= null) {
+            // Here we can decide what do to -- perhaps load other parameters from the intent extras such as IDs, etc
+            if (getIntent().getStringExtra("target").equals("orders")) {
+                android.support.v4.app.FragmentManager fragmentManager3 = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
+                fragmentTransaction3.replace(R.id.fragmentcontener, new ListOfOrders());
+                fragmentTransaction3.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction3.commit();
+                tittle.setVisibility(View.VISIBLE);
+                tittle.setText(getResources().getString(R.string.listorderstitle));
+                Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                tittle.clearAnimation();
+                tittle.setAnimation(anim5);
+                topButtons.setVisibility(View.INVISIBLE);
+                spainnersBox.setVisibility(View.INVISIBLE);
+            }
+
+        }
         //Home button
         homeSide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -576,6 +627,123 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
+
+//        //Check every 1/2 min for orders
+//        final android.os.Handler mHandler = new android.os.Handler();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // TODO Auto-generated method stub
+//                while (true) {
+//                    try {
+//                        Thread.sleep(30000);
+//
+//                        mHandler.post(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                // TODO Auto-generated method stub
+//
+//                                Generator.createService(RihannaAPI.class).getCustomerOrdersById(SaveSharedPreference.getCustomerId(Home.this)).enqueue(new Callback<ResOrderCreation>() {
+//                                    @Override
+//                                    public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
+//                                        if(response.isSuccessful()){
+//
+//                                            if(response.body()!=null){
+//                                                List<Order>acceptedOrders=new ArrayList<Order>();
+//                                                //get Accepeted Oerders
+//                                                for (Order order :response.body().getOrders()){
+//                                                    if(order.getOrderStatus().equals("Processing")){
+//                                                        acceptedOrders.add(order);
+//                                                    }
+//                                                }
+//
+//                                                if(acceptedOrders.size()>ordersCount) {
+//                                                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//                                                    NotificationCompat.Builder builder =
+//                                                            (NotificationCompat.Builder) new NotificationCompat.Builder(getApplicationContext())
+//                                                                    .setSmallIcon(R.drawable.logo)
+//                                                                    .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
+//                                                                    .setSound(alarmSound)
+//                                                                    .setContentTitle(getResources().getString(R.string.app_name))
+//                                                                    .setAutoCancel(true)
+//                                                                    .setContentText(getResources().getString(R.string.notifiction));
+//                                                    Intent notificationIntent = new Intent(getApplicationContext(), Home.class).putExtra("target", "orders");
+//                                                    TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(getApplicationContext());
+//                                                    taskStackBuilder.addParentStack(Home.class);
+//                                                    taskStackBuilder.addNextIntent(notificationIntent);
+//                                                    PendingIntent contentIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//                                                    builder.setContentIntent(contentIntent);
+//                                                    manager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+//                                                    manager.notify(notId, builder.build());
+//                                                    notId++;
+//                                                    ordersCount = acceptedOrders.size();
+//                                                }
+//
+//
+//
+//
+//
+//
+//
+//                                            }else {
+//                                                Toast.makeText(Home.this,"Null from customer orders API",Toast.LENGTH_SHORT).show();
+//                                            }
+//
+//                                        }else {
+//                                            try {
+//                                                Toast.makeText(Home.this,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+//                                            } catch (IOException e) {
+//                                                e.printStackTrace();
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(Call<ResOrderCreation> call, Throwable t) {
+//
+//                                        Toast.makeText(Home.this,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//                            }
+//                        });
+//                    } catch (Exception e) {
+//                        // TODO: handle exception
+//                    }
+//                }
+//            }
+//        }).start();
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -926,6 +1094,54 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
+//
+    public static void setOrdersCount(final Context context){
+        Generator.createService(RihannaAPI.class).getCustomerOrdersById(SaveSharedPreference.getCustomerId(context)).enqueue(new Callback<ResOrderCreation>() {
+            @Override
+            public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
+                if(response.isSuccessful()){
 
+                    if(response.body()!=null){
+                        List<Order>acceptedOrders=new ArrayList<Order>();
+                        //get Accepeted Oerders
+                        for (Order order :response.body().getOrders()){
+                            if(order.getOrderStatus().equals("Processing")){
+                                acceptedOrders.add(order);
+                            }
+                        }
+
+                        ordersCount=acceptedOrders.size();
+
+                    }else {
+                        Toast.makeText(context,"Null from customer orders API",Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    try {
+                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResOrderCreation> call, Throwable t) {
+
+                Toast.makeText(context,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Change language method
+    public  void setLang(int layout){
+        String languageToLoad = SaveSharedPreference.getLangId(this);
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        this.setContentView(layout);
+    }
 
 }

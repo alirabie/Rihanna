@@ -189,4 +189,5 @@
     <string name="pressagain">أضغط مره اخرى للخروج من التطبيق</string>
     <string name="donerating">شكرا لك تم ارسال تقييمك</string>
     <string name="donemessage">تم قبول طلبك بنجاح وبنتظار موافقة الخبيرة </string>
+    <string name="notifiction">لديك طلب جديد تم الموافقة عليه</string>
 </resources>
