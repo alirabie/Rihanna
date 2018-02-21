@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -288,7 +289,26 @@ public class SignInScreen extends AppCompatActivity  {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
 
-                            Toast.makeText(SignInScreen.this, t.getMessage() + " from sign in", Toast.LENGTH_LONG).show();
+                            //Initialize Done Dialog
+                            final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(SignInScreen.this);
+                            dialogBuildercard
+                                    .withDuration(700)//def
+                                    .withEffect(Effectstype.Fall)
+                                    .withDialogColor(Color.BLACK)
+                                    .withIcon(getResources().getDrawable(R.drawable.logo))
+                                    .withTitleColor(Color.WHITE)
+                                    .withMessage(getResources().getString(R.string.connectionerr))
+                                    .withTitle(getResources().getString(R.string.connectionerror))
+                                    .isCancelableOnTouchOutside(false)
+                                    .withButton1Text(getResources().getString(R.string.dissmis))
+                                    .setButton1Click(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            dialogBuildercard.dismiss();
+                                            SignInScreen.this.finish();
+                                        }
+                                    }).show();
                         }
                     });
 

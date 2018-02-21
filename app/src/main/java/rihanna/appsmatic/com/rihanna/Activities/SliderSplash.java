@@ -2,6 +2,7 @@ package rihanna.appsmatic.com.rihanna.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +35,8 @@ import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Advartisments.Responseadv;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.RihannaAPI;
+import rihanna.appsmatic.com.rihanna.OffLineOrder.offAddress;
+import rihanna.appsmatic.com.rihanna.Prefs.SaveSharedPreference;
 import rihanna.appsmatic.com.rihanna.R;
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.views.BannerSlider;
@@ -98,7 +103,7 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
 
                 } else {
                     try {
-                        Toast.makeText(getApplicationContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -107,7 +112,29 @@ public class SliderSplash extends AppCompatActivity implements BaseSliderView.On
 
             @Override
             public void onFailure(Call<Responseadv> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Connection Error from Images Slider Splash "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                //Initialize Done Dialog
+                final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(SliderSplash.this);
+                dialogBuildercard
+                        .withDuration(700)//def
+                        .withEffect(Effectstype.Fall)
+                        .withIcon(getResources().getDrawable(R.drawable.logo))
+                        .withDialogColor(Color.BLACK)
+                        .withTitleColor(Color.WHITE)
+                        .withMessage(getResources().getString(R.string.connectionerr))
+                        .withTitle(getResources().getString(R.string.connectionerror))
+                        .isCancelableOnTouchOutside(false)
+                        .withButton1Text(getResources().getString(R.string.dissmis))
+                        .setButton1Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogBuildercard.dismiss();
+                                SliderSplash.this.finish();
+                            }
+                        }).show();
+
+
+               // Toast.makeText(getApplicationContext(), "Connection Error from Images Slider Splash " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

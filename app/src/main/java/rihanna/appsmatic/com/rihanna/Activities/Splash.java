@@ -1,13 +1,17 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -52,7 +56,11 @@ public class Splash extends AppCompatActivity {
 
         launchTestService();
 
-
+        //Check location permissions for Marshmallow
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+        }
 
 
 
@@ -122,7 +130,26 @@ public class Splash extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<RegResponse> call, Throwable t) {
 
-                                Toast.makeText(Splash.this, t.getMessage() + " from sign in", Toast.LENGTH_LONG).show();
+                                //Initialize Done Dialog
+                                final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(Splash.this);
+                                dialogBuildercard
+                                        .withDuration(700)//def
+                                        .withEffect(Effectstype.Fall)
+                                        .withIcon(getResources().getDrawable(R.drawable.logo))
+                                        .withDialogColor(Color.BLACK)
+                                        .withTitleColor(Color.WHITE)
+                                        .withMessage(getResources().getString(R.string.connectionerr))
+                                        .withTitle(getResources().getString(R.string.connectionerror))
+                                        .isCancelableOnTouchOutside(false)
+                                        .withButton1Text(getResources().getString(R.string.dissmis))
+                                        .setButton1Click(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                dialogBuildercard.dismiss();
+                                                Splash.this.finish();
+                                            }
+                                        }).show();
                             }
                         });
 

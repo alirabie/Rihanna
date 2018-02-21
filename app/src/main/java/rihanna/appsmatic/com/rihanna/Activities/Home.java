@@ -1012,8 +1012,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
-
-
     //Check Google Service
     public static boolean isGooglePlayServicesAvailable(Activity activity) {
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();

@@ -102,10 +102,10 @@ public class AboutApp extends Fragment {
 
 
                 txt1=(TextView)expandableLayout1.findViewById(R.id.text1);
-                txt1.setText("تتألف شروط الاستخدام هذه من الشروط والأحكام الواردة أدناه بالإضافة إلى الشروط الموضحة في سياسة الخصوصية (وفقًا للتعديلات التي يتم إجراؤها من حين لآخر)" +
-                        "\n"+"تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده"+
-                        "\n"+"التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا"+
-                        "\n"+"التعامل بمهنية مع العميلات وحفظ خصوصياتهم ");
+                txt1.setText(getResources().getString(R.string.termsheder) +" : "+
+                        "\n"+"- "+getResources().getString(R.string.role1)+
+                        "\n"+"- "+getResources().getString(R.string.role2)+
+                        "\n"+"- "+getResources().getString(R.string.role3));
                 expandableLayout1.toggle(); // toggle expand and collapse
             }
         });

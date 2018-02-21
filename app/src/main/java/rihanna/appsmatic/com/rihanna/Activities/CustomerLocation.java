@@ -95,6 +95,9 @@ public class CustomerLocation extends FragmentActivity implements OnMapReadyCall
         }
 
 
+
+
+
         addr=(EditText)findViewById(R.id.customer_location_street_input);
         phone=(EditText)findViewById(R.id.customer_location_phone_input);
         next=(TextView)findViewById(R.id.date_time_next_btn);

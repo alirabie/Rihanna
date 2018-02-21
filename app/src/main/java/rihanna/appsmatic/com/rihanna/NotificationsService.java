@@ -92,7 +92,7 @@ public class NotificationsService extends IntentService {
                                                                     .setSound(alarmSound)
                                                                     .setContentTitle(getResources().getString(R.string.app_name))
                                                                     .setAutoCancel(true)
-                                                                    .setContentText(getResources().getString(R.string.notifiction));
+                                                                    .setContentText(getResources().getString(R.string.notifiction)+" "+(acceptedOrders.size()-ordersCount)+" "+getResources().getString(R.string.notifi2));
                                                     Intent notificationIntent = new Intent(getApplicationContext(), Home.class).putExtra("target", "orders");
                                                     TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(getApplicationContext());
                                                     taskStackBuilder.addParentStack(Home.class);
@@ -112,7 +112,7 @@ public class NotificationsService extends IntentService {
 
 
                                             }else {
-                                                Toast.makeText(getApplicationContext(),"Null from customer orders API",Toast.LENGTH_SHORT).show();
+                                            //    Toast.makeText(getApplicationContext(),"Null from customer orders API",Toast.LENGTH_SHORT).show();
                                             }
 
                                         }else {
@@ -127,7 +127,7 @@ public class NotificationsService extends IntentService {
                                     @Override
                                     public void onFailure(Call<ResOrderCreation> call, Throwable t) {
 
-                                        Toast.makeText(getApplicationContext(),"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(getApplicationContext(),"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -183,7 +183,7 @@ public class NotificationsService extends IntentService {
             @Override
             public void onFailure(Call<ResOrderCreation> call, Throwable t) {
 
-                Toast.makeText(context,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(context,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

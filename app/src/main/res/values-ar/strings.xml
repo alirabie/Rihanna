@@ -189,5 +189,12 @@
     <string name="pressagain">أضغط مره اخرى للخروج من التطبيق</string>
     <string name="donerating">شكرا لك تم ارسال تقييمك</string>
     <string name="donemessage">تم قبول طلبك بنجاح وبنتظار موافقة الخبيرة </string>
-    <string name="notifiction">لديك طلب جديد تم الموافقة عليه</string>
+    <string name="notifiction">لديك </string>
+    <string name="connectionerr">من فضلك تحقق من إتصالك بالانترنت .. !</string>
+    <string name="notifi2">طلبات جديدة تم الموافقه عليها</string>
+    <string name="rihannadisc">ريحانه هو تطبيق لتقديم الطريقة الامثل للبحث عن افضل خبيرات التجميل وتيسير عملية التواصل معهم وحجز الخدمات ومعرفة احتياجات العميلة ومن ثم الخبيرة الامثل لمساعدتها </string>
+    <string name="termsheder">تتألف شروط الاستخدام هذه من الشروط والأحكام الواردة أدناه</string>
+    <string name="role1">تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده</string>
+    <string name="role2">التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا</string>
+    <string name="role3">التعامل بمهنية مع العميلات وحفظ خصوصياتهم</string>
 </resources>

@@ -317,7 +317,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="تطبيق ريحانة افضل طرق لعرض خدمات اشهر وافضل خبيرات التجميل فى جميع المدن والمناطق ... ايضا يمكنك من معرفة جميع العروض لديهم وحجزها ويمكنك الدفع بواسطته"
+        android:text="@string/rihannadisc"
         android:id="@+id/about_app_info_tv"
         android:layout_below="@+id/logo_about_app"
         android:layout_alignParentStart="true"

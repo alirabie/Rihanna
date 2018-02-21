@@ -185,7 +185,14 @@
     <string name="pressagain">Press again to Exit App</string>
     <string name="donerating">Thank you Your Review has been Placed</string>
     <string name="donemessage">Service Request is Placed and is Pending Expert approval </string>
-    <string name="notifiction">You Have new Accepted Order</string>
+    <string name="notifiction">You Have new </string>
+    <string name="connectionerr">Please Check Your Internet Connection .. !</string>
+    <string name="notifi2"> Accepted Orders</string>
+    <string name="rihannadisc">Rihanna is a Application for creating the best way for searching for Beauty Experts and increase facility of the process of finding , contacting them and reserve services</string>
+    <string name="termsheder">These Terms of Use consist of the terms and conditions below</string>
+    <string name="role1">Rihanna Application belongs to the Rihanna Company and does not allow to simulate or imitate it</string>
+    <string name="role2">Ensure that all expert data are legally valid</string>
+    <string name="role3">Dealing professionally with clients and keeping their privacy</string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>

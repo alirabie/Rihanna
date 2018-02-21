@@ -204,15 +204,25 @@ public class SignUpScreen extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<ResStates> call, Throwable t) {
-                                    NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(SignUpScreen.this);
-                                    dialogBuilder
+                                    //Initialize Done Dialog
+                                    final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(SignUpScreen.this);
+                                    dialogBuildercard
+                                            .withDuration(700)//def
+                                            .withEffect(Effectstype.Fall)
+                                            .withDialogColor(Color.BLACK)
+                                            .withTitleColor(Color.WHITE)
+                                            .withMessage(getResources().getString(R.string.connectionerr))
                                             .withTitle(getResources().getString(R.string.connectionerror))
-                                            .withDialogColor(R.color.colorPrimary)
-                                            .withTitleColor("#FFFFFF")
-                                            .withDuration(700)                                          //def
-                                            .withEffect(Effectstype.RotateBottom)
-                                            .withMessage(t.getMessage() + " : From states ")
-                                            .show();
+                                            .isCancelableOnTouchOutside(false)
+                                            .withButton1Text(getResources().getString(R.string.dissmis))
+                                            .setButton1Click(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+
+                                                    dialogBuildercard.dismiss();
+                                                    SignUpScreen.this.finish();
+                                                }
+                                            }).show();
                                 }
                             });
 

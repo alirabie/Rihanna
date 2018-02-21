@@ -1,8 +1,11 @@
 package rihanna.appsmatic.com.rihanna.Fragments.ExpertInfoFragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -294,6 +297,7 @@ public class ExpertInfo extends Fragment {
                                 .setButton2Click(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+
                                         //Set service type to offline order outdoor
                                         Home.offOrderModel.setServiceType("out");
                                         startActivity(new Intent(getContext(), CustomerLocation.class).putExtra("expId", expertId));
