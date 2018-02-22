@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class NotificationsService extends IntentService {
                 // TODO Auto-generated method stub
                 while (true) {
                     try {
-                        Thread.sleep(30000);
+                        Thread.sleep(40000);
 
                         mHandler.post(new Runnable() {
 
@@ -76,13 +77,15 @@ public class NotificationsService extends IntentService {
 
                                             if(response.body()!=null){
                                                 List<Order>acceptedOrders=new ArrayList<Order>();
+
                                                 //get Accepeted Oerders
-                                                for (Order order :response.body().getOrders()){
-                                                    if(order.getOrderStatus().equals("Processing")){
-                                                        acceptedOrders.add(order);
+                                                for (int i=0;i<response.body().getOrders().size();i++){
+                                                    if(response.body().getOrders().get(i).getOrderStatus().equals("Processing")){
+                                                        acceptedOrders.add(response.body().getOrders().get(i));
                                                     }
                                                 }
 
+                                                Log.e("test",acceptedOrders.size()+"  >  "+ordersCount);
                                                 if(acceptedOrders.size()>ordersCount) {
                                                     Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                                                     NotificationCompat.Builder builder =
@@ -103,6 +106,7 @@ public class NotificationsService extends IntentService {
                                                     manager.notify(notId, builder.build());
                                                     notId++;
                                                     ordersCount = acceptedOrders.size();
+                                                    acceptedOrders.clear();
                                                 }
 
 
@@ -112,7 +116,7 @@ public class NotificationsService extends IntentService {
 
 
                                             }else {
-                                            //    Toast.makeText(getApplicationContext(),"Null from customer orders API",Toast.LENGTH_SHORT).show();
+                                           //   Toast.makeText(getApplicationContext(),"Null from customer orders API",Toast.LENGTH_SHORT).show();
                                             }
 
                                         }else {
@@ -127,7 +131,7 @@ public class NotificationsService extends IntentService {
                                     @Override
                                     public void onFailure(Call<ResOrderCreation> call, Throwable t) {
 
-                                       // Toast.makeText(getApplicationContext(),"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+                                   ///     Toast.makeText(getApplicationContext(),"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -157,11 +161,11 @@ public class NotificationsService extends IntentService {
                 if(response.isSuccessful()){
 
                     if(response.body()!=null){
-                        List<Order> acceptedOrders=new ArrayList<Order>();
+                        List<Order>acceptedOrders=new ArrayList<Order>();
                         //get Accepeted Oerders
-                        for (Order order :response.body().getOrders()){
-                            if(order.getOrderStatus().equals("Processing")){
-                                acceptedOrders.add(order);
+                        for (int i=0;i<response.body().getOrders().size();i++){
+                            if(response.body().getOrders().get(i).getOrderStatus().equals("Processing")){
+                                acceptedOrders.add(response.body().getOrders().get(i));
                             }
                         }
 

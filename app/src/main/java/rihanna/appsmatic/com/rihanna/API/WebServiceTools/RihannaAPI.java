@@ -127,7 +127,7 @@ public interface RihannaAPI {
 
 
     //Get Customer Orders By Id
-    @GET("api/orders?")
+    @GET("api/orders?&limit=200")
     Call<ResOrderCreation>getCustomerOrdersById(@Query("customerid")String Id);
 
 
