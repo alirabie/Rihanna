@@ -96,7 +96,10 @@ public class NotificationsService extends IntentService {
                                                                     .setContentTitle(getResources().getString(R.string.app_name))
                                                                     .setAutoCancel(true)
                                                                     .setContentText(getResources().getString(R.string.notifiction)+" "+(acceptedOrders.size()-ordersCount)+" "+getResources().getString(R.string.notifi2));
-                                                    Intent notificationIntent = new Intent(getApplicationContext(), Home.class).putExtra("target", "orders");
+                                                    Home.setupCartBadge(acceptedOrders.size()-ordersCount);
+                                                    Intent notificationIntent = new Intent(getApplicationContext(), Home.class)
+                                                            .putExtra("target", "orders")
+                                                            .putExtra("count",acceptedOrders.size()-ordersCount);
                                                     TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(getApplicationContext());
                                                     taskStackBuilder.addParentStack(Home.class);
                                                     taskStackBuilder.addNextIntent(notificationIntent);

@@ -1,5 +1,6 @@
 package rihanna.appsmatic.com.rihanna.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -123,6 +124,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public static NotificationManager manager;
     static int notId=0;
 
+    public static TextView textCartItemCount;
 
     public static final String SAUDI_ID="69";
     public static  String country ="Saudi Arabia";
@@ -131,6 +133,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -142,7 +145,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
        // setLang(R.layout.activity_home);
         setCountryName(Home.this);
-        setOrdersCount(Home.this);
+        //setOrdersCount(Home.this);
         offOrderModel=new OffOrderModel();
         orderItems=new ArrayList<>();
 
@@ -419,7 +422,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         homeSide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 homeSide.clearAnimation();
                 homeSide.setAnimation(anim);
@@ -628,122 +630,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
-
-//        //Check every 1/2 min for orders
-//        final android.os.Handler mHandler = new android.os.Handler();
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // TODO Auto-generated method stub
-//                while (true) {
-//                    try {
-//                        Thread.sleep(30000);
-//
-//                        mHandler.post(new Runnable() {
-//
-//                            @Override
-//                            public void run() {
-//                                // TODO Auto-generated method stub
-//
-//                                Generator.createService(RihannaAPI.class).getCustomerOrdersById(SaveSharedPreference.getCustomerId(Home.this)).enqueue(new Callback<ResOrderCreation>() {
-//                                    @Override
-//                                    public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
-//                                        if(response.isSuccessful()){
-//
-//                                            if(response.body()!=null){
-//                                                List<Order>acceptedOrders=new ArrayList<Order>();
-//                                                //get Accepeted Oerders
-//                                                for (Order order :response.body().getOrders()){
-//                                                    if(order.getOrderStatus().equals("Processing")){
-//                                                        acceptedOrders.add(order);
-//                                                    }
-//                                                }
-//
-//                                                if(acceptedOrders.size()>ordersCount) {
-//                                                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//                                                    NotificationCompat.Builder builder =
-//                                                            (NotificationCompat.Builder) new NotificationCompat.Builder(getApplicationContext())
-//                                                                    .setSmallIcon(R.drawable.logo)
-//                                                                    .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-//                                                                    .setSound(alarmSound)
-//                                                                    .setContentTitle(getResources().getString(R.string.app_name))
-//                                                                    .setAutoCancel(true)
-//                                                                    .setContentText(getResources().getString(R.string.notifiction));
-//                                                    Intent notificationIntent = new Intent(getApplicationContext(), Home.class).putExtra("target", "orders");
-//                                                    TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(getApplicationContext());
-//                                                    taskStackBuilder.addParentStack(Home.class);
-//                                                    taskStackBuilder.addNextIntent(notificationIntent);
-//                                                    PendingIntent contentIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//                                                    builder.setContentIntent(contentIntent);
-//                                                    manager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-//                                                    manager.notify(notId, builder.build());
-//                                                    notId++;
-//                                                    ordersCount = acceptedOrders.size();
-//                                                }
-//
-//
-//
-//
-//
-//
-//
-//                                            }else {
-//                                                Toast.makeText(Home.this,"Null from customer orders API",Toast.LENGTH_SHORT).show();
-//                                            }
-//
-//                                        }else {
-//                                            try {
-//                                                Toast.makeText(Home.this,response.errorBody().string(),Toast.LENGTH_SHORT).show();
-//                                            } catch (IOException e) {
-//                                                e.printStackTrace();
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ResOrderCreation> call, Throwable t) {
-//
-//                                        Toast.makeText(Home.this,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                            }
-//                        });
-//                    } catch (Exception e) {
-//                        // TODO: handle exception
-//                    }
-//                }
-//            }
-//        }).start();
-//
-//
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -829,9 +715,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
 
+        final MenuItem menuItem = menu.findItem(R.id.action_shopping_cart);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge2);
+        //receive orders count from notifications
+        setupCartBadge(getIntent().getIntExtra("count",0));
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+                setupCartBadge(0);
+            }
+        });
 
         //Setup Search view listener >>>
-
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -1093,43 +990,43 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 //
-    public static void setOrdersCount(final Context context){
-        Generator.createService(RihannaAPI.class).getCustomerOrdersById(SaveSharedPreference.getCustomerId(context)).enqueue(new Callback<ResOrderCreation>() {
-            @Override
-            public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
-                if(response.isSuccessful()){
-
-                    if(response.body()!=null){
-                        List<Order>acceptedOrders=new ArrayList<Order>();
-                        //get Accepeted Oerders
-                        for (Order order :response.body().getOrders()){
-                            if(order.getOrderStatus().equals("Processing")){
-                                acceptedOrders.add(order);
-                            }
-                        }
-
-                        ordersCount=acceptedOrders.size();
-
-                    }else {
-                        Toast.makeText(context,"Null from customer orders API",Toast.LENGTH_SHORT).show();
-                    }
-
-                }else {
-                    try {
-                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResOrderCreation> call, Throwable t) {
-
-                Toast.makeText(context,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    public static void setOrdersCount(final Context context){
+//        Generator.createService(RihannaAPI.class).getCustomerOrdersById(SaveSharedPreference.getCustomerId(context)).enqueue(new Callback<ResOrderCreation>() {
+//            @Override
+//            public void onResponse(Call<ResOrderCreation> call, Response<ResOrderCreation> response) {
+//                if(response.isSuccessful()){
+//
+//                    if(response.body()!=null){
+//                        List<Order>acceptedOrders=new ArrayList<Order>();
+//                        //get Accepeted Oerders
+//                        for (Order order :response.body().getOrders()){
+//                            if(order.getOrderStatus().equals("Processing")){
+//                                acceptedOrders.add(order);
+//                            }
+//                        }
+//
+//                        ordersCount=acceptedOrders.size();
+//
+//                    }else {
+//                        Toast.makeText(context,"Null from customer orders API",Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }else {
+//                    try {
+//                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResOrderCreation> call, Throwable t) {
+//
+//                Toast.makeText(context,"Connection Error from customer orders API" +t.getMessage(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     // Change language method
     public  void setLang(int layout){
@@ -1141,5 +1038,23 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         this.setContentView(layout);
     }
+
+    //Add Cart Messages badge count
+    public static void setupCartBadge(int count) {
+        if (textCartItemCount != null) {
+
+            if (count == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(count, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
 
 }

@@ -113,7 +113,7 @@ public class CustomerOrdersAdb extends RecyclerView.Adapter<CustomerOrdersAdb.Or
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 holder.goOrderDetailsBtn.clearAnimation();
                 holder.goOrderDetailsBtn.setAnimation(anim);
-
+                Home.setupCartBadge(0);
                 OrderDetailsFrag orderDetailsFrag = new OrderDetailsFrag();
                 Bundle bundle=new Bundle();
                 bundle.putString("order", Utils.getGsonParser().toJson(orders.get(position)));
