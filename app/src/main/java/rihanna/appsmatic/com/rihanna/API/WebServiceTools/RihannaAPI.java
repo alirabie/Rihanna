@@ -10,6 +10,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rihanna.appsmatic.com.rihanna.API.Models.Advartisments.Responseadv;
+import rihanna.appsmatic.com.rihanna.API.Models.CancleOrders.ChangingResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.Categories.ResCategory;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
 import rihanna.appsmatic.com.rihanna.API.Models.ContactUs.MessegeSentRes;
@@ -152,6 +153,10 @@ public interface RihannaAPI {
     //send message
     @POST("api/contactus")
     Call<MessegeSentRes>contactUs(@Body Object obj);
+
+    //Change Order Status
+    @POST("/api/expert/order/status?")
+    Call<ChangingResponse>changeOrdrStatus(@Query("OrderId")String orderId, @Query("StatusId")String statusId);
 
 
 

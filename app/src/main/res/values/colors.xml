@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EC4399</color>
+    <color name="colorPrimary">#ec4399</color>
     <color name="colorPrimaryDark">#70002d</color>
     <color name="colorAccent">#EC4399</color>
     <color name="ratebar">#ffd900</color>

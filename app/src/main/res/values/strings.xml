@@ -193,6 +193,8 @@
     <string name="role1">Rihanna Application belongs to the Rihanna Company and does not allow to simulate or imitate it</string>
     <string name="role2">Ensure that all expert data are legally valid</string>
     <string name="role3">Dealing professionally with clients and keeping their privacy</string>
+    <string name="cancle">Cancel</string>
+    <string name="cancledialog">Cancel this Order ? </string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>

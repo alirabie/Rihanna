@@ -76,9 +76,6 @@ public class ListOfOrders extends Fragment {
                         List<Order>acceptedOrders=new ArrayList<Order>();
                         List<Order>pindingOrders=new ArrayList<Order>();
 
-
-
-
                         //Split Orders
                         for (Order order :response.body().getOrders()){
                             if(order.getOrderStatus().equals("Pending")){
@@ -98,7 +95,7 @@ public class ListOfOrders extends Fragment {
                             mLayoutManager.setStackFromEnd(true);
                             noreqFlag.setVisibility(View.INVISIBLE);
                             RecyclerView acceptedOrdersList=(RecyclerView)view.findViewById(R.id.requsted_list);
-                            acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),pindingOrders));
+                            acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),pindingOrders,ListOfOrders.this));
                             acceptedOrdersList.setLayoutManager(mLayoutManager);
                         }
 
@@ -113,7 +110,7 @@ public class ListOfOrders extends Fragment {
                             mLayoutManager.setStackFromEnd(true);
                             noacceptedFlag.setVisibility(View.INVISIBLE);
                             RecyclerView acceptedOrdersList=(RecyclerView)view.findViewById(R.id.acepted_requsted_list);
-                            acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),acceptedOrders));
+                            acceptedOrdersList.setAdapter(new CustomerOrdersAdb(getContext(),acceptedOrders,ListOfOrders.this));
                             acceptedOrdersList.setLayoutManager(mLayoutManager);
                         }
 

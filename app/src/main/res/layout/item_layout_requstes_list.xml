@@ -1,143 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="10dp"
-    android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
     android:background="#ffffff"
-    android:id="@+id/goorderdetails">
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/goorderdetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:gravity="center">
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="2dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/ordernum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="كيراتين الشعر"
-                android:id="@+id/ordernum"
-                android:textSize="10dp"
-                android:textColor="#000000" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000"
+                android:textSize="10dp" />
 
             <TextView
+                android:id="@+id/servicetype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="خبيرة جويل"
-                android:id="@+id/servicetype"
-                android:textSize="8dp"
-                android:textColor="@color/colorPrimary" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                android:textSize="8dp" />
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1">
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/orderstatus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="22/8/2016"
-                android:id="@+id/orderstatus"
+                android:gravity="center"
                 android:padding="2dp"
-                android:textSize="8dp"
+                android:text="22/8/2016"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimary"
-                android:gravity="center" />
+                android:textSize="8dp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1">
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/paymentstatus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="1:00 - 10:30"
-                android:id="@+id/paymentstatus"
+                android:gravity="center"
                 android:padding="2dp"
-                android:textSize="8dp"
+                android:text="1:00 - 10:30"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimary"
-                android:gravity="center" />
+                android:textSize="8dp" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:padding="3dp">
 
             <TextView
+                android:id="@+id/req_list_serv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:text="100"
-                android:id="@+id/req_list_serv_price"
-                android:textSize="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimary"
                 android:textIsSelectable="false"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp" />
+                android:textSize="10dp" />
 
             <TextView
+                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/sr"
-                android:id="@+id/textView19"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000"
                 android:textSize="10dp" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/req_list_serv_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/cancle_button_bg"
+            android:padding="3dp"
+            android:text="@string/cancle"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
         <ImageView
+            android:id="@+id/req_list_serv_status"
             android:layout_width="25dp"
             android:layout_height="match_parent"
-            android:id="@+id/req_list_serv_status"
-            android:src="@drawable/acceptedstatus"
-            android:padding="3dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:padding="3dp"
+            android:src="@drawable/acceptedstatus" />
     </LinearLayout>
 </LinearLayout>

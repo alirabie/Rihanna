@@ -5,5 +5,6 @@ package rihanna.appsmatic.com.rihanna.URL;
  */
 public class URLs {
     //http://rihanna-app.com/
-    public static final String API_BASE_URL="http://rihanna.appsmatic.net/";
+    public static final String API_BASE_TESTING_API="http://rihanna.appsmatic.net/";
+    public static final String API_BASE_PRODUCTION_API="http://rihannaproduction.appsmatic.net/";
 }

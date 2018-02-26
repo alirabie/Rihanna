@@ -197,4 +197,6 @@
     <string name="role1">تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده</string>
     <string name="role2">التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا</string>
     <string name="role3">التعامل بمهنية مع العميلات وحفظ خصوصياتهم</string>
+    <string name="cancle">الغاء الطلب</string>
+    <string name="cancledialog">الغاء هذا الطلب ؟</string>
 </resources>
