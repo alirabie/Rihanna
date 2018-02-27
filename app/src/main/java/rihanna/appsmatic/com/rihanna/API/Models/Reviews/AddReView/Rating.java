@@ -13,6 +13,9 @@ public class Rating {
     @SerializedName("expert_id")
     @Expose
     private Integer expertId;
+    @SerializedName("order_id")
+    @Expose
+    private Integer orderId;
     @SerializedName("review_text")
     @Expose
     private String reviewText;
@@ -50,5 +53,13 @@ public class Rating {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 }

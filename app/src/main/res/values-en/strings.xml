@@ -199,4 +199,5 @@
     <string name="role3">Dealing professionally with clients and keeping their privacy</string>
     <string name="cancle">Cancel</string>
     <string name="cancledialog">"Cancel this Order ? "</string>
+    <string name="dubicatreviews">You have rated this expert before</string>
 </resources>

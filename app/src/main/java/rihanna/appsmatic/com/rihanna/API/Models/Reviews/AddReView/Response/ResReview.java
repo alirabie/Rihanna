@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Eng Ali on 12/23/2017.
  */
-public class ResReview {
+public class ResReview extends DublicateReviewRes{
     @SerializedName("ratings")
     @Expose
     private List<Rating> ratings = null;

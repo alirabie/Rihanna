@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -44,10 +47,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import rihanna.appsmatic.com.rihanna.API.Models.Certificates.CertificatesList;
+import rihanna.appsmatic.com.rihanna.API.Models.Error.ResErrors;
 import rihanna.appsmatic.com.rihanna.API.Models.ExpertTimes.SchdulesResponse;
 import rihanna.appsmatic.com.rihanna.API.Models.IsBusy.IsBusyRes;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.PostReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Rating;
+import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.DublicateReviewRes;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.AddReView.Response.ResReview;
 import rihanna.appsmatic.com.rihanna.API.Models.Reviews.GetReviews.GetReviews;
 import rihanna.appsmatic.com.rihanna.API.WebServiceTools.Generator;
@@ -153,12 +158,6 @@ public class FireDialog {
             }
         });
 
-
-
-
-
-
-
     }
 
 
@@ -237,7 +236,7 @@ public class FireDialog {
 
 
     //Review Expert Dialog
-    public static void experrReviewDailog(final Context context,View view, final String expertId, final String customerId,String name){
+    public static void experrReviewDailog(final Context context, View view, final String expertId, final String customerId, final String orderId, String name){
 
         final TextView send;
         final EditText comment;
@@ -291,6 +290,7 @@ public class FireDialog {
                 Rating rating = new Rating();
                 rating.setCustomerId(Integer.parseInt(customerId));
                 rating.setExpertId(Integer.parseInt(expertId));
+                rating.setOrderId(Integer.parseInt(orderId));
                 rating.setRating(Math.round(ratingBar.getRating()));
                 rating.setReviewText(comment.getText().toString());
 
@@ -303,7 +303,20 @@ public class FireDialog {
                                 Toast.makeText(context,context.getString(R.string.donerating),Toast.LENGTH_SHORT).show();
                                 dialogBuildercard.dismiss();
                             } else {
-                                Toast.makeText(context, "Null from rating API ", Toast.LENGTH_SHORT).show();
+
+                              try{
+
+                                  //Handel Error
+                                  if(response.body().getStatus()!=null){
+                                      if(response.body().getStatus().equals("Duplicate Rating")){
+                                          Toast.makeText(context,context.getResources().getString(R.string.dubicatreviews), Toast.LENGTH_SHORT).show();
+                                      }
+                                  }
+
+                              }catch (Exception e){
+                                  Toast.makeText(context,"Review Error : "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                              }
+
                             }
                         } else {
                             try {

@@ -195,6 +195,7 @@
     <string name="role3">Dealing professionally with clients and keeping their privacy</string>
     <string name="cancle">Cancel</string>
     <string name="cancledialog">Cancel this Order ? </string>
+    <string name="dubicatreviews">You have rated this expert before</string>
 
     <!-- Facebook Key -->
     <string name="facebook_app_id" translatable="false">267664500409205</string>
