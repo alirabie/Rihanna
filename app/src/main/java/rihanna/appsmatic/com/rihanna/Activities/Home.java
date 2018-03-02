@@ -114,7 +114,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private static List<String>categoriesIds;
     private LinearLayout sideMenuButtons;
     public static Typeface face;
-    private ImageView homeSide,profileSide,latestOffersSide,ordersListSide,settingsSide,abutAppSide,exitLoginSide;
+    private ImageView homeSide,profileSide,ordersListSide,settingsSide,abutAppSide,exitLoginSide;
     DrawerLayout drawer;
     public static TextView tittle;
     public static LinearLayout topButtons ,spainnersBox;
@@ -321,7 +321,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //Setup Side Menu Items
         homeSide=(ImageView)findViewById(R.id.home_side_button);
         profileSide=(ImageView)findViewById(R.id.profile_side_button);
-        latestOffersSide=(ImageView)findViewById(R.id.offers_side_button);
         ordersListSide=(ImageView)findViewById(R.id.orders_side_button);
         settingsSide=(ImageView)findViewById(R.id.settings_side_buttons);
         abutAppSide=(ImageView)findViewById(R.id.aboutapp_side_buttons);
@@ -341,7 +340,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             homeSide.setBackgroundResource(R.drawable.ripple);
             profileSide.setBackgroundResource(R.drawable.ripple);
-            latestOffersSide.setBackgroundResource(R.drawable.ripple);
             ordersListSide.setBackgroundResource(R.drawable.ripple);
             settingsSide.setBackgroundResource(R.drawable.ripple);
             abutAppSide.setBackgroundResource(R.drawable.ripple);
@@ -353,7 +351,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if(SaveSharedPreference.getLangId(this).equals("ar")){
             homeSide.setImageResource(R.drawable.home);
             profileSide.setImageResource(R.drawable.profile);
-            latestOffersSide.setImageResource(R.drawable.sale);
             ordersListSide.setImageResource(R.drawable.orders);
             settingsSide.setImageResource(R.drawable.settings);
             abutAppSide.setImageResource(R.drawable.about);
@@ -365,7 +362,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }else{
             homeSide.setImageResource(R.drawable.home_en);
             profileSide.setImageResource(R.drawable.profile_en);
-            latestOffersSide.setImageResource(R.drawable.sale_en);
             ordersListSide.setImageResource(R.drawable.orders_en);
             settingsSide.setImageResource(R.drawable.settings_en);
             abutAppSide.setImageResource(R.drawable.aboutus_en);
@@ -461,33 +457,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
-
-        //Offers button
-        latestOffersSide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
-                latestOffersSide.clearAnimation();
-                latestOffersSide.setAnimation(anim);
-
-                Sale sale=new Sale();
-                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener,sale);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-                tittle.setVisibility(View.VISIBLE);
-                tittle.setText(getResources().getString(R.string.salestitle));
-                Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                tittle.clearAnimation();
-                tittle.setAnimation(anim5);
-                topButtons.setVisibility(View.INVISIBLE);
-                spainnersBox.setVisibility(View.INVISIBLE);
-                drawer.closeDrawer(GravityCompat.START);
-
-            }
-        });
-
 
 
         //Orders List

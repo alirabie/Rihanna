@@ -176,7 +176,7 @@
     <string name="orderaccepted">طلب مدفوع</string>
     <string name="orderdetails">تفاصيل الطلب</string>
     <string name="noarieas">لا توجد مدن / مناطق مسجلة من قبل هذه الخبيرة</string>
-    <string name="phonenum">+966565161868</string>
+    <string name="phonenum">+966547806086</string>
     <string name="timebusy">نأسف حيث ان هذا الوقت محجوز مسبقا من فضلك اختارى وقت اخر</string>
     <string name="canceldorders">ملغى</string>
     <string name="completedorders">منتهى</string>
@@ -192,7 +192,7 @@
     <string name="notifiction">لديك </string>
     <string name="connectionerr">من فضلك تحقق من إتصالك بالانترنت .. !</string>
     <string name="notifi2">طلبات جديدة تم الموافقه عليها</string>
-    <string name="rihannadisc">ريحانه هو تطبيق لتقديم الطريقة الامثل للبحث عن افضل خبيرات التجميل وتيسير عملية التواصل معهم وحجز الخدمات ومعرفة احتياجات العميلة ومن ثم الخبيرة الامثل لمساعدتها </string>
+    <string name="rihannadisc">ريحانه الطريقة الامثل للبحث عن افضل خبيرات التجميل </string>
     <string name="termsheder">تتألف شروط الاستخدام هذه من الشروط والأحكام الواردة أدناه</string>
     <string name="role1">تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده</string>
     <string name="role2">التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا</string>
