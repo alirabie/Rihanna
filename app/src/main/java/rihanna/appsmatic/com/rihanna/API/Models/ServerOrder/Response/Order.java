@@ -26,7 +26,7 @@ public class Order {
     private String customerCurrencyCode;
     @SerializedName("currency_rate")
     @Expose
-    private Integer currencyRate;
+    private Double currencyRate;
     @SerializedName("customer_tax_display_type_id")
     @Expose
     private Integer customerTaxDisplayTypeId;
@@ -200,11 +200,11 @@ public class Order {
         this.customerCurrencyCode = customerCurrencyCode;
     }
 
-    public Integer getCurrencyRate() {
+    public Double getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Integer currencyRate) {
+    public void setCurrencyRate(Double currencyRate) {
         this.currencyRate = currencyRate;
     }
 

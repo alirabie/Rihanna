@@ -13,6 +13,12 @@ public class Order {
     @SerializedName("billing_address")
     @Expose
     private BillingAddress billingAddress;
+    @SerializedName("customer_long")
+    @Expose
+    private String customerLong;
+    @SerializedName("customer_lat")
+    @Expose
+    private String customerLat;
     @SerializedName("customer_id")
     @Expose
     private Integer customerId;
@@ -77,4 +83,19 @@ public class Order {
         this.paymentMethodSystemName = paymentMethodSystemName;
     }
 
+    public String getCustomerLong() {
+        return customerLong;
+    }
+
+    public void setCustomerLong(String customerLong) {
+        this.customerLong = customerLong;
+    }
+
+    public String getCustomerLat() {
+        return customerLat;
+    }
+
+    public void setCustomerLat(String customerLat) {
+        this.customerLat = customerLat;
+    }
 }

@@ -261,6 +261,8 @@ public class OrderScreen extends AppCompatActivity {
         }
 
         order.setBillingAddress(billingAddress);
+        order.setCustomerLat(offOrderModel.getOffAddress().getLat()+"");
+        order.setCustomerLong(offOrderModel.getOffAddress().getLng()+"");
         order.setCustomerId(Integer.parseInt(SaveSharedPreference.getCustomerId(context)));
         order.setExpertId(Integer.parseInt(Home.offOrderModel.getExpertId()));
         order.setOrderItems(orderItems);
