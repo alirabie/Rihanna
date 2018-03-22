@@ -14,7 +14,7 @@ import rihanna.appsmatic.com.rihanna.URL.URLs;
  */
 public class Generator {
 
-    public static final String API_BASE_URL = URLs.API_BASE_TESTING_API;
+    public static final String API_BASE_URL = URLs.API_BASE_PRODUCTION_API;
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
 
 
